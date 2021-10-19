@@ -39,7 +39,7 @@ public class CatManager : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        tObj.transform.position = GetMouseWorldPos() + mOffset;
+        //tObj.transform.position = GetMouseWorldPos() + mOffset;
     }
 
     void Update()
