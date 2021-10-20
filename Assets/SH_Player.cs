@@ -5,11 +5,13 @@ using UnityEngine;
 public class SH_Player : MonoBehaviour
 {
     Camera cam;
-    public Damagochi controlTarget;
+    public Damagochi controlDamagochi;
+    SH_ARInputManager arInputManager;
 
     private void Start()
     {
         cam = Camera.main;
+        arInputManager = FindObjectOfType<SH_ARInputManager>();
     }
 
     private void Update()
@@ -22,18 +24,9 @@ public class SH_Player : MonoBehaviour
         if (!Input.GetMouseButtonDown(0))
             return;
 
-        if (controlTarget == null)
+        if (controlDamagochi == null)
             return;
 
-        Vector3 mos = Input.mousePosition;
-        mos.z = cam.farClipPlane; 
-
-        Vector3 dir = cam.ScreenToWorldPoint(mos);
-
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, dir, out hit, mos.z))
-        {
-            controlTarget.gameObject.transform.position = hit.point; 
-        }
+        controlDamagochi.MoveTo(arInputManager.hit.point);
     }
 }

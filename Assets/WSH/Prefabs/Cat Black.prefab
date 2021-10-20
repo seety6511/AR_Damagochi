@@ -549,11 +549,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7127324888260238447}
   - component: {fileID: 7184847406937489267}
-  - component: {fileID: 7140486605579310837}
   - component: {fileID: 7188496512635134567}
   - component: {fileID: 7165271924387964885}
-  - component: {fileID: 7166337453997440411}
   - component: {fileID: 6940077627569797959}
+  - component: {fileID: 5860246611499954482}
   m_Layer: 0
   m_Name: Cat Black
   m_TagString: Untagged
@@ -596,24 +595,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!143 &7140486605579310837
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7124962811824491225}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 0.2
-  m_Radius: 0.2
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!82 &7188496512635134567
 AudioSource:
   m_ObjectHideFlags: 0
@@ -729,67 +710,6 @@ MonoBehaviour:
   attacking: {fileID: 8300000, guid: 13a58eb5deb3e46599037ffb43ae7600, type: 3}
   death: {fileID: 0}
   sleeping: {fileID: 8300000, guid: 7b6b33682babad5438d7b5414f5bcc87, type: 3}
---- !u!114 &7166337453997440411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7124962811824491225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36003be02bd7fc54db18675085e2ab6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idleStates:
-  - stateName: Sleeping
-    animationBool: isSleeping
-    minStateTime: 20
-    maxStateTime: 40
-    stateWeight: 3
-  movementStates:
-  - stateName: Walking
-    animationBool: isWalking
-    maxStateTime: 20
-    moveSpeed: 2
-    turnSpeed: 120
-  - stateName: Running
-    animationBool: isRunning
-    maxStateTime: 5
-    moveSpeed: 10
-    turnSpeed: 200
-  attackingStates:
-  - stateName: Attack
-    animationBool: isAttacking
-  deathStates:
-  - stateName: Dead
-    animationBool: isDead
-  species: Cat
-  stats: {fileID: 11400000, guid: dbe9e93337452e549825f00a2450fc95, type: 2}
-  wanderZone: 5
-  awareness: 30
-  scent: 30
-  constainedToWanderZone: 0
-  nonAgressiveTowards: []
-  matchSurfaceRotation: 0
-  surfaceRotationSpeed: 2
-  logChanges: 0
-  showGizmos: 0
-  drawWanderRange: 1
-  drawScentRange: 1
-  drawAwarenessRange: 1
-  deathEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  attackingEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  idleEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  movementEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!195 &6940077627569797959
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -812,6 +732,28 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5860246611499954482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7124962811824491225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244e03c9f25041e4fa624a86e7774667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Cat
+  playerble: 0
+  hungryState: 0
+  condition: 0
+  actionState: 0
+  moveSpeed: 0
+  atk: 0
+  hp: 0
+  critical: 0
+  atkSpeed: 0
 --- !u!1 &7125013196971424401
 GameObject:
   m_ObjectHideFlags: 0

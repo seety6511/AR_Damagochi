@@ -4,4 +4,23 @@ using UnityEngine;
 
 public class SH_Bear : Damagochi
 {
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+    }
 }

@@ -1150,9 +1150,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3790652799895937169}
   - component: {fileID: 3790652799888772987}
-  - component: {fileID: 3790652800605737187}
-  - component: {fileID: 3790652800605737185}
   - component: {fileID: 3790652800605737184}
+  - component: {fileID: 2095805487508540910}
   m_Layer: 0
   m_Name: Dove
   m_TagString: Untagged
@@ -1195,90 +1194,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!143 &3790652800605737187
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3790652799896042673}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 0.3
-  m_Radius: 0.2
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.2, z: 0}
---- !u!114 &3790652800605737185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3790652799896042673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36003be02bd7fc54db18675085e2ab6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idleStates:
-  - stateName: isLooking
-    animationBool: isLooking
-    minStateTime: 1
-    maxStateTime: 6
-    stateWeight: 7
-  movementStates:
-  - stateName: Walking
-    animationBool: isWalking
-    maxStateTime: 100
-    moveSpeed: 1
-    turnSpeed: 200
-  - stateName: Running
-    animationBool: isRunning
-    maxStateTime: 3
-    moveSpeed: 6
-    turnSpeed: 350
-  - stateName: Flyinjg
-    animationBool: isFlying
-    maxStateTime: 6
-    moveSpeed: 8
-    turnSpeed: 500
-  attackingStates:
-  - stateName: isAttacking
-    animationBool: isAttacking
-  deathStates:
-  - stateName: Dead
-    animationBool: isDead
-  species: Boar
-  stats: {fileID: 11400000, guid: 4c6af54f2eccbaf4dbe2f9fb44ddb171, type: 2}
-  wanderZone: 16.71
-  awareness: 30
-  scent: 30
-  constainedToWanderZone: 0
-  nonAgressiveTowards: []
-  matchSurfaceRotation: 0
-  surfaceRotationSpeed: 2
-  logChanges: 0
-  showGizmos: 0
-  drawWanderRange: 1
-  drawScentRange: 1
-  drawAwarenessRange: 1
-  deathEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  attackingEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  idleEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  movementEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!195 &3790652800605737184
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1301,6 +1216,28 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2095805487508540910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790652799896042673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4691fe3c30b4d8b499a0b68c51cf5965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Dove
+  playerble: 0
+  hungryState: 0
+  condition: 0
+  actionState: 0
+  moveSpeed: 1
+  atk: 5
+  hp: 50
+  critical: 30
+  atkSpeed: 1
 --- !u!1 &3790652799896042675
 GameObject:
   m_ObjectHideFlags: 0

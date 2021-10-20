@@ -1187,10 +1187,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4306383971676097206}
   - component: {fileID: 4217157990940142754}
-  - component: {fileID: 4192719371128527150}
   - component: {fileID: 4248065681474697304}
   - component: {fileID: 4198771797611870174}
-  - component: {fileID: 4198959003230674790}
   - component: {fileID: 4135775068800146406}
   - component: {fileID: -5357159676295027232}
   m_Layer: 0
@@ -1209,7 +1207,7 @@ Transform:
   m_GameObject: {fileID: 4311995978208798160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4306363936962144704}
   m_Father: {fileID: 0}
@@ -1234,24 +1232,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!143 &4192719371128527150
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4311995978208798160}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 1.06
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.06, z: 0}
 --- !u!82 &4248065681474697304
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1367,67 +1347,6 @@ MonoBehaviour:
   attacking: {fileID: 8300000, guid: 2e77463d056f93647b1f400e5c8a0c56, type: 3}
   death: {fileID: 0}
   sleeping: {fileID: 0}
---- !u!114 &4198959003230674790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4311995978208798160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36003be02bd7fc54db18675085e2ab6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idleStates:
-  - stateName: StandUp
-    animationBool: isStanding
-    minStateTime: 5
-    maxStateTime: 10
-    stateWeight: 1
-  movementStates:
-  - stateName: Walk
-    animationBool: isWalking
-    maxStateTime: 10
-    moveSpeed: 2
-    turnSpeed: 100
-  - stateName: Running
-    animationBool: isRunning
-    maxStateTime: 20
-    moveSpeed: 6
-    turnSpeed: 200
-  attackingStates:
-  - stateName: Attack
-    animationBool: isAttacking
-  deathStates:
-  - stateName: Death
-    animationBool: isDead
-  species: Bear
-  stats: {fileID: 11400000, guid: 7c0caf258cdab7a4fa8d1b3f9a9a5510, type: 2}
-  wanderZone: 25
-  awareness: 30
-  scent: 30
-  constainedToWanderZone: 0
-  nonAgressiveTowards: []
-  matchSurfaceRotation: 0
-  surfaceRotationSpeed: 2
-  logChanges: 0
-  showGizmos: 0
-  drawWanderRange: 1
-  drawScentRange: 1
-  drawAwarenessRange: 1
-  deathEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  attackingEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  idleEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  movementEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!195 &4135775068800146406
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1462,6 +1381,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107268dd4d7c5a34297c74ea4d790adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Bear
+  playerble: 0
+  hungryState: 0
+  condition: 0
+  actionState: 0
+  moveSpeed: 1
+  atk: 0
+  hp: 0
+  critical: 0
+  atkSpeed: 0
 --- !u!1 &4312050077561190148
 GameObject:
   m_ObjectHideFlags: 0
