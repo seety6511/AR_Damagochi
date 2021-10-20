@@ -15,6 +15,7 @@ public class KHJ_SceneMngr : MonoBehaviour
     public Image Hvalue;
 
     //공 던지기
+    public bool isBall;
     public GameObject Ball;
     public GameObject shootPosition;
 
@@ -26,37 +27,34 @@ public class KHJ_SceneMngr : MonoBehaviour
     void Update()
     {
         Hvalue.fillAmount = currH / maxH;
+        BallPlayingCam();
     }
 
 
-    private Vector3 mOffset;
-    float mZCoord;
-    private void OnMouseDown()
+
+
+    void BallPlayingCam()
     {
-        mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
-        mOffset = gameObject.transform.position - GetMouseWorldPos();
-        GameObject tObj = Instantiate(Ball);
-
+        if (isBall)
+        {
+            Ball.GetComponent<DragAndThrow>().enabled = true;
+            //Ball.GetComponent<DragAndThrow>().Reset();
+            Camera.main.fieldOfView = 70;
+            Camera.main.transform.position = new Vector3(82.46f, 0.38f, -0.6f);
+        }
+        else
+        {
+            Ball.GetComponent<DragAndThrow>().enabled = false;
+            Ball.transform.SetParent(null);
+            Ball.transform.position = new Vector3(82.3f, 0, 0.47f);
+            Ball.transform.eulerAngles = new Vector3(0, -25, 0);
+            Camera.main.fieldOfView = 25;
+            Camera.main.transform.position = new Vector3(82.46f, 0.38f, -2.9f);
+        }
     }
 
-    private Vector3 GetMouseWorldPos()
-    {
-        //pixel coordinate (x,y)
-        Vector3 mousePoint = Input.mousePosition;
-        //z coordinate of game object on screen
-        mousePoint.z = mZCoord;
-        return Camera.main.ScreenToWorldPoint(mousePoint);
-    }
 
-    private void OnMouseUp()
-    {
 
-    }
-
-    private void OnMouseDrag()
-    {
-        //tObj.transform.position = GetMouseWorldPos() + mOffset;
-    }
 
 
     public void ShootBall()
