@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Damagochi : MonoBehaviour
 {
     public new string name;
-    
+
     int hungry
     {
         set
@@ -51,12 +52,6 @@ public class Damagochi : MonoBehaviour
     public Condition condition; //지금 기분
 
     public float moveSpeed;
-
-    //이하 배틀용 스텟
-    public float atk;
-    public float hp;
-    public float critical;
-    public float atkSpeed;
 
     public void HungryChange(int value)
     {
@@ -113,4 +108,6 @@ public class Damagochi : MonoBehaviour
                 break;
         }
     }
+
+
 }
