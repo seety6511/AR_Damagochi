@@ -31,8 +31,8 @@ public class KHJ_SceneMngr : MonoBehaviour
 
     //¹ä¸Ô±â
     public bool isEat;
-
-
+    public bool isFoodSet;
+    public GameObject Food;
 
     private void Awake()
     {
@@ -50,6 +50,36 @@ public class KHJ_SceneMngr : MonoBehaviour
         IntimacyBar.fillAmount = currH / maxH;
         BallPlayingCam();
         //FoodCam();
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                if(hit.transform.gameObject.name == "FoodPlate" && !isFoodSet)
+                {
+                    print("À½½Ä Ã¤¿ì±â");                    
+                    isFoodSet = true;
+                }
+                if(hit.transform.gameObject.name == "Cat")
+                {
+                    CatManager.instance.actionState = CatManager.ActionState.isTouching;
+                }
+            }
+        }
+
+
+        if (isFoodSet)
+        {
+            Food.SetActive(true);
+        }
+        else
+        {
+            Food.SetActive(false);
+        }
+
     }
 
 
