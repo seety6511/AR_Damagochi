@@ -72,6 +72,8 @@ public class CatManager : Damagochi
                 break;
 
             case ActionState.isSleeping:
+                agent.ResetPath();
+                GetComponent<SceneAnimatorController>().SetAnimatorString("isSleeping");
                 break; 
             case ActionState.isHungry:
                 break;
@@ -99,12 +101,19 @@ public class CatManager : Damagochi
         //    return;
         if (HasDestinationReached())
         {
-            int a = UnityEngine.Random.Range(0, 2);
+            //목적지에 도착하면 랜덤 행동
+            int a = UnityEngine.Random.Range(0, 3);
             if (a == 0)
             {
                 print("Idle로 변환");
                 GetComponent<SceneAnimatorController>().SetAnimatorString("Idle");
                 actionState = ActionState.Idle;
+                return;
+            }
+            if (a == 1)
+            {
+                print("isSleeping으로 변환");
+                actionState = ActionState.isSleeping;
                 return;
             }
             var pos = SH_GameManager.GetRandomInnerCirclePoint(spawnPoint.transform.position, wanderingRadius);
