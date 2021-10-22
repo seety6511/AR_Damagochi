@@ -9,6 +9,10 @@ public class SH_Panel_Battle : MonoBehaviour
     public SH_SkillButton[] skillButtons;
     List<SH_Skill> skills;
 
+    private void Awake()
+    {
+        SetSkills(owner.controlDamagochi);
+    }
     public void On()
     {
         gameObject.SetActive(true);

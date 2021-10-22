@@ -9,6 +9,15 @@ public class SH_PoolDamagochi : Damagochi
 
     List<SH_PoolDamagochi> enablePool;
     List<SH_PoolDamagochi> disablePool;
+
+    protected virtual void Awake()
+    {
+    }
+
+    protected virtual void Update()
+    {
+    }
+
     public void SetPool(List<SH_PoolDamagochi> enablePool, List<SH_PoolDamagochi> disablePool)
     {
         this.enablePool = enablePool;

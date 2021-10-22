@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SH_Skill : MonoBehaviour
 {
+    public SH_ActionDamagochi owner;
     public new string name;
     public float coolTime;
     float timer;
@@ -19,14 +20,28 @@ public class SH_Skill : MonoBehaviour
     public void CoolTimeUpdate()
     {
         timer += Time.deltaTime;
-        if (timer >= coolTime)
+        if (timer > coolTime)
             canActive = true;
     }
 
     public virtual void Active()
     {
+        if (owner.currentTurnGage < owner.maxTurnGage)
+            return;
+
         if (!canActive)
             return;
-        activeEffect?.SetActive(true);
+
+        canActive = false;
+        timer = 0f;
+
+        owner.currentTurnGage = 0f;
+        owner.battleUI.UpdateTurnGage();
+        FindObjectOfType<SH_TextLogControl>().LogText("Active Skill_" + owner.name + "_" + name, Color.black);
+
+        owner.battleState = SH_ActionDamagochi.BattleState.Attaking;
+
+        if (activeEffect != null)
+            activeEffect.SetActive(true);
     }
 }

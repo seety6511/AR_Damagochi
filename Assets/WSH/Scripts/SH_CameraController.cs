@@ -36,18 +36,18 @@ public class SH_CameraController : MonoBehaviour
 
     void CameraMove()
     {
-        float h = 0;
-        float v = 0;
+        var dir = Vector3.zero;
         float scroll = Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
         if (Input.GetKey(KeyCode.A))
-            h = -1;
+            dir -= transform.right;
         if (Input.GetKey(KeyCode.D))
-            h = 1;
+            dir += transform.right;
         if (Input.GetKey(KeyCode.W))
-            v = 1;
+            dir += transform.forward;
         if (Input.GetKey(KeyCode.S))
-            v = -1;
-        var dir = new Vector3(h, -scroll, v);
+            dir -= transform.forward;
+
+        dir.y = scroll;
 
         gameObject.transform.position += dir * moveSpeed * Time.deltaTime;
     }

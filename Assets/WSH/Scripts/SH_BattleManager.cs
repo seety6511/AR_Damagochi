@@ -5,26 +5,41 @@ using UnityEngine;
 public class SH_BattleManager : MonoBehaviour
 {
     public GameObject ambushedEffect;
+    public SH_Panel_Battle battlePanel;
 
     public SH_ActionDamagochi challenger;
     public SH_ActionDamagochi target;
+
+    public SH_TextLogControl battleLog;
+
     public bool playBattle;
-    public void BattleStart(SH_ActionDamagochi challenger, SH_ActionDamagochi target)
+    
+    public void StartBattle(SH_ActionDamagochi c, SH_ActionDamagochi t)
     {
-        this.challenger = challenger;
-        this.target = target;
-        challenger.battleOn = true;
-        target.battleOn = true;
+        if(c == t)
+            return;
+
+        battleLog.LogText("Battle Start!", Color.black);
+
+        challenger = c;
+        target = t;
+
+        target.ActionStateChange(SH_ActionDamagochi.ActionState.isBattle);
+        target.battleState = SH_ActionDamagochi.BattleState.Ambushed;
+        target.attackTarget = challenger;
+
+        challenger.ActionStateChange(SH_ActionDamagochi.ActionState.isBattle);
+        challenger.battleState = SH_ActionDamagochi.BattleState.Surprise;
+        challenger.attackTarget = target;
+
         var pos = target.transform.position;
         pos.y += 1f;
         ambushedEffect.transform.position = pos;
         ambushedEffect.SetActive(true);
 
-        challenger.battleState = SH_ActionDamagochi.BattleState.Surprise;
-        target.battleState = SH_ActionDamagochi.BattleState.Ambushed;
+        battlePanel.gameObject.SetActive(true);
         playBattle = true;
     }
-
     protected void Update()
     {
         BattleUpdate();
@@ -35,6 +50,7 @@ public class SH_BattleManager : MonoBehaviour
         if (!playBattle)
             return;
 
+        battlePanel.SkillButtonUpdate();
         challenger.BattleStateAction();
         target.BattleStateAction();
     }

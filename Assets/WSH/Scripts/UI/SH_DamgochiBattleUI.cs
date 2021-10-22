@@ -17,6 +17,7 @@ public class SH_DamgochiBattleUI : MonoBehaviour
 
     public void UpdateTurnGage()
     {
-
+        var percent = owner.currentTurnGage / owner.maxTurnGage * 0.1f;
+        turnGage.transform.localScale = new Vector3(percent, 0.1f, 0.1f);
     }
 }

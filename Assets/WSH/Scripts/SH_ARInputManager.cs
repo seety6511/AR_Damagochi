@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 
 public class SH_ARInputManager : MonoBehaviour
@@ -25,14 +26,6 @@ public class SH_ARInputManager : MonoBehaviour
             e.Off();
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        TouchInput();
-        MouseInput();
-    }
-
     void TouchEffect(Vector3 pos)
     {
         if (disablePool.Count == 0)
@@ -42,15 +35,12 @@ public class SH_ARInputManager : MonoBehaviour
         disablePool[0].On();
     }
 
-    void MouseInput()
+    public void MouseInput()
     {
         if (!Input.GetMouseButtonDown(0))
             return;
 
-        Vector2 clickPos = Input.mousePosition;
-        bool isOverUI = clickPos.IsPointOverUIObject();
-
-        if (isOverUI)
+        if (EventSystem.current.IsPointerOverGameObject())
             return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -61,24 +51,34 @@ public class SH_ARInputManager : MonoBehaviour
         }
     }
 
-    void TouchInput()
+    public void TouchInput()
     {
         if (Input.touchCount <= 0)
             return;
 
         Touch touch = Input.GetTouch(0);
-
         Vector2 touchPosition = touch.position;
 
         if (touch.phase == TouchPhase.Began)
         {
-            bool isOverUI = touchPosition.IsPointOverUIObject();
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
 
-            if (!isOverUI && arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
+            if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
             {
                 var hitPose = hits[0].pose;
                 TouchEffect(hitPose.position);
             }
         }
+    }
+
+    bool PointOverUICheck()
+    {
+        Vector2 clickPos = Input.mousePosition;
+        bool isOverUI = clickPos.IsPointOverUIObject();
+
+        if (isOverUI)
+            return true;
+        return false;
     }
 }

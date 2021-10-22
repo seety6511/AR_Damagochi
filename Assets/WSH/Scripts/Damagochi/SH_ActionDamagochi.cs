@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
-public class SH_ActionDamagochi : SH_PoolDamagochi
+public class SH_ActionDamagochi : SH_AnimeDamagochi
 {
     //이하 배틀용 스텟
     public float atk;
@@ -13,7 +14,6 @@ public class SH_ActionDamagochi : SH_PoolDamagochi
     public float atkSpeed;
     public float currentTurnGage;
     public float maxTurnGage;
-    public bool canAttack;
 
     public List<SH_Skill> skillList;
 
@@ -30,10 +30,9 @@ public class SH_ActionDamagochi : SH_PoolDamagochi
     }
     public ActionState actionState;
 
-    NavMeshAgent agent;
+
+    public NavMeshAgent agent;
     NavMeshPath path;
-    Animator animator;
-    AnimatorControllerParameter[] animParam;
 
     public float wanderingRadius;//스폰위치에서 벗어나지 않는선의 범위
     public float attackRange;  //공격이 가능한 범위
@@ -43,27 +42,29 @@ public class SH_ActionDamagochi : SH_PoolDamagochi
     public SH_ActionDamagochi attackTarget;
     public enum BattleState
     {
+        Start,
         Ambushed,   //공격당함.
         Surprise,   //기습함.
         TurnWaiting,
+        AttackInputWait,
         Attaking,
+        End,
     }
     public BattleState battleState;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         path = new NavMeshPath();
-        animator = GetComponent<Animator>();
-        animParam = animator.parameters;
-        //battleUI = GetComponentInChildren<SH_DamgochiBattleUI>();
         battleUI.gameObject.SetActive(false);
-        //Debug.Log("Awake Damagochi : " + name);
     }
 
-    protected virtual void Update()
+    protected override void Update()
     {
+        base.Update();
         ActionStateMachine();
     }
 
@@ -101,16 +102,11 @@ public class SH_ActionDamagochi : SH_PoolDamagochi
                 break;
 
             case ActionState.isRunning:
-                RunningStateAction();
+                RunningAction();
                 break;
 
             case ActionState.isBattle:
-                if (!battleOn)
-                {
-                    agent.isStopped = true;
-                    AnimationChange("isRunning", false);
-                    FindObjectOfType<SH_BattleManager>().BattleStart(this, attackTarget);
-                }
+                BattleStateAction();
                 break;
 
             case ActionState.isAttacking:
@@ -124,24 +120,59 @@ public class SH_ActionDamagochi : SH_PoolDamagochi
                 break;
         }
     }
-
+    
+    void RunningAction()
+    {
+        if (attackTarget != null)
+        {
+            if (AttackRangeCheck())
+            {
+                Debug.Log("Attack Target Reached");
+                FindObjectOfType<SH_BattleManager>().StartBattle(this, attackTarget);
+                ActionStateChange(ActionState.isBattle);
+                AnimationChange(ActionState.Idle.ToString());
+            }
+            else
+                agent.SetDestination(attackTarget.transform.position);
+        }
+        else if (HasDestinationReached())
+        {
+            ActionStateChange(ActionState.Idle);
+        }
+    }
     public void Look(GameObject target)
     {
         transform.LookAt(target.transform);
     }
 
+    void BattleInit()
+    {
+        agent.ResetPath();
+        battleUI.gameObject.SetActive(true);
+        battleState = BattleState.TurnWaiting;
+        transform.DOLookAt(attackTarget.transform.position, 1f);
+
+        foreach(var s in skillList)
+        {
+            s.owner = this;
+        }
+
+    }
     public void BattleStateAction()
     {
+        foreach(var s in skillList)
+        {
+            s.CoolTimeUpdate();
+        }
+
         switch (battleState)
         {
             case BattleState.Ambushed:
-                battleState = BattleState.TurnWaiting;
-                ActionStateChange(ActionState.isBattle);
+                BattleInit();
                 break;
 
             case BattleState.Surprise:
-                battleState = BattleState.TurnWaiting;
-                ActionStateChange(ActionState.isBattle);
+                BattleInit();
                 currentTurnGage += 50;
                 break;
 
@@ -149,42 +180,54 @@ public class SH_ActionDamagochi : SH_PoolDamagochi
                 TurnGageUpdate();
                 break;
 
+            case BattleState.AttackInputWait:
+                AttackInputWait();
+                break;
+
             case BattleState.Attaking:
                 Attack();
                 break;
+
+            case BattleState.End:
+                attackTarget = null;
+                break;
+        }
+    }
+
+    void AttackInputWait()
+    {
+        if (playerble)
+            return;
+
+        StartCoroutine(AIAttackSkillSelect());
+    }
+
+    IEnumerator AIAttackSkillSelect()
+    {
+        while (true)
+        {
+            int r = Random.Range(0, skillList.Count);
+            if (skillList[r].canActive)
+            {
+                skillList[r].Active();
+                break;
+            }
+            yield return null;
         }
     }
 
     protected virtual void Attack()
     {
-        if (!canAttack)
-            return;
     }
 
     void TurnGageUpdate()
     {
         if (currentTurnGage >= maxTurnGage)
-            canAttack = true;
+            battleState = BattleState.AttackInputWait;
         else
         {
             currentTurnGage += atkSpeed * Time.deltaTime;
-            canAttack = false;
-        }
-    }
-
-    void RunningStateAction()
-    {
-        if (attackTarget != null)
-        {
-            if (AttackRangeCheck())
-                ActionStateChange(ActionState.isBattle);
-            else
-                AttackTo(attackTarget);
-        }
-        else
-        {
-            if (HasDestinationReached())
-                ActionStateChange(ActionState.Idle);
+            battleUI.UpdateTurnGage();
         }
     }
 
@@ -194,19 +237,7 @@ public class SH_ActionDamagochi : SH_PoolDamagochi
             return false;
         return true;
     }
-    void AnimatorParamClear()
-    {
-        foreach (var p in animParam)
-        {
-            animator.SetBool(p.name, false);
-        }
-    }
 
-    public void AnimationChange(string key, bool value= true)
-    {
-        AnimatorParamClear();
-        animator.SetBool(key, value);
-    }
 
     public void ActionStateChange(ActionState state)
     {
@@ -231,6 +262,13 @@ public class SH_ActionDamagochi : SH_PoolDamagochi
             Debug.Log("Cant Attacked Target");
             return;
         }
+
+        if (actionState == ActionState.isBattle)
+        {
+            Debug.Log(name + " is Already Battle");
+            return;
+        }
+
         attackTarget = target;
         agent.stoppingDistance = attackRange;
         agent.SetDestination(target.gameObject.transform.position);
@@ -242,6 +280,12 @@ public class SH_ActionDamagochi : SH_PoolDamagochi
         if (!CanReachedPos(pos))
         {
             Debug.Log("Cant Move Pos");
+            return;
+        }
+
+        if(actionState == ActionState.isBattle)
+        {
+            Debug.Log(name + " is Battle");
             return;
         }
 

@@ -5,16 +5,10 @@ using UnityEngine.UI;
 
 public class SH_SkillButton : MonoBehaviour
 {
-    Image skillSprite;
-    Button activeButton;
-    Text skillName;
-    SH_Skill skill;
-    private void Awake()
-    {
-        skillSprite = GetComponent<Image>();
-        activeButton = GetComponent<Button>();
-        skillName = GetComponentInChildren<Text>();
-    }
+    public Image skillSprite;
+    public Button activeButton;
+    public Text skillName;
+    public SH_Skill skill;
 
     public void CoolTimeUpdate()
     {
@@ -26,6 +20,12 @@ public class SH_SkillButton : MonoBehaviour
         skill = s;
         skillSprite.sprite = s.skillSprite;
         skillName.text = s.name;
-        activeButton.onClick.AddListener(delegate { s.Active(); });
+        activeButton.onClick.RemoveAllListeners();
+        activeButton.onClick.AddListener(delegate { ButtonActive();  skill.Active(); });
+    }
+    
+    void ButtonActive()
+    {
+        skillSprite.fillAmount = 0f;
     }
 }

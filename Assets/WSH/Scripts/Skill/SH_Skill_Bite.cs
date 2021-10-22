@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class SH_Skill_Bite : SH_Skill
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Active()
     {
-        
-    }
+        base.Active();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        owner.AnimationChange("Bite");
     }
 }
