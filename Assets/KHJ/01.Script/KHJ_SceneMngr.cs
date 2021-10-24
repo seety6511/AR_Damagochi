@@ -49,8 +49,8 @@ public class KHJ_SceneMngr : MonoBehaviour
         diaUI.text = dia.ToString();
         IntimacyBar.fillAmount = currH / maxH;
         BallPlayingCam();
-        //FoodCam();
-
+        FoodCam();
+        Hungry();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -74,6 +74,10 @@ public class KHJ_SceneMngr : MonoBehaviour
         if (isFoodSet)
         {
             Food.SetActive(true);
+            if(cat.hungryState == Damagochi.HungryState.Little || cat.hungryState == Damagochi.HungryState.Very)
+            {
+                cat.actionState = CatManager.ActionState.isEatting;
+            }
         }
         else
         {
@@ -83,13 +87,43 @@ public class KHJ_SceneMngr : MonoBehaviour
     }
 
 
+    float currTime;
+    float HungryTime = 10; 
+    void Hungry()
+    {
+        currTime += Time.deltaTime;
+        if(HungryTime < currTime)
+        {
+            print("Hungry!");
+            cat.hungryState -= 1;
+            if (cat.hungryState < 0)
+            {
+                cat.hungryState = 0;
+                currH -= 5;
+            }
+            currTime = 0;
+        }
+    }
+
     public void isBallChange()
     {
         isBall = !isBall;
+        if (isBall)
+        {
+            CatManager.instance.actionState = CatManager.ActionState.isWaiting;
+        }
+        else
+        {
+            cat.ResetDestination();
+            CatManager.instance.actionState = CatManager.ActionState.Idle;
+        }
     }
 
     void BallPlayingCam()
     {
+        if (isEat)
+            return;
+
         if (isBall)
         {
             Ball.GetComponent<DragAndThrow>().enabled = true;
@@ -113,12 +147,7 @@ public class KHJ_SceneMngr : MonoBehaviour
         if (isEat)
         {
             Camera.main.fieldOfView = 70;
-            Camera.main.transform.position = new Vector3(82.46f, 0.38f, -0.6f);
-        }
-        else
-        {
-            Camera.main.fieldOfView = 25;
-            Camera.main.transform.position = new Vector3(82.46f, 0.38f, -2.9f);
+            Camera.main.transform.position = new Vector3(82.31f, 0.38f, -1.32f);
         }
     }
 

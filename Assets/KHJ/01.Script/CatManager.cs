@@ -8,12 +8,15 @@ public class CatManager : Damagochi
 {
     public static CatManager instance;
     KHJ_SceneMngr mngr;
-    public NavMeshAgent agent;
     NavMeshPath path;
+    Animator anim;
+    public NavMeshAgent agent;
+    public GameObject Panel;
     public GameObject spawnPoint;
+    public GameObject eatPoint;
     public float wanderingRadius;
     public Vector3 Target;
-
+    public GameObject Neck;
 
 
     public enum ActionState
@@ -22,6 +25,7 @@ public class CatManager : Damagochi
         isMoving,
         isEatting,
         isTouching,
+        isWaiting,
         isPlaying,
         isSleeping,
         isHungry,
@@ -42,6 +46,7 @@ public class CatManager : Damagochi
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         path = new NavMeshPath();
+        anim = GetComponent<Animator>();
     }
     private void Update()
     {
@@ -54,6 +59,7 @@ public class CatManager : Damagochi
         switch (actionState)
         {
             case ActionState.Idle:
+                GetComponent<SceneAnimatorController>().SetAnimatorString("Idle");
                 break;
 
             case ActionState.isMoving:
@@ -61,14 +67,22 @@ public class CatManager : Damagochi
                 break;
 
             case ActionState.isEatting:
+                GoToEat();
                 break;
 
             case ActionState.isTouching:
                 agent.ResetPath();
+                LookCam();
                 GetComponent<SceneAnimatorController>().SetAnimatorString("Idle");
                 break;
 
+            case ActionState.isWaiting:
+                Waiting();
+                break;
+
             case ActionState.isPlaying:
+                GetComponent<SceneAnimatorController>().SetAnimatorString("isRunning");
+                Playing();
                 break;
 
             case ActionState.isSleeping:
@@ -78,6 +92,62 @@ public class CatManager : Damagochi
             case ActionState.isHungry:
                 break;
         }
+    }
+
+    private void GoToEat()
+    {
+        KHJ_SceneMngr.instance.isEat = true;
+
+        Panel.SetActive(false);
+
+        MoveTo(eatPoint.transform.position);
+        if (HasDestinationReached())
+        {
+            ResetDestination();
+            //스폰지점에 도착하면 앉아서 밥먹기
+            GetComponent<SceneAnimatorController>().SetAnimatorString("isEatting");
+            return;
+        }
+        GetComponent<SceneAnimatorController>().SetAnimatorString("isWalking");
+    }
+
+    public void FinishEat()
+    {
+        KHJ_SceneMngr.instance.isEat = false;
+        Panel.SetActive(true);
+        KHJ_SceneMngr.instance.isFoodSet = false;
+        KHJ_SceneMngr.instance.currH += 12;
+        hungryState += 2;
+        actionState = ActionState.Idle;
+    }
+    public void ResetDestination()
+    {
+        agent.ResetPath();
+    }
+    private void Waiting()
+    {
+        MoveTo(spawnPoint.transform.position);
+        if (HasDestinationReached())
+        {
+            //스폰지점에 도착하면 앉아서 대기상태
+            LookCam();
+            GetComponent<SceneAnimatorController>().SetAnimatorString("isWaiting");
+            return;
+        }
+        GetComponent<SceneAnimatorController>().SetAnimatorString("isWalking");
+    }
+    private void Playing()
+    {
+        //공이 던져지면 쫓아가기
+        MoveTo(KHJ_SceneMngr.instance.Ball.transform.position);
+        print("Ball pos : " + KHJ_SceneMngr.instance.Ball.transform.position);
+        //if (HasDestinationReached())
+        //{
+        //    print("Catched Ball!");
+        //    agent.ResetPath();
+        //    GetComponent<SceneAnimatorController>().SetAnimatorString("Idle");
+        //    actionState = ActionState.isWaiting;
+        //}
     }
 
     public void MoveOrNot()
@@ -92,17 +162,26 @@ public class CatManager : Damagochi
         }        
     }
     public void Look(GameObject target)
-    {
-        transform.LookAt(target.transform);
+    {        
+        Vector3 dir = target.transform.position - transform.position;
+        transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, dir, 0.3f * Time.deltaTime);
     }
+    public void LookCam( )
+    {
+        print(transform.localEulerAngles);
+        transform.localEulerAngles = Vector3.Lerp(transform.localEulerAngles, new Vector3(0,180,0), 2f * Time.deltaTime);
+    }
+
     void Wandering()
     {
+        GetComponent<SceneAnimatorController>().SetAnimatorString("isWalking");
         //if (playerble)
         //    return;
         if (HasDestinationReached())
         {
             //목적지에 도착하면 랜덤 행동
             int a = UnityEngine.Random.Range(0, 3);
+            print("a : " + a);
             if (a == 0)
             {
                 print("Idle로 변환");
@@ -133,16 +212,15 @@ public class CatManager : Damagochi
             Debug.Log("Cant Move Pos");
             return;
         }
-
-        agent.stoppingDistance = 0.1f;
+        
+        agent.stoppingDistance = 0.1f;        
         agent.SetDestination(pos);
-        GetComponent<SceneAnimatorController>().SetAnimatorString("isWalking");
     }
     bool CanReachedPos(Vector3 pos)
     {
         return agent.CalculatePath(pos, path);
     }
-    bool HasDestinationReached()
+    public bool HasDestinationReached()
     {
         if (agent.pathPending)
             return false;

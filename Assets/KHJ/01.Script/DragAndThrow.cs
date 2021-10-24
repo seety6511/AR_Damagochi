@@ -10,7 +10,7 @@ public class DragAndThrow : MonoBehaviour
     private float speed;
     private float lastMouseX, lastMouseY;
 
-    private bool thrown, holding;
+    public bool thrown, holding;
 
     private Rigidbody _rigidbody;
     private Vector3 newPosition;
@@ -28,7 +28,10 @@ public class DragAndThrow : MonoBehaviour
             OnTouch();
 
         if (thrown)
+        {
+            CatManager.instance.actionState = CatManager.ActionState.isPlaying;
             return;
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -49,6 +52,9 @@ public class DragAndThrow : MonoBehaviour
         {
             if (lastMouseY < Input.mousePosition.y)
             {
+                //CatManager.instance.IntimacyChange(3);
+                CatManager.instance.condition = Damagochi.Condition.Happy;
+                KHJ_SceneMngr.instance.currH += 12;
                 ThrowBall(Input.mousePosition);
             }
         }
@@ -59,9 +65,10 @@ public class DragAndThrow : MonoBehaviour
             lastMouseY = Input.mousePosition.y;
         }
     }
-
     public void Reset()
     {
+        CatManager.instance.ResetDestination();
+        CatManager.instance.actionState = CatManager.ActionState.isWaiting;
         CancelInvoke();
         transform.position = initialPos.transform.position;
         newPosition = transform.position;
