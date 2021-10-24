@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class SH_Skill_Shouting : SH_Skill
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Active()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.Active();
     }
 }

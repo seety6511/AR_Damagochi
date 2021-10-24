@@ -13,6 +13,7 @@ public class SH_ARInputManager : MonoBehaviour
     ARRaycastManager arRaycastManager;
     List<ARRaycastHit> hits;
     public RaycastHit hit;
+    public Damagochi hitDamagochi;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +49,12 @@ public class SH_ARInputManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             TouchEffect(hit.point);
+            if (hit.collider.CompareTag("Damagochi"))
+            {
+                hitDamagochi = hit.collider.gameObject.GetComponent<Damagochi>();
+            }
+            else
+                hitDamagochi = null;
         }
     }
 
@@ -70,15 +77,5 @@ public class SH_ARInputManager : MonoBehaviour
                 TouchEffect(hitPose.position);
             }
         }
-    }
-
-    bool PointOverUICheck()
-    {
-        Vector2 clickPos = Input.mousePosition;
-        bool isOverUI = clickPos.IsPointOverUIObject();
-
-        if (isOverUI)
-            return true;
-        return false;
     }
 }

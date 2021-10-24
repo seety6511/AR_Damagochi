@@ -1393,7 +1393,7 @@ MonoBehaviour:
   playerble: 1
   atk: 20
   hp: 100
-  maxHp: 0
+  maxHp: 100
   critical: 20
   atkSpeed: 2
   currentTurnGage: 0

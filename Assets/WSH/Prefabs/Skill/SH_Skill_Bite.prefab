@@ -43,9 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8252de2bd65bb4ea60c5ddf48fd412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   name: Bite
   coolTime: 6
   canActive: 0
+  damage: 1
   skillSprite: {fileID: 21300000, guid: 6abe113750c164e4687db0e3bfa5a7e5, type: 3}
   activeEffect: {fileID: 0}
   hitEffect: {fileID: 0}

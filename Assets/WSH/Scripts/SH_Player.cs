@@ -7,6 +7,7 @@ public class SH_Player : MonoBehaviour
 {
     public SH_ActionDamagochi controlDamagochi;
     public SH_Panel_Battle battlePanel;
+    public SH_DamagochiPickEffect pinPointEffect;
     SH_ARInputManager arInputManager;
 
     private void Awake()
@@ -35,10 +36,15 @@ public class SH_Player : MonoBehaviour
 
         if (arInputManager.hit.collider.CompareTag("Damagochi"))
         {
-            controlDamagochi.AttackTo(arInputManager.hit.collider.gameObject.GetComponent<SH_ActionDamagochi>());
+            if (controlDamagochi.AttackTo(arInputManager.hitDamagochi.GetComponent<SH_ActionDamagochi>()))
+            {
+                pinPointEffect.FollowTarget(arInputManager.hitDamagochi);
+            }
+            
         }
         else
         {
+            pinPointEffect.Off();
             controlDamagochi.MoveTo(arInputManager.hit.point);
         }
     }

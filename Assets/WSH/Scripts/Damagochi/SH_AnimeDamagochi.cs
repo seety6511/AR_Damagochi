@@ -42,9 +42,9 @@ public class SH_AnimeDamagochi : SH_PoolDamagochi
         animator.SetBool(key, value);
     }
 
-    public void AnimationChange(string key)
-    {
-        AnimatorParamClear();
-        animator.SetTrigger(key);
-    }
+    //public void AnimationChange(string key)
+    //{
+    //    AnimatorParamClear();
+    //    animator.SetTrigger(key);
+    //}
 }

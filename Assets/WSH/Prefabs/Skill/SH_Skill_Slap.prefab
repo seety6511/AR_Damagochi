@@ -43,9 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ded5a9708a4a54eb307be854d72c91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   name: Slap
-  coolTime: 2
+  coolTime: 10
   canActive: 0
+  damage: 2
   skillSprite: {fileID: 21300000, guid: a63737f85f848d74e91a2c437c7c5089, type: 3}
   activeEffect: {fileID: 0}
   hitEffect: {fileID: 0}

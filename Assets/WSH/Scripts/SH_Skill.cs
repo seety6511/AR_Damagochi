@@ -9,6 +9,7 @@ public class SH_Skill : MonoBehaviour
     public float coolTime;
     float timer;
     public bool canActive;
+    public float damage;
 
     public Sprite skillSprite;
     public GameObject activeEffect;
@@ -39,8 +40,9 @@ public class SH_Skill : MonoBehaviour
         owner.battleUI.UpdateTurnGage();
         FindObjectOfType<SH_TextLogControl>().LogText("Active Skill_" + owner.name + "_" + name, Color.black);
 
-        owner.battleState = SH_ActionDamagochi.BattleState.Attaking;
+        owner.battleState = SH_ActionDamagochi.BattleState.TurnWaiting;
 
+        owner.AnimationChange(name);
         if (activeEffect != null)
             activeEffect.SetActive(true);
     }

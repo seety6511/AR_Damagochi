@@ -12,7 +12,7 @@ public class SH_DamgochiBattleUI : MonoBehaviour
     public void UpdateHpBar()
     {
         var percent = owner.hp / owner.maxHp *0.1f;
-        hpBar.transform.localScale = new Vector3(percent, 0.1f, 0.1f);
+        hpBar.gameObject.transform.localScale = new Vector3(percent, 0.1f, 0.1f);
     }
 
     public void UpdateTurnGage()

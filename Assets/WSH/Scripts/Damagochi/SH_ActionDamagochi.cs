@@ -62,10 +62,47 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         battleUI.gameObject.SetActive(false);
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        hp = maxHp;
+    }
+
     protected override void Update()
     {
         base.Update();
         ActionStateMachine();
+    }
+
+    public override void Do(string key)
+    {
+        base.Do(key);
+        if(actionState == ActionState.isBattle)
+        {
+            foreach(var s in skillList)
+            {
+                if(s.name == key)
+                {
+                    FindObjectOfType<SH_TextLogControl>().LogText("Damaged : " + s.damage *atk+ "From : " + this + ", To : " + attackTarget.name, Color.black);
+                    attackTarget.Damaged(s.damage);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void Damaged(float value)
+    {
+        hp -= value*atk;
+
+        hp = Mathf.Max(0, hp);
+        battleUI.UpdateHpBar();
+    }
+
+    public override void End(string key)
+    {
+        base.End(key);
+        AnimationChange(key, false);
     }
 
     void Wandering()
@@ -255,24 +292,28 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
 
     }
 
-    public void AttackTo(SH_ActionDamagochi target)
+    public bool AttackTo(SH_ActionDamagochi target)
     {
+        if (target == this)
+            return false;
+
         if (!CanReachedPos(target.gameObject.transform.position))
         {
             Debug.Log("Cant Attacked Target");
-            return;
+            return false;
         }
 
         if (actionState == ActionState.isBattle)
         {
             Debug.Log(name + " is Already Battle");
-            return;
+            return false;
         }
 
         attackTarget = target;
         agent.stoppingDistance = attackRange;
         agent.SetDestination(target.gameObject.transform.position);
         ActionStateChange(ActionState.isRunning);
+        return true;
     }
 
     public void MoveTo(Vector3 pos)
