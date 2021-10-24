@@ -1,0 +1,221 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class KHJ_SceneMngr : MonoBehaviour
+{
+    public static KHJ_SceneMngr instance;
+    CatManager cat;
+
+    public GameObject Panel;
+
+    //재화
+    public TMP_Text goldUI;
+    public TMP_Text diaUI;
+    int gold = 100;
+    int dia = 100;
+
+    //유대감
+    public float currH = 0;
+    float maxH = 100;
+    public Image IntimacyImg;
+    public Image IntimacyBar;
+    public Sprite[] ImmoSprites;
+
+    //공 던지기
+    public bool isBall;
+    public GameObject Ball;
+    public GameObject shootPosition;
+
+    //밥먹기
+    public bool isEat;
+    public bool isFoodSet;
+    public GameObject Food;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+    private void Start()
+    {
+        cat = CatManager.instance;
+    }
+    void Update()
+    {
+        goldUI.text = gold.ToString();
+        diaUI.text = dia.ToString();
+        IntimacyBar.fillAmount = currH / maxH;
+        BallPlayingCam();
+        FoodCam();
+        Hungry();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                if(hit.transform.gameObject.name == "FoodPlate" && !isFoodSet)
+                {
+                    print("음식 채우기");                    
+                    isFoodSet = true;
+                }
+                if(hit.transform.gameObject.name == "Cat")
+                {
+                    CatManager.instance.actionState = CatManager.ActionState.isTouching;
+                }
+            }
+        }
+
+
+        if (isFoodSet)
+        {
+            Food.SetActive(true);
+            if(cat.hungryState == Damagochi.HungryState.Little || cat.hungryState == Damagochi.HungryState.Very)
+            {
+                cat.actionState = CatManager.ActionState.isEatting;
+            }
+        }
+        else
+        {
+            Food.SetActive(false);
+        }
+
+    }
+
+
+    float currTime;
+    float HungryTime = 10; 
+    void Hungry()
+    {
+        currTime += Time.deltaTime;
+        if(HungryTime < currTime)
+        {
+            print("Hungry!");
+            cat.hungryState -= 1;
+            if (cat.hungryState < 0)
+            {
+                cat.hungryState = 0;
+                currH -= 5;
+            }
+            currTime = 0;
+        }
+    }
+
+    public void isBallChange()
+    {
+        isBall = !isBall;
+        if (isBall)
+        {
+            CatManager.instance.actionState = CatManager.ActionState.isWaiting;
+        }
+        else
+        {
+            cat.ResetDestination();
+            CatManager.instance.actionState = CatManager.ActionState.Idle;
+        }
+    }
+
+    void BallPlayingCam()
+    {
+        if (isEat)
+            return;
+
+        if (isBall)
+        {
+            Ball.GetComponent<DragAndThrow>().enabled = true;
+            //Ball.GetComponent<DragAndThrow>().Reset();
+            Camera.main.fieldOfView = 70;
+            Camera.main.transform.position = new Vector3(82.46f, 0.38f, -0.6f);
+        }
+        else
+        {
+            Ball.GetComponent<DragAndThrow>().enabled = false;
+            Ball.transform.SetParent(null);
+            Ball.transform.position = new Vector3(82.3f, 0, 0.47f);
+            Ball.transform.eulerAngles = new Vector3(0, -25, 0);
+            Camera.main.fieldOfView = 25;
+            Camera.main.transform.position = new Vector3(82.46f, 0.38f, -2.9f);
+        }
+    }
+
+    void FoodCam()
+    {
+        if (isEat)
+        {
+            Camera.main.fieldOfView = 70;
+            Camera.main.transform.position = new Vector3(82.31f, 0.38f, -1.32f);
+        }
+    }
+
+
+    public void ShootBall()
+    {
+        //클릭한 곳으로 물체 쏘기
+        GameObject tObj = Instantiate(Ball);
+        tObj.transform.position = shootPosition.transform.position;
+        Vector3 force = (shootPosition.transform.position - Camera.main.transform.position).normalized;
+
+        Rigidbody tR = tObj.GetComponent<Rigidbody>();
+
+        tR.AddForce(force * 100f);
+    }
+
+    
+    public IEnumerator EatCoroutine(int i)
+    {
+        //밥 먹기 모션
+        cat.GetComponent<SceneAnimatorController>().SetAnimatorString("isEatting");
+        Panel.SetActive(false);
+        yield return new WaitForSeconds(5);
+
+        switch (i)
+        {
+            case 0:
+                break;
+            case 1:
+                DecreaseGold(10);
+                break;
+            case 2:
+                DecreaseDia(10);
+                break;
+        }
+        cat.GetComponent<SceneAnimatorController>().SetAnimatorString("Idle");
+        Panel.SetActive(true);
+    }
+
+    public void Eat(int i)
+    {
+        StartCoroutine(EatCoroutine(i));        
+    }
+
+    public bool DecreaseGold(int i)
+    {
+        if(gold-i < 0)
+        {
+            return false;
+        }
+        else
+        {
+            gold -= i;
+            return true;
+        }
+    }
+    public bool DecreaseDia(int i)
+    {
+        if (dia - i < 0)
+        {
+            return false;
+        }
+        else
+        {
+            dia -= i;
+            return true;
+        }
+    }
+
+
+}
