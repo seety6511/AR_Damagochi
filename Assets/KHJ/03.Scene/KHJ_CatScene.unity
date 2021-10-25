@@ -12910,6 +12910,8 @@ MonoBehaviour:
   moveSpeed: 0.3
   spawnPoint: {x: 0, y: 0, z: 0}
   playerble: 0
+  portrait: {fileID: 0}
+  canAnim: 0
   agent: {fileID: 0}
   Panel: {fileID: 1667716304}
   eatPoint: {fileID: 1710259792}

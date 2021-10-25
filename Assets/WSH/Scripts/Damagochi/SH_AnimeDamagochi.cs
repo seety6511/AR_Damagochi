@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using System.Linq;
 
 public class SH_AnimeDamagochi : SH_PoolDamagochi
 {
@@ -9,17 +11,24 @@ public class SH_AnimeDamagochi : SH_PoolDamagochi
     public bool canAnim;
     protected Animator animator;
     protected AnimatorControllerParameter[] animParam;
+    public Action onEvent;
+
+    public virtual void SpeedChange(float value)
+    {
+        animator.speed = value;
+    }
 
     public virtual void Do(string key)
     {
         canAnim = false;
-        print("Do_"+name +"_"+ key);
+        print("Do_" + name + "_" + key);
+        onEvent?.Invoke();
     }
 
     public virtual void End(string key)
     {
         canAnim = true;
-        print("End_"+name +"_"+ key);
+        print("End_" + name + "_" + key);
     }
 
     protected override void Awake()
@@ -36,6 +45,7 @@ public class SH_AnimeDamagochi : SH_PoolDamagochi
     }
     public void AnimatorParamClear()
     {
+        animator.speed = 1f;
         foreach (var p in animParam)
         {
             animator.SetBool(p.name, false);
@@ -44,18 +54,13 @@ public class SH_AnimeDamagochi : SH_PoolDamagochi
 
     public void AnimationChange(string key, bool value = true)
     {
-        if(!canAnim)
+        if (!canAnim)
         {
             Debug.Log("Already Animation");
             return;
         }
         AnimatorParamClear();
+
         animator.SetBool(key, value);
     }
-
-    //public void AnimationChange(string key)
-    //{
-    //    AnimatorParamClear();
-    //    animator.SetTrigger(key);
-    //}
 }

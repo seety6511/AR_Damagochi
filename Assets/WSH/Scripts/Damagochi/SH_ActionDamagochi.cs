@@ -77,12 +77,14 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     public SH_ActionDamagochi attackTarget;
 
     public BattleState battleState;
+    public SH_HitPoint[] hitPoints;
 
     #region Unity Event Methods
     protected override void Awake()
     {
         base.Awake();
 
+        hitPoints = GetComponentsInChildren<SH_HitPoint>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         path = new NavMeshPath();
@@ -127,6 +129,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         battleUI.UpdateHpBar();
         if(hp==0)
         {
+            AnimationChange("isDead");
             SH_TextLogControl.Instance.LogText("Dead : " + name, Color.red);
             actionState = ActionState.isDead;
         }

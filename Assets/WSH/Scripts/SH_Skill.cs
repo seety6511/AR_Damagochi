@@ -25,6 +25,10 @@ public class SH_Skill : MonoBehaviour
             canActive = true;
     }
 
+    public virtual void HitEvent()
+    {
+    }
+
     public virtual void Active()
     {
         if (owner.currentTurnGage < owner.maxTurnGage)
@@ -35,6 +39,12 @@ public class SH_Skill : MonoBehaviour
 
         if (!owner.canAnim)
             return;
+
+        if (activeEffect != null)
+            activeEffect.SetActive(false);
+
+        if (hitEffect != null)
+            hitEffect.SetActive(false);
 
         canActive = false;
         timer = 0f;

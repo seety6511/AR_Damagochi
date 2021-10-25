@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class SH_Skill_Slap : SH_Skill
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Active()
     {
-        
+        base.Active();
+        owner.onEvent = null;
+        owner.onEvent += HitEvent;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void HitEvent()
     {
-        
+        base.HitEvent();
+        hitEffect.transform.position = owner.hitPoints[Random.Range(0, owner.hitPoints.Length)].transform.position;
+        hitEffect.gameObject.SetActive(true);
     }
 }
