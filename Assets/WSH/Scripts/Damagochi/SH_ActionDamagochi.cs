@@ -6,17 +6,7 @@ using DG.Tweening;
 
 public class SH_ActionDamagochi : SH_AnimeDamagochi
 {
-    //이하 배틀용 스텟
-    public float atk;
-    public float hp;
-    public float maxHp;
-    public float critical;
-    public float atkSpeed;
-    public float currentTurnGage;
-    public float maxTurnGage;
-
-    public List<SH_Skill> skillList;
-
+    #region Local Enum
     public enum ActionState
     {
         Idle,
@@ -28,18 +18,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         isStanding,
 
     }
-    public ActionState actionState;
-
-
-    public NavMeshAgent agent;
-    NavMeshPath path;
-
-    public float wanderingRadius;//스폰위치에서 벗어나지 않는선의 범위
-    public float attackRange;  //공격이 가능한 범위
-    public float scanRadius;    //적을 인식하고 쫒아가는 범위
-    public bool battleOn;  //현재 전투중인가?
-    public SH_DamgochiBattleUI battleUI;
-    public SH_ActionDamagochi attackTarget;
     public enum BattleState
     {
         Start,
@@ -50,8 +28,51 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         Attaking,
         End,
     }
+    #endregion
+
+    public SH_Player owner;
+
+    //이하 배틀용 스텟
+    public float atk;
+    public float hp;
+    public float maxHp;
+    public float critical;
+    public float criticalDamage;
+    public float atkSpeed;
+    public float currentTurnGage;
+    public float maxTurnGage;
+
+    public int level;
+    public float exp
+    {
+        get => exp;
+        set
+        {
+            exp += value;
+        }
+    }
+    public float maxExp => level * expGap;
+    public float expGap => level * 10;
+    public float deadExp => level * 2;
+
+    public List<SH_Skill> skillList;
+
+
+    public ActionState actionState;
+
+    public NavMeshAgent agent;
+    NavMeshPath path;
+    public SH_DamgochiBattleUI battleUI;
+
+    public float wanderingRadius;//스폰위치에서 벗어나지 않는선의 범위
+    public float attackRange;  //공격이 가능한 범위
+    public float scanRadius;    //적을 인식하고 쫒아가는 범위
+    public bool battleOn;  //현재 전투중인가?
+    public SH_ActionDamagochi attackTarget;
+
     public BattleState battleState;
 
+    #region Unity Event Methods
     protected override void Awake()
     {
         base.Awake();
@@ -73,6 +94,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         base.Update();
         ActionStateMachine();
     }
+    #endregion
 
     public override void Do(string key)
     {
@@ -83,7 +105,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
             {
                 if(s.name == key)
                 {
-                    FindObjectOfType<SH_TextLogControl>().LogText("Damaged : " + s.damage *atk+ "From : " + this + ", To : " + attackTarget.name, Color.black);
+                   SH_TextLogControl.Instance.LogText("Damaged : " + s.damage *atk+ "From : " + this + ", To : " + attackTarget.name, Color.black);
                     attackTarget.Damaged(s.damage);
                     break;
                 }
@@ -97,6 +119,11 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
 
         hp = Mathf.Max(0, hp);
         battleUI.UpdateHpBar();
+        if(hp==0)
+        {
+            SH_TextLogControl.Instance.LogText("Dead : " + name, Color.red);
+            actionState = ActionState.isDead;
+        }
     }
 
     public override void End(string key)
@@ -184,6 +211,9 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
 
     void BattleInit()
     {
+        if (owner != null)
+            owner.pinPointEffect.Off();
+
         agent.ResetPath();
         battleUI.gameObject.SetActive(true);
         battleState = BattleState.TurnWaiting;
@@ -222,7 +252,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                 break;
 
             case BattleState.Attaking:
-                Attack();
                 break;
 
             case BattleState.End:
@@ -253,10 +282,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         }
     }
 
-    protected virtual void Attack()
-    {
-    }
-
     void TurnGageUpdate()
     {
         if (currentTurnGage >= maxTurnGage)
@@ -275,7 +300,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         return true;
     }
 
-
     public void ActionStateChange(ActionState state)
     {
         AnimatorParamClear();
@@ -289,7 +313,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                 break;
             }
         }
-
     }
 
     public bool AttackTo(SH_ActionDamagochi target)

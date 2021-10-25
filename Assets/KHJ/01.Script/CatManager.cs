@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CatManager : Damagochi
+public class CatManager : SH_AnimeDamagochi
 {
     public static CatManager instance;
     KHJ_SceneMngr mngr;
@@ -12,7 +12,6 @@ public class CatManager : Damagochi
     Animator anim;
     public NavMeshAgent agent;
     public GameObject Panel;
-    public GameObject spawnPoint;
     public GameObject eatPoint;
     public float wanderingRadius;
     public Vector3 Target;
@@ -32,8 +31,9 @@ public class CatManager : Damagochi
     }
     public ActionState actionState;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if(instance == null)
         {
             instance = this;
@@ -48,7 +48,7 @@ public class CatManager : Damagochi
         path = new NavMeshPath();
         anim = GetComponent<Animator>();
     }
-    private void Update()
+    protected override void Update()
     {
         SetState();
         ActionStateMachine();
@@ -126,7 +126,7 @@ public class CatManager : Damagochi
     }
     private void Waiting()
     {
-        MoveTo(spawnPoint.transform.position);
+        MoveTo(spawnPoint);
         if (HasDestinationReached())
         {
             //스폰지점에 도착하면 앉아서 대기상태
@@ -150,13 +150,23 @@ public class CatManager : Damagochi
         //}
     }
 
-    public void MoveOrNot()
+    public override void Do(string key)
+    {
+        base.Do(key);
+        switch (key)
+        {
+            case "MoveOrNot":
+                MoveOrNot();
+                break;
+        }
+    }
+    void MoveOrNot()
     {
         int a = UnityEngine.Random.Range(0, 3);
         if (a == 0)
         {
             print("Move로 변환");
-            var pos = SH_GameManager.GetRandomInnerCirclePoint(spawnPoint.transform.position, wanderingRadius);
+            var pos = SH_GameManager.GetRandomInnerCirclePoint(spawnPoint, wanderingRadius);
             Target = pos;
             actionState = ActionState.isMoving;
         }        
@@ -195,12 +205,12 @@ public class CatManager : Damagochi
                 actionState = ActionState.isSleeping;
                 return;
             }
-            var pos = SH_GameManager.GetRandomInnerCirclePoint(spawnPoint.transform.position, wanderingRadius);
+            var pos = SH_GameManager.GetRandomInnerCirclePoint(spawnPoint, wanderingRadius);
             Target = pos;
         }
 
         while (!CanReachedPos(Target))
-            Target = SH_GameManager.GetRandomInnerCirclePoint(spawnPoint.transform.position, wanderingRadius);
+            Target = SH_GameManager.GetRandomInnerCirclePoint(spawnPoint, wanderingRadius);
 
         MoveTo(Target);
     }

@@ -14,6 +14,7 @@ public class SH_Player : MonoBehaviour
     {
         arInputManager = FindObjectOfType<SH_ARInputManager>();
         battlePanel = FindObjectOfType<SH_Panel_Battle>();
+        controlDamagochi.owner = this;
     }
 
     private void Update()

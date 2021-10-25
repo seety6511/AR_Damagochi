@@ -9,6 +9,15 @@ public class SH_TextLogControl : MonoBehaviour
 
     public List<GameObject> textItems = new List<GameObject>();
     public int maxLog = 10;
+
+    public static SH_TextLogControl Instance => ins;
+    static SH_TextLogControl ins;
+
+    private void Awake()
+    {
+        if (ins == null)
+            ins = this;
+    }
     private void OnDisable()
     {
         for(int i = 0; i < textItems.Count; ++i)

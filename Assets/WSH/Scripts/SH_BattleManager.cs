@@ -53,6 +53,15 @@ public class SH_BattleManager : MonoBehaviour
         battlePanel.SkillButtonUpdate();
         challenger.BattleStateAction();
         target.BattleStateAction();
+
+        if(challenger.actionState == SH_ActionDamagochi.ActionState.isDead || target.actionState == SH_ActionDamagochi.ActionState.isDead)
+        {
+            BattleEnd();
+        }
+    }
+
+    void BattleEnd()
+    {
     }
 
 }
