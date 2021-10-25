@@ -50,6 +50,11 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         set
         {
             e += value;
+            if (e >= maxExp)
+            {
+                e -= maxExp;
+                level++;
+            }
         }
     }
     public float maxExp => level * expGap;
@@ -190,6 +195,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                 {
                     transform.DOMoveY(-10f, 3f).OnComplete(delegate { gameObject.SetActive(false); });
                     deadTimer = 0f;
+                    ActionStateChange(ActionState.Idle);
                 }
                 break;
         }

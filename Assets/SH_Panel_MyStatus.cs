@@ -8,11 +8,15 @@ public class SH_Panel_MyStatus : MonoBehaviour
     public SH_ActionDamagochi target;
 
     public Text damagoName;
+    public Text level;
+    public Text exp;
     public Text hp;
     public Text atk;
     public Text critical;
     public Text criticalDamage;
     public Text atkSpeed;
+
+    public Image portrait;
 
     public List<Image> skillImages;
     public List<Text> skillNames;
@@ -21,11 +25,14 @@ public class SH_Panel_MyStatus : MonoBehaviour
         target = player.controlDamagochi;
 
         damagoName.text = target.name;
+        level.text = target.level.ToString();
+        exp.text = target.exp+ " / " + target.maxExp;
         hp.text = target.hp + " / " + target.maxHp;
         atk.text = target.atk.ToString();
         critical.text = target.critical.ToString();
         criticalDamage.text = target.criticalDamage.ToString();
         atkSpeed.text = target.atkSpeed.ToString();
+        portrait.sprite = target.portrait;
 
         for(int i = 0; i < skillImages.Count; ++i)
         {
