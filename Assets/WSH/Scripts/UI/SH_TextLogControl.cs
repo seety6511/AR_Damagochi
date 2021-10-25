@@ -26,7 +26,6 @@ public class SH_TextLogControl : MonoBehaviour
             Destroy(temp);
             textItems.RemoveAt(0);
         }
-        textItems = new List<GameObject>();
     }
 
     public void LogText(string text, Color color)
@@ -35,7 +34,7 @@ public class SH_TextLogControl : MonoBehaviour
         {
             GameObject temp = textItems[0];
             Destroy(temp);
-            textItems.Remove(temp);
+            textItems.RemoveAt(0);
         }
 
         GameObject obj = Instantiate(textTemplate);

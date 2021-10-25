@@ -62,8 +62,8 @@ public class SH_BattleManager : MonoBehaviour
             BattleEnd();
         }
     }
-    SH_ActionDamagochi winer;
-    SH_ActionDamagochi loser;
+    public SH_ActionDamagochi winer;
+    public SH_ActionDamagochi loser;
     void BattleEnd()
     {
         winer.exp = loser.deadExp;
@@ -71,6 +71,6 @@ public class SH_BattleManager : MonoBehaviour
         winer.battleState = SH_ActionDamagochi.BattleState.End;
         loser.battleState = SH_ActionDamagochi.BattleState.End;
         playBattle = false;
+        battleResultPanel.On(this);
     }
-
 }

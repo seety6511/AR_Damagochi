@@ -33,6 +33,9 @@ public class SH_Skill : MonoBehaviour
         if (!canActive)
             return;
 
+        if (!owner.canAnim)
+            return;
+
         canActive = false;
         timer = 0f;
 
