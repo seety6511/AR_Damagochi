@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class KHJ_SceneMngr : MonoBehaviour
 {
     public static KHJ_SceneMngr instance;
@@ -33,6 +33,7 @@ public class KHJ_SceneMngr : MonoBehaviour
     public bool isEat;
     public bool isFoodSet;
     public GameObject Food;
+    public GameObject FoodUI;
 
     private void Awake()
     {
@@ -60,8 +61,7 @@ public class KHJ_SceneMngr : MonoBehaviour
             {
                 if(hit.transform.gameObject.name == "FoodPlate" && !isFoodSet)
                 {
-                    print("음식 채우기");                    
-                    isFoodSet = true;
+                    FoodUI.SetActive(!FoodUI.activeSelf);
                 }
                 if(hit.transform.gameObject.name == "Cat")
                 {
@@ -163,15 +163,9 @@ public class KHJ_SceneMngr : MonoBehaviour
 
         tR.AddForce(force * 100f);
     }
-
-    
-    public IEnumerator EatCoroutine(int i)
+        
+    public void Eat(int i)
     {
-        //밥 먹기 모션
-        cat.GetComponent<SceneAnimatorController>().SetAnimatorString("isEatting");
-        Panel.SetActive(false);
-        yield return new WaitForSeconds(5);
-
         switch (i)
         {
             case 0:
@@ -183,13 +177,9 @@ public class KHJ_SceneMngr : MonoBehaviour
                 DecreaseDia(10);
                 break;
         }
-        cat.GetComponent<SceneAnimatorController>().SetAnimatorString("Idle");
-        Panel.SetActive(true);
-    }
-
-    public void Eat(int i)
-    {
-        StartCoroutine(EatCoroutine(i));        
+        print("음식 채우기");
+        FoodUI.SetActive(false);
+        isFoodSet = true;
     }
 
     public bool DecreaseGold(int i)
@@ -216,6 +206,14 @@ public class KHJ_SceneMngr : MonoBehaviour
             return true;
         }
     }
+    public void GoToScene(string scenename)
+    {
+        SceneManager.LoadScene(scenename);
+    }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 
 }

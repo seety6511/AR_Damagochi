@@ -42,6 +42,7 @@ public class CatManager : SH_AnimeDamagochi
 
     private void Start()
     {
+        spawnPoint = GameObject.Find("SpwanPoint").transform.position;
         mngr = KHJ_SceneMngr.instance;
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
