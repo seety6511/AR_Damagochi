@@ -65,6 +65,22 @@ public class DragAndThrow : MonoBehaviour
             lastMouseY = Input.mousePosition.y;
         }
     }
+
+
+    public void Cancel()
+    {
+        CancelInvoke("Reset");
+        CatManager.instance.ResetDestination();
+        CatManager.instance.actionState = CatManager.ActionState.Idle;
+        transform.position = initialPos.transform.position;
+        newPosition = transform.position;
+        thrown = holding = false;
+
+        _rigidbody.useGravity = false;
+        _rigidbody.velocity = Vector3.zero;
+        _rigidbody.angularVelocity = Vector3.zero;
+        transform.rotation = Quaternion.Euler(0f, 200f, 0f);
+    }
     public void Reset()
     {
         CatManager.instance.ResetDestination();

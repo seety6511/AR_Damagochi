@@ -35,6 +35,9 @@ public class KHJ_SceneMngr : MonoBehaviour
     public GameObject Food;
     public GameObject FoodUI;
 
+    //AR
+    public bool isAR;
+
     private void Awake()
     {
         if (instance == null)
@@ -49,8 +52,11 @@ public class KHJ_SceneMngr : MonoBehaviour
         goldUI.text = gold.ToString();
         diaUI.text = dia.ToString();
         IntimacyBar.fillAmount = currH / maxH;
-        BallPlayingCam();
-        FoodCam();
+        if (!isAR)
+        {
+            BallPlayingCam();
+            FoodCam();
+        }
         Hungry();
 
         if (Input.GetMouseButtonDown(0))
@@ -65,6 +71,8 @@ public class KHJ_SceneMngr : MonoBehaviour
                 }
                 if(hit.transform.gameObject.name == "Cat")
                 {
+                    if (isBall)
+                        return;
                     CatManager.instance.actionState = CatManager.ActionState.isTouching;
                 }
             }
@@ -76,6 +84,8 @@ public class KHJ_SceneMngr : MonoBehaviour
             Food.SetActive(true);
             if(cat.hungryState == Damagochi.HungryState.Little || cat.hungryState == Damagochi.HungryState.Very)
             {
+                if (isBall)
+                    return;
                 cat.actionState = CatManager.ActionState.isEatting;
             }
         }

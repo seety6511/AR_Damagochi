@@ -141,7 +141,6 @@ public class CatManager : SH_AnimeDamagochi
     {
         //공이 던져지면 쫓아가기
         MoveTo(KHJ_SceneMngr.instance.Ball.transform.position);
-        print("Ball pos : " + KHJ_SceneMngr.instance.Ball.transform.position);
         //if (HasDestinationReached())
         //{
         //    print("Catched Ball!");
@@ -179,7 +178,6 @@ public class CatManager : SH_AnimeDamagochi
     }
     public void LookCam( )
     {
-        print(transform.localEulerAngles);
         transform.localEulerAngles = Vector3.Lerp(transform.localEulerAngles, new Vector3(0,180,0), 2f * Time.deltaTime);
     }
 
@@ -217,7 +215,6 @@ public class CatManager : SH_AnimeDamagochi
     }
     public void MoveTo(Vector3 pos)
     {
-        print(pos);
         if (!CanReachedPos(pos))
         {
             Debug.Log("Cant Move Pos");
