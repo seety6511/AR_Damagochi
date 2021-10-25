@@ -2417,7 +2417,6 @@ GameObject:
   - component: {fileID: 778350446}
   - component: {fileID: 778350445}
   - component: {fileID: 778350444}
-  - component: {fileID: 778350448}
   - component: {fileID: 778350449}
   m_Layer: 0
   m_Name: AR Session Origin
@@ -2482,20 +2481,6 @@ Transform:
   m_Father: {fileID: 1728394969}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &778350448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 778350443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ef2a3cb2dfb1c14b81a8b490f3154d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  touchEffect: {fileID: 5384817849587756578, guid: 7d468033dd13ac840bdfa336b4253ae1, type: 3}
-  hitDamagochi: {fileID: 0}
 --- !u!114 &778350449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5554,6 +5539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e674e1d6155b6459a7bdf7f5f05823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchEffect: {fileID: 5384817849587756578, guid: 7d468033dd13ac840bdfa336b4253ae1, type: 3}
+  hitDamagochi: {fileID: 0}
   controlDamagochi: {fileID: 1085497268}
   battlePanel: {fileID: 1765097017}
   pinPointEffect: {fileID: 1488142934}

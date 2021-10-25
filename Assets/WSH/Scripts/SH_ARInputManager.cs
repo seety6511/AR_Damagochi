@@ -15,7 +15,7 @@ public class SH_ARInputManager : MonoBehaviour
     public RaycastHit hit;
     public Damagochi hitDamagochi;
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Awake()
     {
         arRaycastManager = GetComponent<ARRaycastManager>();
         hits = new List<ARRaycastHit>();

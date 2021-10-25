@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SH_Player : MonoBehaviour
+public class SH_Player : SH_ARInputManager
 {
     public SH_ActionDamagochi controlDamagochi;
     public SH_Panel_Battle battlePanel;
     public SH_DamagochiPickEffect pinPointEffect;
-    SH_ARInputManager arInputManager;
 
-    private void Awake()
+    protected override void Awake()
     {
-        arInputManager = FindObjectOfType<SH_ARInputManager>();
-        //battlePanel = FindObjectOfType<SH_Panel_Battle>();
         controlDamagochi.owner = this;
     }
 
     private void Update()
     {
-        arInputManager.MouseInput();
-        arInputManager.TouchInput();
+        MouseInput();
+        TouchInput();
         MouseAction();
     }
 
@@ -35,18 +32,18 @@ public class SH_Player : MonoBehaviour
         if (controlDamagochi == null)
             return;
 
-        if (arInputManager.hit.collider.CompareTag("Damagochi"))
+        if (hit.collider.CompareTag("Damagochi"))
         {
-            if (controlDamagochi.AttackTo(arInputManager.hitDamagochi.GetComponent<SH_ActionDamagochi>()))
+            if (controlDamagochi.AttackTo(hitDamagochi.GetComponent<SH_ActionDamagochi>()))
             {
-                pinPointEffect.FollowTarget(arInputManager.hitDamagochi);
+                pinPointEffect.FollowTarget(hitDamagochi);
             }
             
         }
         else
         {
             pinPointEffect.Off();
-            controlDamagochi.MoveTo(arInputManager.hit.point);
+            controlDamagochi.MoveTo(hit.point);
         }
     }
 }

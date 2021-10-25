@@ -20,7 +20,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     }
     public enum BattleState
     {
-        Start,
+        None,
         Ambushed,   //공격당함.
         Surprise,   //기습함.
         TurnWaiting,
@@ -131,7 +131,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         {
             AnimationChange("isDead");
             SH_TextLogControl.Instance.LogText("Dead : " + name, Color.red);
-            actionState = ActionState.isDead;
+            ActionStateChange(ActionState.isDead);
         }
     }
 
@@ -196,13 +196,23 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                 battleUI.gameObject.SetActive(false);
                 if (deadTimer >= deadSinkTime)
                 {
-                    transform.DOMoveY(-10f, 3f).OnComplete(delegate { gameObject.SetActive(false); });
-                    deadTimer = 0f;
-                    ActionStateChange(ActionState.Idle);
-                    attackTarget = null;
+                    transform.DOMoveY(-10f, 10f).OnComplete(delegate { gameObject.SetActive(false); });
+                    Init();
                 }
                 break;
         }
+    }
+
+    void Init()
+    {
+        deadTimer = 0f;
+        hp = maxHp;
+        currentTurnGage = 0f;
+        ActionStateChange(ActionState.Idle);
+        battleState = BattleState.None;
+        battleOn = false;
+        canAnim = true;
+        attackTarget = null;
     }
     
     void RunningAction()
@@ -277,11 +287,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                 break;
 
             case BattleState.End:
-                if(hp<=0)
-                {
-                    ActionStateChange(ActionState.isDead);
-                    battleOn = false;
-                }
+                battleOn = false;
                 battleUI.gameObject.SetActive(false);
                 attackTarget = null;
                 if (owner != null)
