@@ -7,7 +7,7 @@ public class SH_Skill : MonoBehaviour
     public SH_ActionDamagochi owner;
     public new string name;
     public float coolTime;
-    float timer;
+    public float timer;
     public bool canActive;
     public float damage;
 
@@ -41,7 +41,7 @@ public class SH_Skill : MonoBehaviour
 
         owner.currentTurnGage = 0f;
         owner.battleUI.UpdateTurnGage();
-        FindObjectOfType<SH_TextLogControl>().LogText("Active Skill_" + owner.name + "_" + name, Color.black);
+        SH_TextLogControl.Instance.LogText("Active Skill_" + owner.name + "_" + name, Color.black);
 
         owner.battleState = SH_ActionDamagochi.BattleState.TurnWaiting;
 

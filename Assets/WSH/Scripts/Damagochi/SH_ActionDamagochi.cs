@@ -112,7 +112,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                 if(s.name == key)
                 {
                    SH_TextLogControl.Instance.LogText("Damaged : " + s.damage *atk+ "From : " + this + ", To : " + attackTarget.name, Color.black);
-                    attackTarget.Damaged(s.damage);
+                    attackTarget.Damaged(s.damage * s.owner.atk);
                     break;
                 }
             }
@@ -121,7 +121,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
 
     public void Damaged(float value)
     {
-        hp -= value*atk;
+        hp -= value;
 
         hp = Mathf.Max(0, hp);
         battleUI.UpdateHpBar();
@@ -196,6 +196,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                     transform.DOMoveY(-10f, 3f).OnComplete(delegate { gameObject.SetActive(false); });
                     deadTimer = 0f;
                     ActionStateChange(ActionState.Idle);
+                    attackTarget = null;
                 }
                 break;
         }
@@ -230,6 +231,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         if (owner != null)
             owner.pinPointEffect.Off();
 
+        hp = maxHp;
         agent.ResetPath();
         battleUI.gameObject.SetActive(true);
         battleState = BattleState.TurnWaiting;
@@ -238,6 +240,8 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         foreach(var s in skillList)
         {
             s.owner = this;
+            s.timer = s.coolTime;
+            s.canActive = true;
         }
     }
     public void BattleStateAction()

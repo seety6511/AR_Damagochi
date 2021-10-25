@@ -1390,8 +1390,9 @@ MonoBehaviour:
   condition: 0
   moveSpeed: 3
   spawnPoint: {x: 0, y: 0, z: 0}
-  playerble: 1
+  playerble: 0
   portrait: {fileID: 21300000, guid: 2ff13894f44bfce418ea310e20778053, type: 3}
+  canAnim: 0
   owner: {fileID: 0}
   atk: 20
   hp: 100

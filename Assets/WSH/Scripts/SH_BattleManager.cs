@@ -71,6 +71,8 @@ public class SH_BattleManager : MonoBehaviour
         winer.battleState = SH_ActionDamagochi.BattleState.End;
         loser.battleState = SH_ActionDamagochi.BattleState.End;
         playBattle = false;
+        winer.canAnim = true;
+        loser.canAnim = true;
         battleResultPanel.On(this);
     }
 }
