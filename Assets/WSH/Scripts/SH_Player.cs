@@ -13,7 +13,7 @@ public class SH_Player : MonoBehaviour
     private void Awake()
     {
         arInputManager = FindObjectOfType<SH_ARInputManager>();
-        battlePanel = FindObjectOfType<SH_Panel_Battle>();
+        //battlePanel = FindObjectOfType<SH_Panel_Battle>();
         controlDamagochi.owner = this;
     }
 

@@ -6,6 +6,7 @@ public class SH_BattleManager : MonoBehaviour
 {
     public GameObject ambushedEffect;
     public SH_Panel_Battle battlePanel;
+    public SH_Panel_BattleResult battleResultPanel;
 
     public SH_ActionDamagochi challenger;
     public SH_ActionDamagochi target;
@@ -56,12 +57,20 @@ public class SH_BattleManager : MonoBehaviour
 
         if(challenger.actionState == SH_ActionDamagochi.ActionState.isDead || target.actionState == SH_ActionDamagochi.ActionState.isDead)
         {
+            winer = challenger.actionState == SH_ActionDamagochi.ActionState.isDead ? target : challenger;
+            loser = winer == challenger ? target : challenger;
             BattleEnd();
         }
     }
-
+    SH_ActionDamagochi winer;
+    SH_ActionDamagochi loser;
     void BattleEnd()
     {
+        winer.exp = loser.deadExp;
+        Debug.Log(winer.name + " Get " + loser.deadExp +" Exp");
+        winer.battleState = SH_ActionDamagochi.BattleState.End;
+        loser.battleState = SH_ActionDamagochi.BattleState.End;
+        playBattle = false;
     }
 
 }

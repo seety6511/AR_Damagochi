@@ -43,12 +43,13 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     public float maxTurnGage;
 
     public int level;
+    float e;
     public float exp
     {
-        get => exp;
+        get => e;
         set
         {
-            exp += value;
+            e += value;
         }
     }
     public float maxExp => level * expGap;
@@ -151,6 +152,8 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
             return;
     }
 
+    float deadTimer;
+    public float deadSinkTime = 3f;
     void ActionStateMachine()
     {
         switch (actionState)
@@ -181,6 +184,13 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                 break;
 
             case ActionState.isDead:
+                deadTimer += Time.deltaTime;
+                battleUI.gameObject.SetActive(false);
+                if (deadTimer >= deadSinkTime)
+                {
+                    transform.DOMoveY(-10f, 3f).OnComplete(delegate { gameObject.SetActive(false); });
+                    deadTimer = 0f;
+                }
                 break;
         }
     }
@@ -223,7 +233,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         {
             s.owner = this;
         }
-
     }
     public void BattleStateAction()
     {
@@ -255,7 +264,18 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                 break;
 
             case BattleState.End:
+                if(hp<=0)
+                {
+                    ActionStateChange(ActionState.isDead);
+                    battleOn = false;
+                }
+                battleUI.gameObject.SetActive(false);
                 attackTarget = null;
+                if (owner != null)
+                    owner.battlePanel.gameObject.SetActive(false);
+
+                SH_TextLogControl.Instance.Clear();
+                ActionStateChange(ActionState.Idle);
                 break;
         }
     }

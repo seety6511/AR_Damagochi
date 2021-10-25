@@ -18,9 +18,9 @@ public class SH_TextLogControl : MonoBehaviour
         if (ins == null)
             ins = this;
     }
-    private void OnDisable()
+    public void Clear()
     {
-        for(int i = 0; i < textItems.Count; ++i)
+        for (int i = 0; i < textItems.Count; ++i)
         {
             var temp = textItems[0];
             Destroy(temp);
@@ -28,6 +28,7 @@ public class SH_TextLogControl : MonoBehaviour
         }
         textItems = new List<GameObject>();
     }
+
     public void LogText(string text, Color color)
     {
         if (textItems.Count == maxLog)

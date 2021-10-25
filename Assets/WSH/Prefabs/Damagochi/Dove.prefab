@@ -1238,13 +1238,16 @@ MonoBehaviour:
   moveSpeed: 3
   spawnPoint: {x: 0, y: 0, z: 0}
   playerble: 0
+  owner: {fileID: 0}
   atk: 5
   hp: 50
   maxHp: 50
   critical: 30
+  criticalDamage: 0
   atkSpeed: 5
   currentTurnGage: 0
   maxTurnGage: 10
+  level: 1
   skillList:
   - {fileID: 4491917203789548476}
   - {fileID: 8239940162212370875}
@@ -1252,13 +1255,14 @@ MonoBehaviour:
   - {fileID: 3093948985257630257}
   actionState: 0
   agent: {fileID: 0}
+  battleUI: {fileID: 5960223004482604977}
   wanderingRadius: 3
   attackRange: 2
   scanRadius: 4
   battleOn: 0
-  battleUI: {fileID: 5960223004482604977}
   attackTarget: {fileID: 0}
   battleState: 0
+  deadSinkTime: 3
 --- !u!54 &7505669413311709015
 Rigidbody:
   m_ObjectHideFlags: 0
