@@ -36,7 +36,10 @@ public class KHJ_SceneMngr : MonoBehaviour
     public GameObject FoodUI;
 
     //AR
-    public bool isAR;
+    public bool useAR;
+    public GameObject MainCam;
+    public GameObject ARCam;
+    public GameObject AR_Text;
 
     private void Awake()
     {
@@ -52,7 +55,7 @@ public class KHJ_SceneMngr : MonoBehaviour
         goldUI.text = gold.ToString();
         diaUI.text = dia.ToString();
         IntimacyBar.fillAmount = currH / maxH;
-        if (!isAR)
+        if (!useAR)
         {
             BallPlayingCam();
             FoodCam();
@@ -129,6 +132,22 @@ public class KHJ_SceneMngr : MonoBehaviour
         }
     }
 
+    public void ARChange()
+    {
+        useAR = !useAR;
+        if (useAR)
+        {
+            MainCam.SetActive(false);
+            ARCam.SetActive(true);
+            AR_Text.SetActive(true);
+        }
+        else
+        {
+            MainCam.SetActive(true);
+            ARCam.SetActive(false);
+            AR_Text.SetActive(false);
+        }
+    }
     void BallPlayingCam()
     {
         if (isEat)

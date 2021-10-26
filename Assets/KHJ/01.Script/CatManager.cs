@@ -104,6 +104,7 @@ public class CatManager : SH_AnimeDamagochi
         MoveTo(eatPoint.transform.position);
         if (HasDestinationReached())
         {
+            LookCam();
             ResetDestination();
             //½ºÆùÁöÁ¡¿¡ µµÂøÇÏ¸é ¾É¾Æ¼­ ¹ä¸Ô±â
             GetComponent<SceneAnimatorController>().SetAnimatorString("isEatting");
