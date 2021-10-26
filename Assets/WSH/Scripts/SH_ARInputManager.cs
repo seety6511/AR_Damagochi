@@ -11,14 +11,14 @@ public class SH_ARInputManager : MonoBehaviour
     List<SH_Effect> disablePool = new List<SH_Effect>();
 
     ARRaycastManager arRaycastManager;
-    List<ARRaycastHit> hits;
+    public List<ARRaycastHit> touchHits;
     public RaycastHit hit;
     public Damagochi hitDamagochi;
     // Start is called before the first frame update
     protected virtual void Awake()
     {
         arRaycastManager = GetComponent<ARRaycastManager>();
-        hits = new List<ARRaycastHit>();
+        touchHits = new List<ARRaycastHit>();
         for(int i = 0; i < 6; ++i)
         {
             var e = Instantiate(touchEffect);
@@ -26,6 +26,12 @@ public class SH_ARInputManager : MonoBehaviour
             e.Set(enablePool, disablePool);
             e.Off();
         }
+    }
+
+    protected virtual void Update()
+    {
+        //Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        //arRaycastManager.Raycast(ray, forwardHits);
     }
     void TouchEffect(Vector3 pos)
     {
@@ -38,6 +44,10 @@ public class SH_ARInputManager : MonoBehaviour
 
     public void MouseInput()
     {
+#if UNITY_ANDROID
+        return;
+#endif
+
         if (!Input.GetMouseButtonDown(0))
             return;
 
@@ -60,6 +70,9 @@ public class SH_ARInputManager : MonoBehaviour
 
     public void TouchInput()
     {
+#if UNITY_EDITOR
+        return;
+#endif
         if (Input.touchCount <= 0)
             return;
 
@@ -71,9 +84,9 @@ public class SH_ARInputManager : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
 
-            if (arRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
+            if (arRaycastManager.Raycast(touchPosition, touchHits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
             {
-                var hitPose = hits[0].pose;
+                var hitPose = touchHits[0].pose;
                 TouchEffect(hitPose.position);
             }
         }

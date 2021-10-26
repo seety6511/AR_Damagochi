@@ -11,11 +11,13 @@ public class SH_Player : SH_ARInputManager
 
     protected override void Awake()
     {
+        base.Awake();
         controlDamagochi.owner = this;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         MouseInput();
         TouchInput();
         MouseAction();
@@ -32,13 +34,15 @@ public class SH_Player : SH_ARInputManager
         if (controlDamagochi == null)
             return;
 
+        if (hit.collider == null)
+            return;
+
         if (hit.collider.CompareTag("Damagochi"))
         {
             if (controlDamagochi.AttackTo(hitDamagochi.GetComponent<SH_ActionDamagochi>()))
             {
                 pinPointEffect.FollowTarget(hitDamagochi);
             }
-            
         }
         else
         {

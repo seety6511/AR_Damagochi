@@ -205,6 +205,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
 
     void Init()
     {
+        agent.enabled = false;
         deadTimer = 0f;
         hp = maxHp;
         currentTurnGage = 0f;
@@ -213,6 +214,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         battleOn = false;
         canAnim = true;
         attackTarget = null;
+        agent.enabled = true;
     }
     
     void RunningAction()
@@ -353,7 +355,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
             }
         }
     }
-
     public bool AttackTo(SH_ActionDamagochi target)
     {
         if (target == this)
@@ -378,6 +379,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         return true;
     }
 
+    Vector3 movePos;
     public void MoveTo(Vector3 pos)
     {
         if (!CanReachedPos(pos))
@@ -391,9 +393,9 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
             Debug.Log(name + " is Battle");
             return;
         }
-
+        movePos = pos;
         agent.stoppingDistance = 0.1f;
-        agent.SetDestination(pos);
+        agent.SetDestination(movePos);
         ActionStateChange(ActionState.isWalking);
     }
 
