@@ -61,7 +61,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     public float expGap => level * 10;
     public float deadExp => level * 2;
 
-    public List<SH_Skill> skillList;
+    public SH_Skill[] skillList;
 
 
     public ActionState actionState;
@@ -89,6 +89,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         agent.speed = moveSpeed;
         path = new NavMeshPath();
         battleUI.gameObject.SetActive(false);
+        skillList = GetComponentsInChildren<SH_Skill>();
     }
 
     protected override void OnEnable()
@@ -313,7 +314,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     {
         while (true)
         {
-            int r = Random.Range(0, skillList.Count);
+            int r = Random.Range(0, skillList.Length);
             if (skillList[r].canActive)
             {
                 skillList[r].Active();

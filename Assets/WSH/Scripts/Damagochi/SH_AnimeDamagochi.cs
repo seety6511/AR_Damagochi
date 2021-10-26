@@ -13,6 +13,11 @@ public class SH_AnimeDamagochi : SH_PoolDamagochi
     protected AnimatorControllerParameter[] animParam;
     public Action onEvent;
 
+    public void AnimSpeedChange(float value)
+    {
+        animator.speed = value;
+    }
+
     public virtual void SpeedChange(float value)
     {
         animator.speed = value;

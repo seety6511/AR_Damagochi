@@ -7,7 +7,7 @@ public class SH_Panel_Battle : MonoBehaviour
 {
     public SH_Player owner;
     public SH_SkillButton[] skillButtons;
-    List<SH_Skill> skills;
+    SH_Skill[] skills;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class SH_Panel_Battle : MonoBehaviour
     public void SetSkills(SH_ActionDamagochi dama)
     {
         skills = dama.skillList;
-        for(int i = 0; i < dama.skillList.Count; ++i)
+        for(int i = 0; i < dama.skillList.Length; ++i)
         {
             skillButtons[i].SetSkill(skills[i]);
         }
