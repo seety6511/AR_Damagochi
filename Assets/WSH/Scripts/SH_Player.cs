@@ -18,14 +18,13 @@ public class SH_Player : SH_ARInputManager
     protected override void Update()
     {
         base.Update();
-        MouseInput();
-        TouchInput();
         MouseAction();
+        TouchAction();
     }
 
-    public void MouseAction()
+    void TouchAction()
     {
-        if (!Input.GetMouseButtonDown(0))
+        if (!touch)
             return;
 
         if (EventSystem.current.IsPointerOverGameObject())
@@ -34,20 +33,51 @@ public class SH_Player : SH_ARInputManager
         if (controlDamagochi == null)
             return;
 
-        if (hit.collider == null)
-            return;
-
-        if (hit.collider.CompareTag("Damagochi"))
+        if (touchRayHit.collider.CompareTag("Damagochi"))
         {
+            var hitDamagochi = touchRayHit.collider.gameObject.GetComponent<Damagochi>();
             if (controlDamagochi.AttackTo(hitDamagochi.GetComponent<SH_ActionDamagochi>()))
             {
+                effectOff = true;
                 pinPointEffect.FollowTarget(hitDamagochi);
             }
         }
         else
         {
+            effectOff = false;
             pinPointEffect.Off();
-            controlDamagochi.MoveTo(hit.point);
+            controlDamagochi.MoveTo(touchRayHitPoint);
+        }
+    }
+
+    void MouseAction()
+    {
+        if (!click)
+            return;
+
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        if (controlDamagochi == null)
+            return;
+
+        if (mouseRayHit.collider == null)
+            return;
+
+        if (mouseRayHit.collider.CompareTag("Damagochi"))
+        {
+            var hitDamagochi = mouseRayHit.collider.gameObject.GetComponent<Damagochi>();
+            if (controlDamagochi.AttackTo(hitDamagochi.GetComponent<SH_ActionDamagochi>()))
+            {
+                effectOff = true;
+                pinPointEffect.FollowTarget(hitDamagochi);
+            }
+        }
+        else
+        {
+            effectOff = false;
+            pinPointEffect.Off();
+            controlDamagochi.MoveTo(mouseRayHitPoint);
         }
     }
 }

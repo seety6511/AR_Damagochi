@@ -1389,7 +1389,7 @@ MonoBehaviour:
   name: Bear
   hungryState: 0
   condition: 0
-  moveSpeed: 3
+  moveSpeed: 0.5
   spawnPoint: {x: 0, y: 0, z: 0}
   playerble: 0
   portrait: {fileID: 21300000, guid: 2ff13894f44bfce418ea310e20778053, type: 3}
@@ -1413,7 +1413,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   battleUI: {fileID: 7721741897825207886}
   wanderingRadius: 3
-  attackRange: 2
+  attackRange: 1
   scanRadius: 4
   battleOn: 0
   attackTarget: {fileID: 0}

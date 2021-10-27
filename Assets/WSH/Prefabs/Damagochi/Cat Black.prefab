@@ -783,7 +783,7 @@ MonoBehaviour:
   name: Cat
   hungryState: 0
   condition: 0
-  moveSpeed: 1.5
+  moveSpeed: 0.5
   spawnPoint: {x: 0, y: 0, z: 0}
   playerble: 0
   portrait: {fileID: 21300000, guid: 78b0b111dcaa29f49b65843779ceb96d, type: 3}
@@ -807,7 +807,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   battleUI: {fileID: 6770709638437104570}
   wanderingRadius: 3
-  attackRange: 2
+  attackRange: 1
   scanRadius: 4
   battleOn: 0
   attackTarget: {fileID: 0}

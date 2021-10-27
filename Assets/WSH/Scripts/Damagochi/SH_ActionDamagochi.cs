@@ -114,7 +114,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
             {
                 if(s.name == key)
                 {
-                   SH_TextLogControl.Instance.LogText("Damaged : " + s.damage *atk+ "From : " + this + ", To : " + attackTarget.name, Color.black);
+                   SH_BattleLogger.Instance.LogText("Damaged : " + s.damage *atk+ "From : " + this + ", To : " + attackTarget.name, Color.black);
                     attackTarget.Damaged(s.damage * s.owner.atk);
                     break;
                 }
@@ -131,7 +131,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         if(hp==0)
         {
             AnimationChange("isDead");
-            SH_TextLogControl.Instance.LogText("Dead : " + name, Color.red);
+            SH_BattleLogger.Instance.LogText("Dead : " + name, Color.red);
             ActionStateChange(ActionState.isDead);
         }
     }
@@ -296,7 +296,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                 if (owner != null)
                     owner.battlePanel.gameObject.SetActive(false);
 
-                SH_TextLogControl.Instance.Clear();
+                SH_BattleLogger.Instance.Clear();
                 ActionStateChange(ActionState.Idle);
                 break;
         }
