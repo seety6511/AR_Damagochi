@@ -14,8 +14,10 @@ public class KHJ_SceneMngr : MonoBehaviour
     //재화
     public TMP_Text goldUI;
     public TMP_Text diaUI;
-    int gold = 100;
-    int dia = 100;
+    public int gold = 100;
+    public int dia = 100;
+    public Text ticketNum;
+    public int Ticket;
 
     //유대감
     public float currH = 0;
@@ -54,6 +56,7 @@ public class KHJ_SceneMngr : MonoBehaviour
     {
         goldUI.text = gold.ToString();
         diaUI.text = dia.ToString();
+        ticketNum.text = Ticket.ToString();
         IntimacyBar.fillAmount = currH / maxH;
         if (!useAR)
         {
