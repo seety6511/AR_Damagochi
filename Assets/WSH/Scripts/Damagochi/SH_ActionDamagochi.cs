@@ -122,6 +122,13 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         }
     }
 
+    public void Heal(float value)
+    {
+        hp += value;
+        hp = Mathf.Min(maxHp, hp);
+        battleUI.UpdateHpBar();
+    }
+
     public void Damaged(float value)
     {
         hp -= value;

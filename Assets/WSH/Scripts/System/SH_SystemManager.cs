@@ -7,9 +7,17 @@ public class SH_SystemManager : MonoBehaviour
     SH_WorldBuilder worldBuilder;
     SH_NavMeshBuilder navMeshBuilder;
     SH_EnemySpanwer enemySpawner;
+    SH_PlaneSetting planeSetting;
     public SH_Player player;
 
     bool setFirstPlane;
+
+    private void Start()
+    {
+        planeSetting = FindObjectOfType<SH_PlaneSetting>();
+        planeSetting.Init();
+    }
+
     public void Find()
     {
         worldBuilder = FindObjectOfType<SH_WorldBuilder>();

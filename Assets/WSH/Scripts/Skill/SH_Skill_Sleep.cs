@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SH_Skill_Sleep : MonoBehaviour
+public class SH_Skill_Sleep : SH_Skill
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Active()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.Active();
+        owner.hp += owner.atk * damage;
+        if (owner.hp >= owner.maxHp)
+            owner.hp = owner.maxHp;
     }
 }

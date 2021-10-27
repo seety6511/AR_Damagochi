@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
-public class SH_FirstSetting : MonoBehaviour
+public class SH_PlaneSetting : MonoBehaviour
 {
     SH_ARInputManager arInputManager;
     ARPlaneManager arPlaneManager;
@@ -21,25 +21,26 @@ public class SH_FirstSetting : MonoBehaviour
 
     private void Start()
     {
-#if UNITY_EDITOR
-        gameObject.SetActive(false);
-        Debug.Log("First Plane Setting Start");
+        
+    }
+
+    public void Init()
+    {
         arInputManager = FindObjectOfType<SH_ARInputManager>();
         arPlaneManager = FindObjectOfType<ARPlaneManager>();
         arAnchorManager = FindObjectOfType<ARAnchorManager>();
         systemManager = FindObjectOfType<SH_SystemManager>();
+#if UNITY_EDITOR
+        gameObject.SetActive(false);
+        Debug.Log("First Plane Setting Start");
+        
         PlaneSetting();
 #elif UNITY_ANDROID
         gameObject.SetActive(true);
         Debug.Log("First Plane Setting Start");
-        arInputManager = FindObjectOfType<SH_ARInputManager>();
-        arPlaneManager = FindObjectOfType<ARPlaneManager>();
-        arAnchorManager = FindObjectOfType<ARAnchorManager>();
-        systemManager = FindObjectOfType<SH_SystemManager>();
         reset.onClick.AddListener(ResetPlane);
         ok.onClick.AddListener(PlaneSetting);
 #endif
-
     }
 
     private void Update()
