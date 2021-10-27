@@ -19,8 +19,6 @@ public class KHJ_ARMngr : MonoBehaviour
         if (!KHJ_SceneMngr.instance.useAR)
             return;
 
-
-        print("AR On");
         //1.카메라 위치, 카메라 앞방향에서 발사되는 Ray를 만들고
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
