@@ -57,6 +57,8 @@ public class LootBox : MonoBehaviour
 
         if (OnDisappear)
         {
+            OnClicked = false;
+            GetComponent<Button>().enabled = false;
             colorA -= Time.deltaTime;
             image.color = new Color(colorR, colorG, colorB, colorA);
             if (colorA < 0)

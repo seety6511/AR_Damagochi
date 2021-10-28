@@ -248,4 +248,17 @@ public class KHJ_SceneMngr : MonoBehaviour
         Application.Quit();
     }
 
+
+    public GameObject PetGotchaPannel;
+    public void PetGotcha()
+    {
+        //티켓 감소
+        if (Ticket > 0)
+        {
+            Ticket--;
+            PetGotchaPannel.SetActive(true);
+        }
+        else
+            return;
+    }
 }
