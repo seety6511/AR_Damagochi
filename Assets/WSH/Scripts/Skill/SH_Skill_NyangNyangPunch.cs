@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class SH_Skill_NyangNyangPunch : SH_Skill
 {
-    public override void Active()
+    public float turnGageDamage;
+    public override bool Active()
     {
         base.Active();
-        StartCoroutine("SkillEffect");
+        return true;
     }
 
-    IEnumerable SkillEffect()
+    protected override IEnumerator SpecialEffect()
     {
         owner.AnimSpeedChange(3f);
         for(int i = 0; i < 3; ++i)
         {
             yield return new WaitForSeconds(0.1f);
+            owner.attackTarget.Damaged(owner.atk * damage);
             owner.AnimationChange(name);
-            owner.attackTarget.currentTurnGage -= 20f;
+            owner.attackTarget.TurnGageChange (turnGageDamage);
         }
         owner.AnimSpeedChange(1f);
     }

@@ -600,9 +600,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7124962811824491225}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -15, y: 0, z: 29}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 7127482813064976847}
   - {fileID: 7127033675261448309}
@@ -789,7 +789,7 @@ MonoBehaviour:
   portrait: {fileID: 21300000, guid: 78b0b111dcaa29f49b65843779ceb96d, type: 3}
   canAnim: 0
   owner: {fileID: 0}
-  atk: 20
+  atk: 2
   hp: 70
   maxHp: 70
   critical: 20
@@ -797,6 +797,7 @@ MonoBehaviour:
   atkSpeed: 3
   currentTurnGage: 0
   maxTurnGage: 10
+  overPower: 0
   level: 1
   skillList:
   - {fileID: 0}
@@ -806,9 +807,9 @@ MonoBehaviour:
   actionState: 0
   agent: {fileID: 0}
   battleUI: {fileID: 6770709638437104570}
-  wanderingRadius: 3
+  wanderingRadius: 1
   attackRange: 1
-  scanRadius: 4
+  scanRadius: 1
   battleOn: 0
   attackTarget: {fileID: 0}
   battleState: 0

@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class SH_Skill_Slap : SH_Skill
 {
-    public override void Active()
+    public override bool Active()
     {
-        base.Active();
-        owner.onEvent = null;
-        owner.onEvent += HitEvent;
-    }
+        if (base.Active())
+            owner.attackTarget.Damaged(owner.atk * damage);
 
-    public override void HitEvent()
-    {
-        base.HitEvent();
-        hitEffect.transform.position = owner.hitPoints[Random.Range(0, owner.hitPoints.Length)].transform.position;
-        hitEffect.gameObject.SetActive(true);
+        return true;
     }
 }

@@ -25,11 +25,11 @@ public class SH_BattleManager : MonoBehaviour
         challenger = c;
         target = t;
 
-        target.ActionStateChange(SH_ActionDamagochi.ActionState.isBattle);
+        target.ActionStateChange(SH_ActionDamagochi.ActionState.Battle);
         target.battleState = SH_ActionDamagochi.BattleState.Ambushed;
         target.attackTarget = challenger;
 
-        challenger.ActionStateChange(SH_ActionDamagochi.ActionState.isBattle);
+        challenger.ActionStateChange(SH_ActionDamagochi.ActionState.Battle);
         challenger.battleState = SH_ActionDamagochi.BattleState.Surprise;
         challenger.attackTarget = target;
 
@@ -55,9 +55,9 @@ public class SH_BattleManager : MonoBehaviour
         challenger.BattleStateAction();
         target.BattleStateAction();
 
-        if(challenger.actionState == SH_ActionDamagochi.ActionState.isDead || target.actionState == SH_ActionDamagochi.ActionState.isDead)
+        if(challenger.actionState == SH_ActionDamagochi.ActionState.Dead || target.actionState == SH_ActionDamagochi.ActionState.Dead)
         {
-            winer = challenger.actionState == SH_ActionDamagochi.ActionState.isDead ? target : challenger;
+            winer = challenger.actionState == SH_ActionDamagochi.ActionState.Dead ? target : challenger;
             loser = winer == challenger ? target : challenger;
             BattleEnd();
         }

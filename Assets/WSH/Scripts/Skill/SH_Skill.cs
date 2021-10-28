@@ -25,26 +25,42 @@ public class SH_Skill : MonoBehaviour
             canActive = true;
     }
 
-    public virtual void HitEvent()
+    protected virtual void HitEvent()
+    {
+        if (hitEffect != null)
+        {
+            if (owner.attackTarget.hitPoints.Length != 0)
+                hitEffect.transform.position = owner.attackTarget.GetRandomHitPoint().transform.position;
+            else
+                hitEffect.transform.position = owner.attackTarget.transform.position;
+
+            hitEffect.SetActive(true);
+        }
+    }
+
+    protected virtual void EndEvent()
     {
     }
 
-    public virtual void Active()
+    public virtual bool Active()
     {
         if (owner.currentTurnGage < owner.maxTurnGage)
-            return;
+            return false;
 
         if (!canActive)
-            return;
+            return false;
 
         if (!owner.canAnim)
-            return;
+            return false;
 
         if (activeEffect != null)
             activeEffect.SetActive(false);
 
         if (hitEffect != null)
             hitEffect.SetActive(false);
+
+        owner.doEvent += HitEvent;
+        owner.endEvent += EndEvent;
 
         canActive = false;
         timer = 0f;
@@ -56,7 +72,17 @@ public class SH_Skill : MonoBehaviour
         owner.battleState = SH_ActionDamagochi.BattleState.TurnWaiting;
 
         owner.AnimationChange(name);
+
         if (activeEffect != null)
             activeEffect.SetActive(true);
+
+        Debug.Log("ActiveSkill : " + name);
+        StartCoroutine("SpecialEffect");
+        return true;
+    }
+
+    protected virtual IEnumerator SpecialEffect()
+    {
+        yield return null;
     }
 }

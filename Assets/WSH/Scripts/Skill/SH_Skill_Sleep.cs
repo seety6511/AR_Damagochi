@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class SH_Skill_Sleep : SH_Skill
 {
-    public override void Active()
+    public override bool Active()
     {
-        base.Active();
-        owner.hp += owner.atk * damage;
-        if (owner.hp >= owner.maxHp)
-            owner.hp = owner.maxHp;
+        if (base.Active())
+        {
+        owner.Heal(owner.atk * damage);
+        }
+        return true;
     }
 }

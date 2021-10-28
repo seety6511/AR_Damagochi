@@ -11,7 +11,8 @@ public class SH_AnimeDamagochi : SH_PoolDamagochi
     public bool canAnim;
     protected Animator animator;
     protected AnimatorControllerParameter[] animParam;
-    public Action onEvent;
+    public Action doEvent;
+    public Action endEvent;
 
     public void AnimSpeedChange(float value)
     {
@@ -27,13 +28,16 @@ public class SH_AnimeDamagochi : SH_PoolDamagochi
     {
         canAnim = false;
         print("Do_" + name + "_" + key);
-        onEvent?.Invoke();
+        doEvent?.Invoke();
+        doEvent = null;
     }
 
     public virtual void End(string key)
     {
         canAnim = true;
         print("End_" + name + "_" + key);
+        endEvent?.Invoke();
+        endEvent = null;
     }
 
     protected override void Awake()
