@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class SH_Skill_Grooming : SH_Skill
 {
-    public override bool Active()
-    {
-        base.Active();
-        return true;
-    }
-
     protected override IEnumerator SpecialEffect()
     {
         var tempAtk = owner.atk;

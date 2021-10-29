@@ -5,12 +5,6 @@ using UnityEngine;
 public class SH_Skill_NyangNyangPunch : SH_Skill
 {
     public float turnGageDamage;
-    public override bool Active()
-    {
-        base.Active();
-        return true;
-    }
-
     protected override IEnumerator SpecialEffect()
     {
         owner.AnimSpeedChange(3f);

@@ -10,13 +10,14 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     public enum ActionState
     {
         Idle,
-        Walking,
-        Running,
+        Walk,
+        Run,
         Attack,
         Battle,
         Dead,
-        Stainding,
-
+        Stand,
+        Sit,
+        Eat,
     }
     public enum BattleState
     {
@@ -170,12 +171,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         MoveTo(pos);
     }
 
-    void EnemyScan()
-    {
-        if (playerble)
-            return;
-    }
-
     float deadTimer;
     public float deadSinkTime = 3f;
     void ActionStateMachine()
@@ -184,15 +179,16 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         {
             case ActionState.Idle:
                 Wandering();
-                EnemyScan();
                 break;
 
-            case ActionState.Walking:
+            case ActionState.Walk:
                 if (HasDestinationReached())
+                {
                     ActionStateChange(ActionState.Idle);
+                }
                 break;
 
-            case ActionState.Running:
+            case ActionState.Run:
                 RunningAction();
                 break;
 
@@ -204,7 +200,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                 //AttackStateAction();
                 break;
 
-            case ActionState.Stainding:
+            case ActionState.Stand:
                 break;
 
             case ActionState.Dead:
@@ -290,7 +286,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
 
             case BattleState.Surprise:
                 BattleInit();
-                currentTurnGage += 50;
+                currentTurnGage += maxTurnGage*0.5f;
                 break;
 
             case BattleState.TurnWaiting:
@@ -311,10 +307,15 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                 if (owner != null)
                     owner.battlePanel.gameObject.SetActive(false);
 
+                Invoke("IdleState",2f);
                 SH_BattleLogger.Instance.Clear();
-                ActionStateChange(ActionState.Idle);
                 break;
         }
+    }
+
+    void IdleState()
+    {
+        ActionStateChange(ActionState.Idle);
     }
 
     void AttackInputWait()
@@ -359,17 +360,8 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
 
     public void ActionStateChange(ActionState state)
     {
-        AnimatorParamClear();
+        AnimationChange(state.ToString());
         actionState = state;
-
-        foreach (var p in animParam)
-        {
-            if (p.name == state.ToString())
-            {
-                animator.SetBool(state.ToString(), true);
-                break;
-            }
-        }
     }
     public bool AttackTo(SH_ActionDamagochi target)
     {
@@ -391,7 +383,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         attackTarget = target;
         agent.stoppingDistance = attackRange;
         agent.SetDestination(target.gameObject.transform.position);
-        ActionStateChange(ActionState.Running);
+        ActionStateChange(ActionState.Run);
         return true;
     }
 
@@ -412,7 +404,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         movePos = pos;
         agent.stoppingDistance = 0.1f;
         agent.SetDestination(movePos);
-        ActionStateChange(ActionState.Walking);
+        ActionStateChange(ActionState.Walk);
     }
 
     bool CanReachedPos(Vector3 pos)
@@ -425,10 +417,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         if (agent.pathPending)
             return false;
 
-        if (agent.hasPath)
-            return false;
-
-        if (agent.remainingDistance > agent.stoppingDistance)
+        if (agent.remainingDistance >= agent.stoppingDistance)
             return false;
 
         if (agent.velocity.sqrMagnitude != 0f)

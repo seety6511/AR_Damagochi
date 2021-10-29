@@ -63,11 +63,11 @@ public class SH_AnimeDamagochi : SH_PoolDamagochi
 
     public void AnimationChange(string key, bool value = true)
     {
-        if (!canAnim)
-        {
-            Debug.Log("Already Animation");
-            return;
-        }
+        //if (!canAnim)
+        //{
+        //    Debug.Log("Already Animation");
+        //    return;
+        //}
         AnimatorParamClear();
 
         animator.SetBool(key, value);

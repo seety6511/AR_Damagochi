@@ -808,7 +808,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   battleUI: {fileID: 6770709638437104570}
   wanderingRadius: 1
-  attackRange: 1
+  attackRange: 0.5
   scanRadius: 1
   battleOn: 0
   attackTarget: {fileID: 0}
@@ -2459,7 +2459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6271106947459656388, guid: 650ea1957c4b7404cb542f606df7ea21, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6271106947459656388, guid: 650ea1957c4b7404cb542f606df7ea21, type: 3}
       propertyPath: m_LocalPosition.z

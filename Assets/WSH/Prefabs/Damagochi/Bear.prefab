@@ -1395,7 +1395,7 @@ MonoBehaviour:
   portrait: {fileID: 21300000, guid: 2ff13894f44bfce418ea310e20778053, type: 3}
   canAnim: 0
   owner: {fileID: 0}
-  atk: 20
+  atk: 0
   hp: 100
   maxHp: 100
   critical: 20
@@ -1414,7 +1414,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   battleUI: {fileID: 7721741897825207886}
   wanderingRadius: 1
-  attackRange: 1
+  attackRange: 0.5
   scanRadius: 1
   battleOn: 0
   attackTarget: {fileID: 0}
@@ -1728,7 +1728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6271106947459656388, guid: 6f1655a34f22f78498c64a54eab6e837, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6271106947459656388, guid: 6f1655a34f22f78498c64a54eab6e837, type: 3}
       propertyPath: m_LocalPosition.z

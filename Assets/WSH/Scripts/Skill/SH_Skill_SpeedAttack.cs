@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class SH_Skill_SpeedAttack : SH_Skill
 {
-    public override bool Active()
+    protected override IEnumerator SpecialEffect()
     {
-        if (base.Active())
-        {
-            owner.attackTarget.Damaged(owner.currentTurnGage * damage);
-            owner.currentTurnGage += owner.atkSpeed * 8f;
-        }
-        return true;
+        owner.attackTarget.Damaged(owner.currentTurnGage * damage);
+        owner.currentTurnGage += owner.maxTurnGage * 0.8f;
+        yield return null;
     }
 }

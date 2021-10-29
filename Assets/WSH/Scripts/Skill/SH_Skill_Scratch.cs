@@ -6,17 +6,10 @@ public class SH_Skill_Scratch : SH_Skill
 {
     public GameObject bleedingEffect;
     public float bleedDamage;
-    public override bool Active()
-    {
-        if (base.Active())
-        {
-            owner.attackTarget.Damaged(owner.atk * damage);
-        }
-        return true;
-    }
-
     protected override IEnumerator SpecialEffect()
     {
+        owner.attackTarget.Damaged(owner.atk * damage);
+
         bleedingEffect.SetActive(true);
         bleedingEffect.transform.position = owner.attackTarget.GetRandomHitPoint().transform.position;
         for(int i = 0; i < 3; ++i)

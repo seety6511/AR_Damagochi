@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class SH_Skill_Slap : SH_Skill
 {
-    public override bool Active()
+    protected override IEnumerator SpecialEffect()
     {
-        if (base.Active())
-            owner.attackTarget.Damaged(owner.atk * damage);
-
-        return true;
+        owner.attackTarget.Damaged(owner.atk * damage);
+        yield return null;
     }
 }

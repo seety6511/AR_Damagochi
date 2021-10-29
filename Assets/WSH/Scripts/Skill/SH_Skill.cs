@@ -42,16 +42,13 @@ public class SH_Skill : MonoBehaviour
     {
     }
 
-    public virtual bool Active()
+    public virtual void Active()
     {
         if (owner.currentTurnGage < owner.maxTurnGage)
-            return false;
+            return;
 
         if (!canActive)
-            return false;
-
-        if (!owner.canAnim)
-            return false;
+            return;
 
         if (activeEffect != null)
             activeEffect.SetActive(false);
@@ -78,7 +75,6 @@ public class SH_Skill : MonoBehaviour
 
         Debug.Log("ActiveSkill : " + name);
         StartCoroutine("SpecialEffect");
-        return true;
     }
 
     protected virtual IEnumerator SpecialEffect()

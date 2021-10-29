@@ -5,12 +5,6 @@ using UnityEngine;
 public class SH_Skill_Peck : SH_Skill
 {
     public int maxHit;
-    public override bool Active()
-    {
-        base.Active();
-        return true;
-    }
-
     protected override IEnumerator SpecialEffect()
     {
         owner.AnimSpeedChange(3f);

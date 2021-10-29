@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class SH_Skill_Bite : SH_Skill
 {
-    public override bool Active()
+    protected override IEnumerator SpecialEffect()
     {
-        if (base.Active())
-        {
         owner.attackTarget.Damaged(owner.atk * damage);
-        }
-        return true;
+        yield return null;
     }
 }
