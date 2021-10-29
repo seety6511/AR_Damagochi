@@ -146,7 +146,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DamagochiMaster.AR_Damagochi
+    Android: com.DamagochiMaster.ARDamagochi
     Standalone: com.DefaultCompany.ARDamagochi
   buildNumber:
     Standalone: 0
