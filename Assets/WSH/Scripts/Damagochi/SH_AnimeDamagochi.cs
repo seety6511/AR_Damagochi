@@ -5,6 +5,38 @@ using UnityEngine.UI;
 using System;
 using System.Linq;
 
+public enum DoveAnim
+{
+    Idle,
+    Walk,
+    Run,
+    Attack,
+    Sit,
+    Dead,
+    Look,
+    Fly,
+    Grooming,
+    Peck,
+    FriendCall
+}
+
+public enum CatAnim
+{
+    Idle,
+    Walk,
+    Run,
+    Attack,
+    Sit,
+    Dead,
+    Sleep,
+    Eat,
+    Wait,
+    NyangNyangPunch,
+    SpeedAttack,
+    Growling,
+    Scratch,
+}
+
 public class SH_AnimeDamagochi : SH_PoolDamagochi
 {
     public Sprite portrait;

@@ -4797,7 +4797,7 @@ GameObject:
   - component: {fileID: 19916344}
   - component: {fileID: 9070931940874290627}
   m_Layer: 0
-  m_Name: Dove_FriendCall
+  m_Name: Dove_FriendCall_Hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
