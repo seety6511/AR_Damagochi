@@ -3159,7 +3159,7 @@ MonoBehaviour:
   arHit: 0
   mouseRayHitPoint: {x: 0, y: 0, z: 0}
   touchRayHitPoint: {x: 0, y: 0, z: 0}
-  controlDamagochi: {fileID: 787806622}
+  controlDamagochi: {fileID: 1298230051}
   battlePanel: {fileID: 1765097017}
   pinPointEffect: {fileID: 1488142934}
 --- !u!1 &784885999
@@ -3353,17 +3353,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da7cba65fc7c52643a010274d561137b, type: 3}
---- !u!114 &787806622 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5860246611499954482, guid: da7cba65fc7c52643a010274d561137b, type: 3}
-  m_PrefabInstance: {fileID: 787806621}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 244e03c9f25041e4fa624a86e7774667, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &803156706
 GameObject:
   m_ObjectHideFlags: 0
@@ -5673,6 +5662,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219598558}
   m_CullTransparentMesh: 1
+--- !u!114 &1298230051 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2095805487508540910, guid: e18bc9f7118b2864f881a0fbc017a940, type: 3}
+  m_PrefabInstance: {fileID: 266462717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4691fe3c30b4d8b499a0b68c51cf5965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1323477868
 PrefabInstance:
   m_ObjectHideFlags: 0

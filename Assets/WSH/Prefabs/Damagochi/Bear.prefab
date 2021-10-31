@@ -1410,6 +1410,7 @@ MonoBehaviour:
   - {fileID: 7871835294886018039}
   - {fileID: 0}
   - {fileID: 3858370609553782909}
+  currentActiveSkill: {fileID: 0}
   actionState: 0
   agent: {fileID: 0}
   battleUI: {fileID: 7721741897825207886}
@@ -1878,6 +1879,10 @@ PrefabInstance:
     - target: {fileID: 2850086844313825263, guid: b419ddc6bf4859e42bb1f71d34214305, type: 3}
       propertyPath: m_Name
       value: Canvas_Battle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850086844313825263, guid: b419ddc6bf4859e42bb1f71d34214305, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6510041716368291568, guid: b419ddc6bf4859e42bb1f71d34214305, type: 3}
       propertyPath: m_Pivot.x

@@ -5,39 +5,34 @@ using UnityEngine.UI;
 using System;
 using System.Linq;
 
-public enum DoveAnim
+public enum DamagochiAnim
 {
     Idle,
     Walk,
     Run,
-    Attack,
-    Sit,
     Dead,
-    Look,
-    Fly,
-    Grooming,
-    Peck,
-    FriendCall
-}
-
-public enum CatAnim
-{
-    Idle,
-    Walk,
-    Run,
+    Stand,
     Attack,
-    Sit,
-    Dead,
+    Slap,
+    Shouting,
+    Bite,
     Sleep,
-    Eat,
-    Wait,
     NyangNyangPunch,
     SpeedAttack,
     Growling,
     Scratch,
+    Sit,
+    Look,
+    Fly,
+    Grooming,
+    Peck,
+    FriendCall,
+    Eat,
+    Wait,
 }
 
-public class SH_AnimeDamagochi : SH_PoolDamagochi
+[RequireComponent(typeof(Animator))]
+public class SH_AnimeDamagochi : SH_SoundDamagochi
 {
     public Sprite portrait;
     public bool canAnim;
@@ -79,7 +74,6 @@ public class SH_AnimeDamagochi : SH_PoolDamagochi
         animator = GetComponent<Animator>();
         animParam = animator.parameters;
     }
-
     protected override void Update()
     {
         base.Update();
@@ -95,13 +89,20 @@ public class SH_AnimeDamagochi : SH_PoolDamagochi
 
     public void AnimationChange(string key, bool value = true)
     {
-        //if (!canAnim)
-        //{
-        //    Debug.Log("Already Animation");
-        //    return;
-        //}
+        AnimatorParamClear();
+        foreach(var p in animParam)
+        {
+            if (p.name == key)
+            {
+                animator.SetBool(key, value);
+                return;
+            }
+        }
+    }
+    public void AnimationChange(DamagochiAnim key, bool value = true)
+    {
         AnimatorParamClear();
 
-        animator.SetBool(key, value);
+        animator.SetBool(key.ToString(), value);
     }
 }

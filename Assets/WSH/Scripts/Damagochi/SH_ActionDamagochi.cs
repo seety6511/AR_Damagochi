@@ -64,7 +64,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     public float deadExp => level * 2;
 
     public SH_Skill[] skillList;
-
+    public SH_Skill currentActiveSkill;
 
     public ActionState actionState;
 
@@ -92,6 +92,13 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         path = new NavMeshPath();
         battleUI.gameObject.SetActive(false);
         skillList = GetComponentsInChildren<SH_Skill>();
+
+        foreach (var s in skillList)
+        {
+            s.owner = this;
+            s.timer = s.coolTime;
+            s.canActive = true;
+        }
     }
 
     protected override void OnEnable()
@@ -264,12 +271,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         battleState = BattleState.TurnWaiting;
         transform.DOLookAt(attackTarget.transform.position, 1f);
 
-        foreach(var s in skillList)
-        {
-            s.owner = this;
-            s.timer = s.coolTime;
-            s.canActive = true;
-        }
     }
     public void BattleStateAction()
     {
@@ -360,6 +361,39 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
 
     public void ActionStateChange(ActionState state)
     {
+        switch (state)
+        {
+            case ActionState.Idle:
+                AnimationChange(DamagochiAnim.Idle);
+                break;
+
+            case ActionState.Battle:
+                AnimationChange(DamagochiAnim.Idle);
+                break;
+            
+            case ActionState.Dead:
+                AnimationChange(DamagochiAnim.Dead);
+                break;
+            
+            case ActionState.Eat:
+                AnimationChange(DamagochiAnim.Eat);
+                break;
+            
+            case ActionState.Run:
+                AnimationChange(DamagochiAnim.Run);
+                break;
+            
+            case ActionState.Sit:
+                AnimationChange(DamagochiAnim.Sit);
+                break;
+            
+            case ActionState.Stand:
+                AnimationChange(DamagochiAnim.Stand);
+                break;
+         
+            case ActionState.Walk:
+                break;
+        }
         AnimationChange(state.ToString());
         actionState = state;
     }

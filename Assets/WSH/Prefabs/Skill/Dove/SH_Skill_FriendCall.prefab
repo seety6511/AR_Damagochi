@@ -52,7 +52,8 @@ MonoBehaviour:
   damage: 0.2
   skillSprite: {fileID: 21300000, guid: 76a0ff55627934040b44902d31bb145d, type: 3}
   activeEffect: {fileID: 0}
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 187952, guid: 11924ee7aea25d94bbe3334efad3ce97, type: 3}
+  flyDove: {fileID: 3790652799896042673, guid: 5d87744f77e54bd4f8cd4531efcd9e21, type: 3}
 --- !u!1001 &4546577665050078608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63,6 +64,10 @@ PrefabInstance:
     - target: {fileID: 187952, guid: 11924ee7aea25d94bbe3334efad3ce97, type: 3}
       propertyPath: m_Name
       value: Dove_FriendCall
+      objectReference: {fileID: 0}
+    - target: {fileID: 187952, guid: 11924ee7aea25d94bbe3334efad3ce97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 424984, guid: 11924ee7aea25d94bbe3334efad3ce97, type: 3}
       propertyPath: m_RootOrder

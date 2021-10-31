@@ -12,16 +12,33 @@ public class SH_BattleManager : MonoBehaviour
     public SH_ActionDamagochi target;
 
     public SH_BattleLogger battleLog;
+    public AudioSource bgmPlayer;
+
+    public AudioClip[] battleBGM;
 
     public bool playBattle;
-    
+
+    private void Start()
+    {
+        if(!TryGetComponent(out bgmPlayer))
+            bgmPlayer = gameObject.AddComponent<AudioSource>();
+    }
+
+    void PlayBattleBGM()
+    {
+        var i = Random.Range(0, battleBGM.Length);
+        var bgm = battleBGM[i];
+        bgmPlayer.clip = bgm;
+        bgmPlayer.Play();
+    }
+
     public void StartBattle(SH_ActionDamagochi c, SH_ActionDamagochi t)
     {
         if(c == t)
             return;
 
         battleLog.LogText("Battle Start!", Color.black);
-
+        PlayBattleBGM();
         challenger = c;
         target = t;
 

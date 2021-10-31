@@ -14,7 +14,8 @@ public class SH_Skill : MonoBehaviour
     public Sprite skillSprite;
     public GameObject activeEffect;
     public GameObject hitEffect;
-
+    public AudioClip activeSound;
+    public AudioClip hitSound;
     public float remainingCoolTime
         => timer / coolTime;
 
@@ -35,6 +36,10 @@ public class SH_Skill : MonoBehaviour
                 hitEffect.transform.position = owner.attackTarget.transform.position;
 
             hitEffect.SetActive(true);
+        }
+        if (hitSound != null)
+        {
+            owner.PlaySound(hitSound);
         }
     }
 
@@ -69,10 +74,14 @@ public class SH_Skill : MonoBehaviour
         owner.battleState = SH_ActionDamagochi.BattleState.TurnWaiting;
 
         owner.AnimationChange(name);
-
+        owner.currentActiveSkill = this;
+        
         if (activeEffect != null)
             activeEffect.SetActive(true);
 
+        if (activeSound != null)
+            owner.PlaySound(activeSound);
+        
         Debug.Log("ActiveSkill : " + name);
         StartCoroutine("SpecialEffect");
     }
