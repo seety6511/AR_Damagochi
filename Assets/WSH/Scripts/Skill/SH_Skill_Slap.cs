@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class SH_Skill_Slap : SH_Skill
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override IEnumerator SpecialEffect()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        owner.attackTarget.Damaged(owner.atk * damage);
+        yield return null;
     }
 }

@@ -12,21 +12,20 @@ public class SH_Player : MonoBehaviour
 
     private void Awake()
     {
-        arInputManager = FindObjectOfType<SH_ARInputManager>();
-        //battlePanel = FindObjectOfType<SH_Panel_Battle>();
+        base.Awake();
         controlDamagochi.owner = this;
     }
 
-    private void Update()
+    protected override void Update()
     {
-        arInputManager.MouseInput();
-        arInputManager.TouchInput();
+        base.Update();
         MouseAction();
+        TouchAction();
     }
 
-    public void MouseAction()
+    void TouchAction()
     {
-        if (!Input.GetMouseButtonDown(0))
+        if (!touch)
             return;
 
         if (EventSystem.current.IsPointerOverGameObject())
@@ -35,18 +34,51 @@ public class SH_Player : MonoBehaviour
         if (controlDamagochi == null)
             return;
 
-        if (arInputManager.hit.collider.CompareTag("Damagochi"))
+        if (touchRayHit.collider.CompareTag("Damagochi"))
         {
-            if (controlDamagochi.AttackTo(arInputManager.hitDamagochi.GetComponent<SH_ActionDamagochi>()))
+            var hitDamagochi = touchRayHit.collider.gameObject.GetComponent<Damagochi>();
+            if (controlDamagochi.AttackTo(hitDamagochi.GetComponent<SH_ActionDamagochi>()))
             {
-                pinPointEffect.FollowTarget(arInputManager.hitDamagochi);
+                effectOff = true;
+                pinPointEffect.FollowTarget(hitDamagochi);
             }
-            
         }
         else
         {
+            effectOff = false;
             pinPointEffect.Off();
-            controlDamagochi.MoveTo(arInputManager.hit.point);
+            controlDamagochi.MoveTo(touchRayHitPoint);
+        }
+    }
+
+    void MouseAction()
+    {
+        if (!click)
+            return;
+
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        if (controlDamagochi == null)
+            return;
+
+        if (mouseRayHit.collider == null)
+            return;
+
+        if (mouseRayHit.collider.CompareTag("Damagochi"))
+        {
+            var hitDamagochi = mouseRayHit.collider.gameObject.GetComponent<Damagochi>();
+            if (controlDamagochi.AttackTo(hitDamagochi.GetComponent<SH_ActionDamagochi>()))
+            {
+                effectOff = true;
+                pinPointEffect.FollowTarget(hitDamagochi);
+            }
+        }
+        else
+        {
+            effectOff = false;
+            pinPointEffect.Off();
+            controlDamagochi.MoveTo(mouseRayHitPoint);
         }
     }
 }

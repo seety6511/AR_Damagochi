@@ -11,13 +11,14 @@ public class SH_EnemySpanwer : MonoBehaviour
     public int maxEnemy;
     public List<SH_PoolDamagochi> damagochiList;
 
-    public List<SH_PoolDamagochi> enablePool;
-    public List<SH_PoolDamagochi> disablePool;
+    public List<SH_PoolDamagochi> enablePool = new List<SH_PoolDamagochi>();
+    public List<SH_PoolDamagochi> disablePool = new List<SH_PoolDamagochi>();
+    public Transform center;
 
-    private void Start()
+    public void Init()
     {
-        enablePool = new List<SH_PoolDamagochi>();
-        disablePool = new List<SH_PoolDamagochi>();
+        SH_GameManager.ListClear(enablePool);
+        SH_GameManager.ListClear(disablePool);
 
         int ec = maxEnemy;
         int i = 0;
@@ -31,10 +32,6 @@ public class SH_EnemySpanwer : MonoBehaviour
             if (i == damagochiList.Count)
                 i = 0;
         }
-    }
-    private void Update()
-    {
-        Spawn();
     }
     public void Spawn()
     {

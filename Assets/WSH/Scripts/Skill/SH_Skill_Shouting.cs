@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class SH_Skill_Shouting : SH_Skill
 {
-    public override void Active()
+    protected override IEnumerator SpecialEffect()
     {
-        base.Active();
+        var temp = owner.attackTarget.atkSpeed;
+        owner.attackTarget.atkSpeed *= 0.5f;
+        yield return new WaitForSecondsRealtime(10f);
+        owner.attackTarget.atkSpeed = temp;
     }
 }
