@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SH_Player : MonoBehaviour
+public class SH_Player : SH_ARInputManager
 {
     public SH_ActionDamagochi controlDamagochi;
     public SH_Panel_Battle battlePanel;
     public SH_DamagochiPickEffect pinPointEffect;
-    SH_ARInputManager arInputManager;
 
     private void Awake()
     {
