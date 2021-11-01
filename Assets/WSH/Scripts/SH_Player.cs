@@ -9,7 +9,7 @@ public class SH_Player : SH_ARInputManager
     public SH_Panel_Battle battlePanel;
     public SH_DamagochiPickEffect pinPointEffect;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         controlDamagochi.owner = this;
