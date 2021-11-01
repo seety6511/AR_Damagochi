@@ -7,7 +7,7 @@ public class SH_Skill_Peck : SH_Skill
     public int maxHit;
     protected override IEnumerator SpecialEffect()
     {
-        owner.AnimSpeedChange(3f);
+        owner.SpeedCgange(3f);
         int totalCount = 0;
         for (int i = 0; i < 3; ++i)
         {
@@ -22,6 +22,6 @@ public class SH_Skill_Peck : SH_Skill
             if (totalCount == maxHit)
                 break;
         }
-        owner.AnimSpeedChange(1f);
+        owner.SpeedCgange(1f);
     }
 }

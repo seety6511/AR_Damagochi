@@ -13,7 +13,6 @@ public class SH_EnemySpanwer : MonoBehaviour
 
     public List<SH_PoolDamagochi> enablePool = new List<SH_PoolDamagochi>();
     public List<SH_PoolDamagochi> disablePool = new List<SH_PoolDamagochi>();
-    public Transform center;
 
     public void Init()
     {
@@ -33,6 +32,7 @@ public class SH_EnemySpanwer : MonoBehaviour
                 i = 0;
         }
     }
+
     public void Spawn()
     {
         if (enablePool.Count == maxEnemy)

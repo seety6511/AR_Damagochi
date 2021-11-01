@@ -29,6 +29,8 @@ public class SH_BattleManager : MonoBehaviour
         var i = Random.Range(0, battleBGM.Length);
         var bgm = battleBGM[i];
         bgmPlayer.clip = bgm;
+        bgmPlayer.loop = true;
+        bgmPlayer.volume = 1f;
         bgmPlayer.Play();
     }
 
@@ -88,8 +90,20 @@ public class SH_BattleManager : MonoBehaviour
         winer.battleState = SH_ActionDamagochi.BattleState.End;
         loser.battleState = SH_ActionDamagochi.BattleState.End;
         playBattle = false;
-        //winer.canAnim = true;
-        //loser.canAnim = true;
         battleResultPanel.On(this);
+        StartCoroutine("BGMDown");
+    }
+
+    IEnumerator BGMDown()
+    {
+        float timer = 0f;
+
+        while (timer < 3f)
+        {
+            timer += Time.deltaTime;
+            bgmPlayer.volume *= 0.9f;
+            yield return null;
+        }
+        bgmPlayer.volume = 0f;
     }
 }

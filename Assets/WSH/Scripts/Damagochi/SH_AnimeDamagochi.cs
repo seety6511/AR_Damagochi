@@ -32,43 +32,33 @@ public enum DamagochiAnim
 [RequireComponent(typeof(Animator))]
 public class SH_AnimeDamagochi : SH_SoundDamagochi
 {
+    public float animSpeed;
     public Sprite portrait;
-    public bool canAnim;
     protected Animator animator;
     protected AnimatorControllerParameter[] animParam;
     public Action doEvent;
     public Action endEvent;
 
-    public void AnimSpeedChange(float value)
+    public virtual void SpeedCgange(float value)
     {
         animator.speed = value;
+        animSpeed = value;
     }
-
-    public virtual void SpeedChange(float value)
-    {
-        animator.speed = value;
-    }
-
     public virtual void Do(string key)
     {
-        canAnim = false;
         print("Do_" + name + "_" + key);
         doEvent?.Invoke();
         doEvent = null;
     }
-
     public virtual void End(string key)
     {
-        canAnim = true;
         print("End_" + name + "_" + key);
         endEvent?.Invoke();
         endEvent = null;
     }
-
     protected override void Awake()
     {
         base.Awake();
-        canAnim = true;
         animator = GetComponent<Animator>();
         animParam = animator.parameters;
     }

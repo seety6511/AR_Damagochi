@@ -1185,6 +1185,7 @@ GameObject:
   - component: {fileID: 2095805487508540910}
   - component: {fileID: 7505669413311709015}
   - component: {fileID: 3934757601557129995}
+  - component: {fileID: 4252049152520694457}
   m_Layer: 0
   m_Name: Dove
   m_TagString: Damagochi
@@ -1270,8 +1271,8 @@ MonoBehaviour:
   moveSpeed: 0.5
   spawnPoint: {x: 0, y: 0, z: 0}
   playerble: 0
+  animSpeed: 0
   portrait: {fileID: 21300000, guid: 11db7e3b6b3a92b4593ad31202ab8827, type: 3}
-  canAnim: 0
   owner: {fileID: 0}
   atk: 0
   hp: 50
@@ -1330,6 +1331,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &4252049152520694457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790652799896042673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9f636986a9fe04db3ae2ed9b84ae65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3790652799896042675
 GameObject:
   m_ObjectHideFlags: 0

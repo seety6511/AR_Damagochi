@@ -1188,7 +1188,6 @@ GameObject:
   - component: {fileID: 4306383971676097206}
   - component: {fileID: 4217157990940142754}
   - component: {fileID: 4248065681474697304}
-  - component: {fileID: 4198771797611870174}
   - component: {fileID: 4135775068800146406}
   - component: {fileID: -5357159676295027232}
   - component: {fileID: 3193640703546435863}
@@ -1332,25 +1331,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &4198771797611870174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4311995978208798160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0ca804d6b18f6d4db4ebe14203336f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animalSound: {fileID: 8300000, guid: aafad6057d8ff4b439280f5000d370a3, type: 3}
-  walking: {fileID: 0}
-  eating: {fileID: 0}
-  running: {fileID: 0}
-  attacking: {fileID: 8300000, guid: 2e77463d056f93647b1f400e5c8a0c56, type: 3}
-  death: {fileID: 0}
-  sleeping: {fileID: 0}
 --- !u!195 &4135775068800146406
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1391,8 +1371,8 @@ MonoBehaviour:
   moveSpeed: 0.5
   spawnPoint: {x: 0, y: 0, z: 0}
   playerble: 0
+  animSpeed: 0
   portrait: {fileID: 21300000, guid: 2ff13894f44bfce418ea310e20778053, type: 3}
-  canAnim: 0
   owner: {fileID: 0}
   atk: 0
   hp: 100
