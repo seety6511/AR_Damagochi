@@ -15,6 +15,8 @@ public class DragAndThrow : MonoBehaviour
     private Rigidbody _rigidbody;
     private Vector3 newPosition;
     public GameObject initialPos;
+    public Transform catballpos;
+    public Transform bearballpos;
 
     void Start()
     {
@@ -24,6 +26,15 @@ public class DragAndThrow : MonoBehaviour
 
     void Update()
     {
+        if(KHJ_SceneMngr.instance.nowPet == Pet.cat)
+        {
+            initialPos = catballpos.gameObject;
+        }
+        else if(KHJ_SceneMngr.instance.nowPet == Pet.bear)
+        {
+            initialPos = bearballpos.gameObject;
+        }
+
         if (holding)
             OnTouch();
 

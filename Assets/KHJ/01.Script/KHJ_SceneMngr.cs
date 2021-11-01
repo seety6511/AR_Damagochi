@@ -4,10 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+
+
+public enum Pet
+{
+    cat,
+    bear,
+    dove,
+}
 public class KHJ_SceneMngr : MonoBehaviour
 {
     public static KHJ_SceneMngr instance;
-    CatManager cat;
+    CatManager pet;
+
+    //Æê Á¾·ù
+    public Pet nowPet;
+    public GameObject catEnvironmet;
+    public GameObject bearEnvironment;
+    public GameObject pet_cat;
+    public GameObject pet_bear;
+
 
     public GameObject Panel;
 
@@ -50,7 +66,7 @@ public class KHJ_SceneMngr : MonoBehaviour
     }
     private void Start()
     {
-        cat = CatManager.instance;
+        pet = CatManager.instance;
     }
     void Update()
     {
@@ -88,11 +104,11 @@ public class KHJ_SceneMngr : MonoBehaviour
         if (isFoodSet)
         {
             Food.SetActive(true);
-            if(cat.hungryState == Damagochi.HungryState.Little || cat.hungryState == Damagochi.HungryState.Very)
+            if(pet.hungryState == Damagochi.HungryState.Little || pet.hungryState == Damagochi.HungryState.Very)
             {
                 if (isBall)
                     return;
-                cat.actionState = CatManager.ActionState.isEatting;
+                pet.actionState = CatManager.ActionState.isEatting;
             }
         }
         else
@@ -101,6 +117,28 @@ public class KHJ_SceneMngr : MonoBehaviour
         }
 
     }
+
+    public void SetPet(int a)
+    {
+        nowPet = (Pet)a;
+        switch (nowPet)
+        {
+            case Pet.cat:
+                bearEnvironment.SetActive(false);
+                catEnvironmet.SetActive(true);
+                pet = pet_cat.GetComponent<CatManager>();
+                break;
+            case Pet.bear:
+                bearEnvironment.SetActive(true);
+                catEnvironmet.SetActive(false);
+                pet = pet_bear.GetComponent<CatManager>();
+                break;
+            default:
+                break;
+        }
+    }
+
+
 
 
     float currTime;
@@ -111,10 +149,10 @@ public class KHJ_SceneMngr : MonoBehaviour
         if(HungryTime < currTime)
         {
             print("Hungry!");
-            cat.hungryState -= 1;
-            if (cat.hungryState < 0)
+            pet.hungryState -= 1;
+            if (pet.hungryState < 0)
             {
-                cat.hungryState = 0;
+                pet.hungryState = 0;
                 currH -= 5;
             }
             currTime = 0;
@@ -130,7 +168,7 @@ public class KHJ_SceneMngr : MonoBehaviour
         }
         else
         {
-            cat.ResetDestination();
+            pet.ResetDestination();
             CatManager.instance.actionState = CatManager.ActionState.Idle;
         }
     }

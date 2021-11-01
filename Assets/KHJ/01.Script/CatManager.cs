@@ -11,11 +11,11 @@ public class CatManager : SH_AnimeDamagochi
     NavMeshPath path;
     Animator anim;
     public NavMeshAgent agent;
+    public GameObject spwanPoint;
     public GameObject Panel;
     public GameObject eatPoint;
     public float wanderingRadius;
     public Vector3 Target;
-    public GameObject Neck;
 
 
     public enum ActionState
@@ -42,7 +42,7 @@ public class CatManager : SH_AnimeDamagochi
 
     private void Start()
     {
-        spawnPoint = GameObject.Find("SpwanPoint").transform.position;
+        spawnPoint = spwanPoint.transform.position;
         mngr = KHJ_SceneMngr.instance;
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
