@@ -766,10 +766,10 @@ MonoBehaviour:
   moveSpeed: 0.5
   spawnPoint: {x: 0, y: 0, z: 0}
   playerble: 0
-  animSpeed: 0
+  animSpeed: 1
   portrait: {fileID: 21300000, guid: 78b0b111dcaa29f49b65843779ceb96d, type: 3}
   owner: {fileID: 0}
-  atk: 2
+  atk: 20
   hp: 70
   maxHp: 70
   critical: 20
@@ -794,6 +794,7 @@ MonoBehaviour:
   battleOn: 0
   attackTarget: {fileID: 0}
   battleState: 0
+  homePlate: {fileID: 0}
   hitPoints:
   - {fileID: 0}
   deadSinkTime: 3

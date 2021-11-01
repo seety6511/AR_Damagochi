@@ -1372,10 +1372,10 @@ MonoBehaviour:
   moveSpeed: 0.5
   spawnPoint: {x: 0, y: 0, z: 0}
   playerble: 0
-  animSpeed: 0
+  animSpeed: 1
   portrait: {fileID: 21300000, guid: 2ff13894f44bfce418ea310e20778053, type: 3}
   owner: {fileID: 0}
-  atk: 0
+  atk: 10
   hp: 100
   maxHp: 100
   critical: 20
@@ -1388,7 +1388,7 @@ MonoBehaviour:
   skillList:
   - {fileID: 2392039704802568688}
   - {fileID: 7871835294886018039}
-  - {fileID: 0}
+  - {fileID: 3858370609553782909}
   - {fileID: 3858370609553782909}
   currentActiveSkill: {fileID: 0}
   actionState: 0
@@ -1400,6 +1400,7 @@ MonoBehaviour:
   battleOn: 0
   attackTarget: {fileID: 0}
   battleState: 0
+  homePlate: {fileID: 0}
   hitPoints:
   - {fileID: 0}
   deadSinkTime: 3

@@ -12,8 +12,7 @@ public class SH_Skill_Peck : SH_Skill
         for (int i = 0; i < 3; ++i)
         {
             hitEffect.SetActive(false);
-            yield return new WaitForSeconds(0.1f);
-            owner.attackTarget.Damaged(owner.atk * damage);
+            owner.attackTarget?.Damaged(owner.atk * damage);
             owner.AnimationChange(name);
             hitEffect.SetActive(true);
             totalCount++;
@@ -21,6 +20,8 @@ public class SH_Skill_Peck : SH_Skill
                 i--;
             if (totalCount == maxHit)
                 break;
+            yield return new WaitForSeconds(0.1f);
+
         }
         owner.SpeedCgange(1f);
     }

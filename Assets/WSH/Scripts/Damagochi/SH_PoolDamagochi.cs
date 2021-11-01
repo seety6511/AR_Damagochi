@@ -43,7 +43,7 @@ public class SH_PoolDamagochi : Damagochi
 
         enablePool?.Add(this);
         disablePool?.Remove(this);
-        //Debug.Log("OnEnable : " + name);
+        Debug.Log("OnEnable : " + name);
     }
 
     protected virtual void OnDisable()
@@ -53,7 +53,7 @@ public class SH_PoolDamagochi : Damagochi
 
         enablePool?.Remove(this);
         disablePool?.Add(this);
-        //Debug.Log("OnDisable : " + name);
+        Debug.Log("OnDisable : " + name);
     }
 
 }

@@ -90,8 +90,19 @@ public class SH_BattleManager : MonoBehaviour
         winer.battleState = SH_ActionDamagochi.BattleState.End;
         loser.battleState = SH_ActionDamagochi.BattleState.End;
         playBattle = false;
+        //GetBattleResult();
         battleResultPanel.On(this);
         StartCoroutine("BGMDown");
+    }
+
+    public int winCoin;
+    public int winDia;
+    void GetBattleResult()
+    {
+        winCoin = loser.level * 4;
+        winDia = loser.level;
+        winer.owner.coin += winCoin;
+        winer.owner.dia += winDia;
     }
 
     IEnumerator BGMDown()

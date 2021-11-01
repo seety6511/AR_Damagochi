@@ -107,6 +107,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     protected override void OnEnable()
     {
         base.OnEnable();
+        Init();
         if (!playerble)
         {
             //SettingHomePlate();
@@ -170,10 +171,11 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
             return;
 
         Debug.Log("Damaged : " + value);
-        SH_BattleLogger.Instance.LogText("Damaged To : " + attackTarget + "_" + value,Color.black);
+        SH_BattleLogger.Instance.LogText("Damaged To : " + attackTarget + "_" + value, Color.black);
         hp -= value;
 
         hp = Mathf.Max(0, hp);
+
         battleUI.UpdateHpBar();
         if(hp==0)
         {
@@ -268,6 +270,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         battleOn = false;
         attackTarget = null;
         agent.enabled = true;
+
     }
 
     void RunningAction()

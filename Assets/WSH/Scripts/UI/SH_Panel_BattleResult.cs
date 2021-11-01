@@ -12,6 +12,9 @@ public class SH_Panel_BattleResult : MonoBehaviour
     public Text loserLevel;
     public Text winerExp;
 
+    public Text winerCoin;
+    public Text winerDia;
+
     public void On(SH_BattleManager bm)
     {
         var winer = bm.winer;
@@ -22,6 +25,8 @@ public class SH_Panel_BattleResult : MonoBehaviour
         winerLevel.text = winer.level.ToString();
         loserLevel.text = loser.level.ToString();
         winerExp.text = winer.exp + " / " + winer.maxExp;
+        //winerCoin.text = "+" + bm.winCoin;
+        //winerDia.text = "+" + bm.winDia;
         gameObject.SetActive(true);
     }
 }

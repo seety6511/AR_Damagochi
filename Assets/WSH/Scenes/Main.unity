@@ -1158,7 +1158,11 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2095805487508540910, guid: e18bc9f7118b2864f881a0fbc017a940, type: 3}
-      propertyPath: atk
+      propertyPath: animSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095805487508540910, guid: e18bc9f7118b2864f881a0fbc017a940, type: 3}
+      propertyPath: overPower
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2095805487508540910, guid: e18bc9f7118b2864f881a0fbc017a940, type: 3}
@@ -1701,6 +1705,8 @@ MonoBehaviour:
   playBattle: 0
   winer: {fileID: 0}
   loser: {fileID: 0}
+  winCoin: 0
+  winDia: 0
 --- !u!1 &493557777
 GameObject:
   m_ObjectHideFlags: 0
@@ -3228,6 +3234,8 @@ MonoBehaviour:
   arHit: 0
   mouseRayHitPoint: {x: 0, y: 0, z: 0}
   touchRayHitPoint: {x: 0, y: 0, z: 0}
+  coin: 0
+  dia: 0
   controlDamagochi: {fileID: 1298230051}
   battlePanel: {fileID: 1765097017}
   pinPointEffect: {fileID: 1488142934}
@@ -3364,6 +3372,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5860246611499954482, guid: da7cba65fc7c52643a010274d561137b, type: 3}
+      propertyPath: animSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860246611499954482, guid: da7cba65fc7c52643a010274d561137b, type: 3}
+      propertyPath: overPower
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5860246611499954482, guid: da7cba65fc7c52643a010274d561137b, type: 3}
       propertyPath: playerble
       value: 1
@@ -3854,6 +3870,8 @@ MonoBehaviour:
   winerLevel: {fileID: 2009900923}
   loserLevel: {fileID: 1568115157}
   winerExp: {fileID: 2116620626}
+  winerCoin: {fileID: 0}
+  winerDia: {fileID: 0}
 --- !u!1 &859440776
 GameObject:
   m_ObjectHideFlags: 0
@@ -4740,7 +4758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3894627743310862665, guid: e881ad117b7fc654783c713e99963a03, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3894627743310862666, guid: e881ad117b7fc654783c713e99963a03, type: 3}
       propertyPath: m_Enabled
@@ -5049,6 +5067,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea3a03662d11748a245ed946fec6f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  occlusion: {fileID: 0}
+  arHeight: {fileID: 0}
 --- !u!1 &1060195004
 GameObject:
   m_ObjectHideFlags: 0
@@ -6758,6 +6778,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5357159676295027232, guid: 64af19f251dcf5b4fb63811236d8be4d, type: 3}
+      propertyPath: animSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5357159676295027232, guid: 64af19f251dcf5b4fb63811236d8be4d, type: 3}
+      propertyPath: overPower
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5357159676295027232, guid: 64af19f251dcf5b4fb63811236d8be4d, type: 3}
+      propertyPath: playerble
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4306383971676097206, guid: 64af19f251dcf5b4fb63811236d8be4d, type: 3}
       propertyPath: m_RootOrder
       value: 16

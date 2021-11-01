@@ -1271,10 +1271,10 @@ MonoBehaviour:
   moveSpeed: 0.5
   spawnPoint: {x: 0, y: 0, z: 0}
   playerble: 0
-  animSpeed: 0
+  animSpeed: 1
   portrait: {fileID: 21300000, guid: 11db7e3b6b3a92b4593ad31202ab8827, type: 3}
   owner: {fileID: 0}
-  atk: 0
+  atk: 40
   hp: 50
   maxHp: 50
   critical: 30
@@ -1299,6 +1299,7 @@ MonoBehaviour:
   battleOn: 0
   attackTarget: {fileID: 0}
   battleState: 0
+  homePlate: {fileID: 0}
   hitPoints:
   - {fileID: 0}
   deadSinkTime: 3
@@ -1343,6 +1344,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9f636986a9fe04db3ae2ed9b84ae65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idle: {fileID: 0}
+  walk: {fileID: 0}
+  run: {fileID: 0}
+  fly: {fileID: 0}
+  eat: {fileID: 0}
+  dead: {fileID: 0}
+  skill_01: {fileID: 0}
+  skill_02: {fileID: 0}
+  skill_03: {fileID: 0}
+  skill_04: {fileID: 0}
 --- !u!1 &3790652799896042675
 GameObject:
   m_ObjectHideFlags: 0

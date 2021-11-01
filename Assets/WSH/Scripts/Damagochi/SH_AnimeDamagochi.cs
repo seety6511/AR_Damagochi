@@ -40,7 +40,12 @@ public class SH_AnimeDamagochi : SH_SoundDamagochi
     public Action doEvent;
     public Action endEvent;
 
-    public virtual void SpeedCgange(float value)
+    void Attacking()
+    {
+
+    }
+
+    public void SpeedCgange(float value)
     {
         animator.speed = value;
         animSpeed = value;

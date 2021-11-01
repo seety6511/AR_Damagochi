@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class SH_Player : SH_ARInputManager
 {
+    public int coin;
+    public int dia;
     public SH_ActionDamagochi controlDamagochi;
     public SH_Panel_Battle battlePanel;
     public SH_DamagochiPickEffect pinPointEffect;
