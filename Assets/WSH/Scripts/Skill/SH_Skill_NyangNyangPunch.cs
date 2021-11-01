@@ -7,7 +7,7 @@ public class SH_Skill_NyangNyangPunch : SH_Skill
     public float turnGageDamage;
     protected override IEnumerator SpecialEffect()
     {
-        owner.AnimSpeedChange(3f);
+        owner.SpeedCgange(3f);
         for(int i = 0; i < 3; ++i)
         {
             yield return new WaitForSeconds(0.1f);
@@ -15,6 +15,6 @@ public class SH_Skill_NyangNyangPunch : SH_Skill
             owner.AnimationChange(name);
             owner.attackTarget.TurnGageChange (turnGageDamage);
         }
-        owner.AnimSpeedChange(1f);
+        owner.SpeedCgange(1f);
     }
 }

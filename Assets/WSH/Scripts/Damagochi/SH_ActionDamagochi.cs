@@ -80,6 +80,8 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
 
     public BattleState battleState;
 
+    public GameObject homePlate;
+
     #region Unity Event Methods
     protected override void Awake()
     {
@@ -102,7 +104,37 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     protected override void OnEnable()
     {
         base.OnEnable();
+        if (!playerble)
+        {
+            SettingHomePlate();
+        }
         hp = maxHp;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        if (!playerble)
+        {
+            DestroyHomePlate();
+        }
+
+    }
+
+    GameObject tempHome;
+    void SettingHomePlate()
+    {
+        tempHome = Instantiate(homePlate);
+        var pos = gameObject.transform.position;
+        pos.y -= 2f;
+        tempHome.transform.position = pos;
+        tempHome.transform.DOMove(gameObject.transform.position, 3f);
+    }
+
+    void DestroyHomePlate()
+    {
+        tempHome.transform.DOMoveY(-3f, 3f);
+        Destroy(tempHome, 3f);
     }
 
     protected override void Update()
@@ -231,7 +263,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         ActionStateChange(ActionState.Idle);
         battleState = BattleState.None;
         battleOn = false;
-        canAnim = true;
         attackTarget = null;
         agent.enabled = true;
     }
