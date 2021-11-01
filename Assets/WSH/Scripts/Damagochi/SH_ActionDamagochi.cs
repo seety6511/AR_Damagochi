@@ -21,6 +21,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     }
     public enum BattleState
     {
+        None,
         Start,
         Ambushed,   //���ݴ���.
         Surprise,   //������.
@@ -82,6 +83,8 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
 
     public GameObject homePlate;
 
+    public SH_HitPoint[] hitPoints;
+
     #region Unity Event Methods
     protected override void Awake()
     {
@@ -92,7 +95,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         path = new NavMeshPath();
         battleUI.gameObject.SetActive(false);
         skillList = GetComponentsInChildren<SH_Skill>();
-
+        hitPoints = GetComponentsInChildren<SH_HitPoint>();
         foreach (var s in skillList)
         {
             s.owner = this;
@@ -106,7 +109,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         base.OnEnable();
         if (!playerble)
         {
-            SettingHomePlate();
+            //SettingHomePlate();
         }
         hp = maxHp;
     }
@@ -116,7 +119,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         base.OnDisable();
         if (!playerble)
         {
-            DestroyHomePlate();
+            //DestroyHomePlate();
         }
 
     }
@@ -335,7 +338,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
             case BattleState.End:
                 if(hp<=0)
                 {
-                    ActionStateChange(ActionState.isDead);
+                    ActionStateChange(ActionState.Dead);
                     battleOn = false;
                 }
                 battleUI.gameObject.SetActive(false);
