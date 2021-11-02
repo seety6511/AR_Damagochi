@@ -35,7 +35,7 @@ public class CatManager : SH_AnimeDamagochi
     {
         base.Awake();
         if(instance == null)
-        {
+        { 
             instance = this;
         }
     }
@@ -82,13 +82,13 @@ public class CatManager : SH_AnimeDamagochi
                 break;
 
             case ActionState.isPlaying:
-                GetComponent<SceneAnimatorController>().SetAnimatorString("isRunning");
+                GetComponent<SceneAnimatorController>().SetAnimatorString("Run");
                 Playing();
                 break;
 
             case ActionState.isSleeping:
                 agent.ResetPath();
-                GetComponent<SceneAnimatorController>().SetAnimatorString("isSleeping");
+                GetComponent<SceneAnimatorController>().SetAnimatorString("Sleep");
                 break; 
             case ActionState.isHungry:
                 break;
@@ -107,10 +107,10 @@ public class CatManager : SH_AnimeDamagochi
             LookCam();
             ResetDestination();
             //스폰지점에 도착하면 앉아서 밥먹기
-            GetComponent<SceneAnimatorController>().SetAnimatorString("isEatting");
+            GetComponent<SceneAnimatorController>().SetAnimatorString("Eat");
             return;
         }
-        GetComponent<SceneAnimatorController>().SetAnimatorString("isWalking");
+        GetComponent<SceneAnimatorController>().SetAnimatorString("Walk");
     }
 
     public void FinishEat()
@@ -133,10 +133,10 @@ public class CatManager : SH_AnimeDamagochi
         {
             //스폰지점에 도착하면 앉아서 대기상태
             LookCam();
-            GetComponent<SceneAnimatorController>().SetAnimatorString("isWaiting");
+            GetComponent<SceneAnimatorController>().SetAnimatorString("Wait");
             return;
         }
-        GetComponent<SceneAnimatorController>().SetAnimatorString("isWalking");
+        GetComponent<SceneAnimatorController>().SetAnimatorString("Walk");
     }
     private void Playing()
     {
@@ -184,7 +184,7 @@ public class CatManager : SH_AnimeDamagochi
 
     void Wandering()
     {
-        GetComponent<SceneAnimatorController>().SetAnimatorString("isWalking");
+        GetComponent<SceneAnimatorController>().SetAnimatorString("Walk");
         //if (playerble)
         //    return;
         if (HasDestinationReached())

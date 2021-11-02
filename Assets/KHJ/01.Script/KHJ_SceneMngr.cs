@@ -35,11 +35,12 @@ public class KHJ_SceneMngr : MonoBehaviour
     public Text ticketNum;
     public int Ticket;
 
-    //유대감
+    //유대감, 배고픔 게이지
     public float currH = 0;
     float maxH = 100;
     public Image IntimacyImg;
     public Image IntimacyBar;
+    public Image HungryBar;
     public Sprite[] ImmoSprites;
 
     //공 던지기
@@ -142,7 +143,7 @@ public class KHJ_SceneMngr : MonoBehaviour
 
 
     float currTime;
-    float HungryTime = 10; 
+    float HungryTime = 100; 
     void Hungry()
     {
         currTime += Time.deltaTime;
