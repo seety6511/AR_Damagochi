@@ -1,101 +1,53 @@
 {
     "m_SelectedDeviceId": "R5CR21C5QBR",
     "m_SelectedPackage": {
-        "deviceId": "R5CR21C5QBR",
-        "name": "com.DamagochiMaster.ARDamagochi",
-        "processId": 27842,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "R5CR21C5QBR",
-            "name": "com.DefaultCompany.AR_Damagochi",
-            "processId": 11921,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.microsoft.launcher",
-            "processId": 31155,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DefaultCompany.AR_Damagochi",
-            "processId": 12660,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DefaultCompany.AR_Damagochi",
-            "processId": 16699,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DefaultCompany.AR_Damagochi",
-            "processId": 19733,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DefaultCompany.AR_Damagochi",
-            "processId": 23616,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DefaultCompany.AR_Damagochi",
-            "processId": 26278,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DefaultCompany.AR_Damagochi",
-            "processId": 29203,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DefaultCompany.AR_Damagochi",
-            "processId": 11850,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 27985,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 14429,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 19993,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 25529,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
             "name": "com.DamagochiMaster.ARDamagochi",
             "processId": 26198,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "R5CR21C5QBR",
             "name": "com.DamagochiMaster.ARDamagochi",
             "processId": 27842,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 4219,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 27853,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 17239,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.microsoft.launcher",
+            "processId": 15515,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.android.chrome",
+            "processId": 21683,
             "exited": false
         }
     ],
