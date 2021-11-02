@@ -118,8 +118,7 @@ public class CatManager : SH_AnimeDamagochi
         KHJ_SceneMngr.instance.isEat = false;
         Panel.SetActive(true);
         KHJ_SceneMngr.instance.isFoodSet = false;
-        KHJ_SceneMngr.instance.currH += 12;
-        hungryState += 2;
+        KHJ_SceneMngr.instance.currH += 50;
         actionState = ActionState.Idle;
     }
     public void ResetDestination()

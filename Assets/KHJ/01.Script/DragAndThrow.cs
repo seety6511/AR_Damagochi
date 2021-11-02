@@ -63,9 +63,8 @@ public class DragAndThrow : MonoBehaviour
         {
             if (lastMouseY < Input.mousePosition.y)
             {
-                //CatManager.instance.IntimacyChange(3);
                 CatManager.instance.condition = Damagochi.Condition.Happy;
-                KHJ_SceneMngr.instance.currH += 12;
+                KHJ_SceneMngr.instance.currImacy += 12;
                 ThrowBall(Input.mousePosition);
             }
         }

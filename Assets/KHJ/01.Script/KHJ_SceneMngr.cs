@@ -15,7 +15,7 @@ public enum Pet
 public class KHJ_SceneMngr : MonoBehaviour
 {
     public static KHJ_SceneMngr instance;
-    CatManager pet;
+    public CatManager pet;
 
     //Æê Á¾·ù
     public Pet nowPet;
@@ -38,6 +38,8 @@ public class KHJ_SceneMngr : MonoBehaviour
     //À¯´ë°¨, ¹è°íÇÄ °ÔÀÌÁö
     public float currH = 0;
     float maxH = 100;
+    public float currImacy;
+    float maxImacy = 100;
     public Image IntimacyImg;
     public Image IntimacyBar;
     public Image HungryBar;
@@ -47,6 +49,7 @@ public class KHJ_SceneMngr : MonoBehaviour
     public bool isBall;
     public GameObject Ball;
     public GameObject shootPosition;
+    public GameObject PlayUI;
 
     //¹ä¸Ô±â
     public bool isEat;
@@ -67,6 +70,8 @@ public class KHJ_SceneMngr : MonoBehaviour
     }
     private void Start()
     {
+        currH = 100;
+        currImacy = 100;
         pet = CatManager.instance;
     }
     void Update()
@@ -74,13 +79,14 @@ public class KHJ_SceneMngr : MonoBehaviour
         goldUI.text = gold.ToString();
         diaUI.text = dia.ToString();
         ticketNum.text = Ticket.ToString();
-        IntimacyBar.fillAmount = currH / maxH;
+        HungryBar.fillAmount = currH / maxH;
         if (!useAR)
         {
             BallPlayingCam();
             FoodCam();
         }
         Hungry();
+        ConditionSet();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -92,7 +98,11 @@ public class KHJ_SceneMngr : MonoBehaviour
                 {
                     FoodUI.SetActive(!FoodUI.activeSelf);
                 }
-                if(hit.transform.gameObject.name == "Cat")
+                if (hit.transform.gameObject.name == "cat-ball" && !isBall)
+                {
+                    PlayUI.SetActive(!PlayUI.activeSelf);
+                }
+                if (hit.transform.gameObject.name == "Cat")
                 {
                     if (isBall)
                         return;
@@ -139,24 +149,90 @@ public class KHJ_SceneMngr : MonoBehaviour
         }
     }
 
+    float currTime1;
+    float ConditionTime = 1;
+    void ConditionSet()
+    {
+        currTime1 += Time.deltaTime;
+        if (HungryTime < currTime1)
+        {
+            currImacy -= 1;
+            if (currImacy < 0)
+            {
+                currImacy = 0;
+                return;
+            }
+            currTime1 = 0;
+        }
 
+        if (currImacy >= 80)
+        {
+            pet.condition = Damagochi.Condition.Happy;
+            IntimacyBar.color = Color.green;
+        }
+        else if (currImacy < 80 && currImacy >= 60)
+        {
+            pet.condition = Damagochi.Condition.Good;
+            IntimacyBar.color = Color.green;
+        }
+        else if (currImacy < 60 && currImacy >= 40)
+        {
+            pet.condition = Damagochi.Condition.Normal;
+            IntimacyBar.color = Color.green;
+        }
+        else if (currImacy < 40 && currImacy >= 20)
+        {
+            pet.condition = Damagochi.Condition.Bad;
+            IntimacyBar.color = Color.yellow;
+        }
+        else
+        {
+            pet.condition = Damagochi.Condition.Angry;
+            IntimacyBar.color = Color.red;
+        }
+    }
 
 
     float currTime;
-    float HungryTime = 100; 
+    float HungryTime = 1; 
     void Hungry()
     {
         currTime += Time.deltaTime;
         if(HungryTime < currTime)
         {
-            print("Hungry!");
-            pet.hungryState -= 1;
-            if (pet.hungryState < 0)
+            currH -= 1;
+            if (currH < 0)
             {
-                pet.hungryState = 0;
-                currH -= 5;
+                currH = 0;
+                return;
             }
             currTime = 0;
+        }
+
+        if (currH >= 80)
+        {
+            pet.hungryState = Damagochi.HungryState.Full;
+            HungryBar.color = Color.green;
+        }
+        else if(currH<80 && currH >= 60)
+        {
+            pet.hungryState = Damagochi.HungryState.Enough;
+            HungryBar.color = Color.green;
+        }
+        else if(currH<60 && currH>=40)
+        {
+            pet.hungryState = Damagochi.HungryState.Normal;
+            HungryBar.color = Color.green;
+        }
+        else if(currH<40 && currH >= 20)
+        {
+            pet.hungryState = Damagochi.HungryState.Little;
+            HungryBar.color = Color.yellow;
+        }
+        else
+        {
+            pet.hungryState = Damagochi.HungryState.Very;
+            HungryBar.color = Color.red;
         }
     }
 
