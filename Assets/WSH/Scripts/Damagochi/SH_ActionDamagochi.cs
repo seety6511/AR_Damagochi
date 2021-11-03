@@ -220,7 +220,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         switch (actionState)
         {
             case ActionState.Idle:
-                Wandering();
+                //Wandering();
                 break;
 
             case ActionState.Walk:
