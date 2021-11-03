@@ -10,45 +10,39 @@
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 26198,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 27842,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 4219,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 27853,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 17239,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
             "name": "com.microsoft.launcher",
-            "processId": 15515,
+            "processId": 27243,
             "exited": false
         },
         {
             "deviceId": "R5CR21C5QBR",
-            "name": "com.android.chrome",
-            "processId": 21683,
-            "exited": false
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 20845,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 23989,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 26074,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 28426,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 31249,
+            "exited": true
         }
     ],
     "m_Tags": {

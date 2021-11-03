@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SH_DamagochiTrainer : MonoBehaviour
 {
-    public List<SH_ActionDamagochi> damagochiList;
+    public SH_ActionDamagochi damagochi;
     public void LoadDamagochiData()
     {
     }
