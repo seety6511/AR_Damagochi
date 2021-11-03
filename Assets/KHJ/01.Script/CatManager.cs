@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 public class CatManager : SH_AnimeDamagochi
 {
-    //public static CatManager instance;
     KHJ_SceneMngr mngr;
     NavMeshPath path;
     Animator anim;
@@ -20,7 +19,7 @@ public class CatManager : SH_AnimeDamagochi
     public float currH;
     public float currImacy;
 
-
+    public int Level;
     public enum ActionState
     {
         Idle,        
@@ -33,15 +32,6 @@ public class CatManager : SH_AnimeDamagochi
         isHungry,
     }
     public ActionState actionState;
-
-    //protected override void Awake()
-    //{
-    //    base.Awake();
-    //    if(instance == null)
-    //    { 
-    //        instance = this;
-    //    }
-    //}
 
     private void Start()
     {
@@ -60,6 +50,8 @@ public class CatManager : SH_AnimeDamagochi
     {
         SetState();
         ActionStateMachine();
+        ConditionSet();
+        Hungry();
     }
 
     void ActionStateMachine()
@@ -102,6 +94,41 @@ public class CatManager : SH_AnimeDamagochi
         }
     }
 
+    float currTime1;
+    public float ConditionTime = 1;
+    void ConditionSet()
+    {
+        currTime1 += Time.deltaTime;
+        if (ConditionTime < currTime1)
+        {
+            currImacy -= 1;
+            if (currImacy < 0)
+            {
+                currImacy = 0;
+                return;
+            }
+            currTime1 = 0;
+        }
+    }
+
+    float currTime;
+    public float HungryTime = 5;
+    void Hungry()
+    {
+        currTime += Time.deltaTime;
+        if (HungryTime < currTime)
+        {
+            currH -= 1;
+            if (currH < 0)
+            {
+                currH = 0;
+                return;
+            }
+            currTime = 0;
+        }
+    }
+
+
     private void GoToEat()
     {
         KHJ_SceneMngr.instance.isEat = true;
@@ -125,7 +152,7 @@ public class CatManager : SH_AnimeDamagochi
         KHJ_SceneMngr.instance.isEat = false;
         Panel.SetActive(true);
         KHJ_SceneMngr.instance.isFoodSet[(int)KHJ_SceneMngr.instance.nowPet] = false;
-        KHJ_SceneMngr.instance.currH += 50;
+        currH += 50;
         actionState = ActionState.Idle;
     }
     public void ResetDestination()

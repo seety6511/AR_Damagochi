@@ -172,22 +172,9 @@ public class KHJ_SceneMngr : MonoBehaviour
         }
     }
 
-    float currTime1;
-    float ConditionTime = 1;
+
     void ConditionSet()
     {
-        currTime1 += Time.deltaTime;
-        if (ConditionTime < currTime1)
-        {
-            currImacy -= 1;
-            if (currImacy < 0)
-            {
-                currImacy = 0;
-                return;
-            }
-            currTime1 = 0;
-        }
-
         if (currImacy >= 80)
         {
             pet.condition = Damagochi.Condition.Happy;
@@ -216,22 +203,9 @@ public class KHJ_SceneMngr : MonoBehaviour
     }
 
 
-    float currTime;
-    float HungryTime = 5; 
+
     void Hungry()
     {
-        currTime += Time.deltaTime;
-        if(HungryTime < currTime)
-        {
-            currH -= 1;
-            if (currH < 0)
-            {
-                currH = 0;
-                return;
-            }
-            currTime = 0;
-        }
-
         if (currH >= 80)
         {
             pet.hungryState = Damagochi.HungryState.Full;

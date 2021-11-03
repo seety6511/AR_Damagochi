@@ -94,17 +94,40 @@ public class GIfAnimation : MonoBehaviour
         switch (r)
         {
             case 0:
-                petButtons[0].SetActive(true);
-                resultTxt.text = "냥냥이";
+                if (petButtons[0].activeSelf)
+                {
+                    KHJ_SceneMngr.instance.pet_cat.GetComponent<CatManager>().Level++;
+                    resultTxt.text = "냥냥이 레벨업";
+                }
+                else
+                {
+                    petButtons[0].SetActive(true);
+                    resultTxt.text = "냥냥이";
+                }
                 break;
             case 1:
-                petButtons[1].SetActive(true);
-                resultTxt.text = "곰돌이";
+                if (petButtons[1].activeSelf)
+                {
+                    KHJ_SceneMngr.instance.pet_bear.GetComponent<CatManager>().Level++;
+                    resultTxt.text = "곰돌이 레벨업";
+                }
+                else
+                {
+                    petButtons[1].SetActive(true);
+                    resultTxt.text = "곰돌이";
+                }
                 break;
             case 2:
-                petButtons[2].SetActive(true);
-                resultTxt.text = "구구";
-
+                if (petButtons[0].activeSelf)
+                {
+                    KHJ_SceneMngr.instance.pet_dove.GetComponent<CatManager>().Level++;
+                    resultTxt.text = "구구 레벨업";
+                }
+                else
+                {
+                    petButtons[2].SetActive(true);
+                    resultTxt.text = "구구";
+                }
                 break;
         }
     }
