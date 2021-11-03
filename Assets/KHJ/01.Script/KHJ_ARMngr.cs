@@ -47,7 +47,7 @@ public class KHJ_ARMngr : MonoBehaviour
         {
             Instantiate(sphere);
             sphere.transform.position = Indicator.transform.position;
-            CatManager.instance.gameObject.transform.position = Indicator.transform.position;
+            KHJ_SceneMngr.instance.pet.gameObject.transform.position = Indicator.transform.position;
         }
     }
 }

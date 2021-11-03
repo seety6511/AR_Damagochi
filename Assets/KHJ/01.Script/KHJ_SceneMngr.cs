@@ -21,8 +21,10 @@ public class KHJ_SceneMngr : MonoBehaviour
     public Pet nowPet;
     public GameObject catEnvironmet;
     public GameObject bearEnvironment;
+    public GameObject doveEnvironment;
     public GameObject pet_cat;
     public GameObject pet_bear;
+    public GameObject pet_dove;
 
 
     public GameObject Panel;
@@ -39,7 +41,6 @@ public class KHJ_SceneMngr : MonoBehaviour
     public float currH = 0;
     float maxH = 100;
     public float currImacy;
-    float maxImacy = 100;
     public Image IntimacyImg;
     public Image IntimacyBar;
     public Image HungryBar;
@@ -53,8 +54,8 @@ public class KHJ_SceneMngr : MonoBehaviour
 
     //밥먹기
     public bool isEat;
-    public bool isFoodSet;
-    public GameObject Food;
+    public bool[] isFoodSet;
+    public GameObject[] Food;
     public GameObject FoodUI;
 
     //AR
@@ -70,21 +71,19 @@ public class KHJ_SceneMngr : MonoBehaviour
     }
     private void Start()
     {
-        currH = 100;
-        currImacy = 100;
-        pet = CatManager.instance;
+        pet = pet_cat.GetComponent<CatManager>();
+        currH = pet.currH;
+        currImacy = pet.currImacy;
     }
     void Update()
     {
+        currH = pet.currH;
+        currImacy = pet.currImacy;
         goldUI.text = gold.ToString();
         diaUI.text = dia.ToString();
         ticketNum.text = Ticket.ToString();
         HungryBar.fillAmount = currH / maxH;
-        if (!useAR)
-        {
-            BallPlayingCam();
-            FoodCam();
-        }
+
         Hungry();
         ConditionSet();
 
@@ -94,7 +93,7 @@ public class KHJ_SceneMngr : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100f))
             {
-                if(hit.transform.gameObject.name == "FoodPlate" && !isFoodSet)
+                if(hit.transform.gameObject.name == "FoodPlate" && !isFoodSet[(int)nowPet])
                 {
                     FoodUI.SetActive(!FoodUI.activeSelf);
                 }
@@ -102,20 +101,32 @@ public class KHJ_SceneMngr : MonoBehaviour
                 {
                     PlayUI.SetActive(!PlayUI.activeSelf);
                 }
-                if (hit.transform.gameObject.name == "Cat")
+                if (hit.transform.gameObject.name == "Cat" || hit.transform.gameObject.name == "Bear" || hit.transform.gameObject.name == "Dove")
                 {
                     if (isBall)
                         return;
-                    CatManager.instance.actionState = CatManager.ActionState.isTouching;
+                    pet.actionState = CatManager.ActionState.isTouching;
+                }
+                if(hit.transform.gameObject.tag == "floor")
+                {
+                    print("터치 이동");
+                    
+                    pet.Target = hit.point;
+                    pet.actionState = CatManager.ActionState.isMoving;
                 }
             }
         }
 
+        FoodSet();
 
-        if (isFoodSet)
+    }
+    void FoodSet()
+    {
+
+        if (isFoodSet[(int)nowPet])
         {
-            Food.SetActive(true);
-            if(pet.hungryState == Damagochi.HungryState.Little || pet.hungryState == Damagochi.HungryState.Very)
+            Food[(int)nowPet].SetActive(true);
+            if (pet.hungryState == Damagochi.HungryState.Little || pet.hungryState == Damagochi.HungryState.Very)
             {
                 if (isBall)
                     return;
@@ -124,25 +135,37 @@ public class KHJ_SceneMngr : MonoBehaviour
         }
         else
         {
-            Food.SetActive(false);
+            Food[(int)nowPet].SetActive(false);
         }
-
     }
-
     public void SetPet(int a)
     {
         nowPet = (Pet)a;
         switch (nowPet)
         {
             case Pet.cat:
+                pet.actionState = CatManager.ActionState.isSleeping;
                 bearEnvironment.SetActive(false);
                 catEnvironmet.SetActive(true);
+                doveEnvironment.SetActive(false);
                 pet = pet_cat.GetComponent<CatManager>();
+                pet.actionState = CatManager.ActionState.Idle;
                 break;
             case Pet.bear:
+                pet.actionState = CatManager.ActionState.isSleeping;
                 bearEnvironment.SetActive(true);
                 catEnvironmet.SetActive(false);
+                doveEnvironment.SetActive(false);
                 pet = pet_bear.GetComponent<CatManager>();
+                pet.actionState = CatManager.ActionState.Idle;
+                break;
+            case Pet.dove:
+                pet.actionState = CatManager.ActionState.isSleeping;
+                bearEnvironment.SetActive(false);
+                catEnvironmet.SetActive(false);
+                doveEnvironment.SetActive(true);
+                pet = pet_dove.GetComponent<CatManager>();
+                pet.actionState = CatManager.ActionState.Idle;
                 break;
             default:
                 break;
@@ -154,7 +177,7 @@ public class KHJ_SceneMngr : MonoBehaviour
     void ConditionSet()
     {
         currTime1 += Time.deltaTime;
-        if (HungryTime < currTime1)
+        if (ConditionTime < currTime1)
         {
             currImacy -= 1;
             if (currImacy < 0)
@@ -194,7 +217,7 @@ public class KHJ_SceneMngr : MonoBehaviour
 
 
     float currTime;
-    float HungryTime = 1; 
+    float HungryTime = 5; 
     void Hungry()
     {
         currTime += Time.deltaTime;
@@ -241,12 +264,12 @@ public class KHJ_SceneMngr : MonoBehaviour
         isBall = !isBall;
         if (isBall)
         {
-            CatManager.instance.actionState = CatManager.ActionState.isWaiting;
+            pet.actionState = CatManager.ActionState.isWaiting;
         }
         else
         {
             pet.ResetDestination();
-            CatManager.instance.actionState = CatManager.ActionState.Idle;
+            pet.actionState = CatManager.ActionState.Idle;
         }
     }
 
@@ -266,38 +289,6 @@ public class KHJ_SceneMngr : MonoBehaviour
             AR_Text.SetActive(false);
         }
     }
-    void BallPlayingCam()
-    {
-        if (isEat)
-            return;
-
-        if (isBall)
-        {
-            Ball.GetComponent<DragAndThrow>().enabled = true;
-            //Ball.GetComponent<DragAndThrow>().Reset();
-            Camera.main.fieldOfView = 70;
-            Camera.main.transform.position = new Vector3(82.46f, 0.38f, -0.6f);
-        }
-        else
-        {
-            Ball.GetComponent<DragAndThrow>().enabled = false;
-            Ball.transform.SetParent(null);
-            Ball.transform.position = new Vector3(82.3f, 0, 0.47f);
-            Ball.transform.eulerAngles = new Vector3(0, -25, 0);
-            Camera.main.fieldOfView = 25;
-            Camera.main.transform.position = new Vector3(82.46f, 0.38f, -2.9f);
-        }
-    }
-
-    void FoodCam()
-    {
-        if (isEat)
-        {
-            Camera.main.fieldOfView = 70;
-            Camera.main.transform.position = new Vector3(82.31f, 0.38f, -1.32f);
-        }
-    }
-
 
     public void ShootBall()
     {
@@ -326,7 +317,7 @@ public class KHJ_SceneMngr : MonoBehaviour
         }
         print("음식 채우기");
         FoodUI.SetActive(false);
-        isFoodSet = true;
+        isFoodSet[(int)nowPet] = true;
     }
 
     public bool DecreaseGold(int i)

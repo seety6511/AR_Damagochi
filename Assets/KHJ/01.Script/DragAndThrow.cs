@@ -40,7 +40,7 @@ public class DragAndThrow : MonoBehaviour
 
         if (thrown)
         {
-            CatManager.instance.actionState = CatManager.ActionState.isPlaying;
+            KHJ_SceneMngr.instance.pet.actionState = CatManager.ActionState.isPlaying;
             return;
         }
 
@@ -63,7 +63,7 @@ public class DragAndThrow : MonoBehaviour
         {
             if (lastMouseY < Input.mousePosition.y)
             {
-                CatManager.instance.condition = Damagochi.Condition.Happy;
+                KHJ_SceneMngr.instance.pet.condition = Damagochi.Condition.Happy;
                 KHJ_SceneMngr.instance.currImacy += 12;
                 ThrowBall(Input.mousePosition);
             }
@@ -80,8 +80,8 @@ public class DragAndThrow : MonoBehaviour
     public void Cancel()
     {
         CancelInvoke("Reset");
-        CatManager.instance.ResetDestination();
-        CatManager.instance.actionState = CatManager.ActionState.Idle;
+        KHJ_SceneMngr.instance.pet.ResetDestination();
+        KHJ_SceneMngr.instance.pet.actionState = CatManager.ActionState.Idle;
         transform.position = initialPos.transform.position;
         newPosition = transform.position;
         thrown = holding = false;
@@ -93,8 +93,8 @@ public class DragAndThrow : MonoBehaviour
     }
     public void Reset()
     {
-        CatManager.instance.ResetDestination();
-        CatManager.instance.actionState = CatManager.ActionState.isWaiting;
+        KHJ_SceneMngr.instance.pet.ResetDestination();
+        KHJ_SceneMngr.instance.pet.actionState = CatManager.ActionState.isWaiting;
         CancelInvoke();
         transform.position = initialPos.transform.position;
         newPosition = transform.position;

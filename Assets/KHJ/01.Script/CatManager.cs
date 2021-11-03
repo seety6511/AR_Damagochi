@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class CatManager : SH_AnimeDamagochi
 {
-    public static CatManager instance;
+    //public static CatManager instance;
     KHJ_SceneMngr mngr;
     NavMeshPath path;
     Animator anim;
@@ -16,6 +16,9 @@ public class CatManager : SH_AnimeDamagochi
     public GameObject eatPoint;
     public float wanderingRadius;
     public Vector3 Target;
+
+    public float currH;
+    public float currImacy;
 
 
     public enum ActionState
@@ -31,14 +34,14 @@ public class CatManager : SH_AnimeDamagochi
     }
     public ActionState actionState;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        if(instance == null)
-        { 
-            instance = this;
-        }
-    }
+    //protected override void Awake()
+    //{
+    //    base.Awake();
+    //    if(instance == null)
+    //    { 
+    //        instance = this;
+    //    }
+    //}
 
     private void Start()
     {
@@ -48,6 +51,10 @@ public class CatManager : SH_AnimeDamagochi
         agent.speed = moveSpeed;
         path = new NavMeshPath();
         anim = GetComponent<Animator>();
+
+        currH = 100;
+        currImacy = 100;
+
     }
     protected override void Update()
     {
@@ -117,7 +124,7 @@ public class CatManager : SH_AnimeDamagochi
     {
         KHJ_SceneMngr.instance.isEat = false;
         Panel.SetActive(true);
-        KHJ_SceneMngr.instance.isFoodSet = false;
+        KHJ_SceneMngr.instance.isFoodSet[(int)KHJ_SceneMngr.instance.nowPet] = false;
         KHJ_SceneMngr.instance.currH += 50;
         actionState = ActionState.Idle;
     }
@@ -184,8 +191,7 @@ public class CatManager : SH_AnimeDamagochi
     void Wandering()
     {
         GetComponent<SceneAnimatorController>().SetAnimatorString("Walk");
-        //if (playerble)
-        //    return;
+
         if (HasDestinationReached())
         {
             //목적지에 도착하면 랜덤 행동
