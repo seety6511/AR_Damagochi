@@ -69,8 +69,6 @@ public class GIfAnimation : MonoBehaviour
         {
             image.sprite = sprites[now];
             yield return null;
-            yield return null;
-            yield return null;
             now++;
 
             if (image.sprite == sprites[sprites.Length - 1])
