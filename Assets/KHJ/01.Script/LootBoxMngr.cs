@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LootBoxMngr : MonoBehaviour
 {
+    public static LootBoxMngr instance;
     public List<LootBox> lootBoxesOrigin;
     public List<LootBox> lootBoxes;
 
@@ -11,11 +12,11 @@ public class LootBoxMngr : MonoBehaviour
     public List<LootBox> G10;
     public List<LootBox> G5;
     public List<LootBox> G;
-    void Start()
+    private void Awake()
     {
-        //Reset();
+        if (instance == null)
+            instance = this;
     }
-
     public void Reset()
     {
         lootBoxes.Clear();

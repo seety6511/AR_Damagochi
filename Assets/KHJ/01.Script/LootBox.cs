@@ -17,6 +17,7 @@ public class LootBox : MonoBehaviour
 
     public bool OnClicked;
     public bool OnDisappear;
+    public bool Finish;
     public Image image;
     public Text text;
 
@@ -54,7 +55,10 @@ public class LootBox : MonoBehaviour
         {
             transform.eulerAngles = Vector3.zero;
         }
-
+        if (Finish)
+        {
+            OnlyResult();
+        }
         if (OnDisappear)
         {
             OnClicked = false;
@@ -72,11 +76,13 @@ public class LootBox : MonoBehaviour
         GetComponent<Button>().enabled = true;
         OnClicked = false;
         OnDisappear = false;
+        Finish = false;
         colorA = 1;
         image.color = new Color(colorR, colorG, colorB, colorA);
     }
     void ShowResult()
     {
+        Finish = true;
         OnDisappear = false;
         text.text = "";
         image.color = new Color(0.8f, 0.8f, 0.8f, 1);
@@ -101,6 +107,29 @@ public class LootBox : MonoBehaviour
                 break;
         }
     }
+    void OnlyResult()
+    {
+        OnDisappear = false;
+        text.text = "";
+        image.color = new Color(0.8f, 0.8f, 0.8f, 1);
+        transform.eulerAngles = Vector3.zero;
+        switch (prize)
+        {
+            case Prize.Ticket:
+                text.text = "Æê »Ì±â±Ç";
+                break;
+            case Prize.G10:
+                text.text = "10 Gold";
+                break;
+            case Prize.G5:
+                text.text = "5 Gold";
+                break;
+            case Prize.G:
+                text.text = "1 Gold";
+                break;
+        }
+    }
+
     IEnumerator ClickEvent()
     {
         yield return new WaitForSeconds(1f);

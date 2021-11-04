@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+
 public class KHJ_InfoMngr : MonoBehaviour
 {
-
     public Image portrait;
     public Sprite[] sprites;
     public Text petname;
@@ -13,8 +14,6 @@ public class KHJ_InfoMngr : MonoBehaviour
     public Text level;
     public void SetInfo()
     {
-        print("SetInfo");
-
         portrait.sprite = sprites[(int)KHJ_SceneMngr.instance.nowPet];
         petname.text = names[(int)KHJ_SceneMngr.instance.nowPet];
         level.text = KHJ_SceneMngr.instance.pet.leveltxt.text;

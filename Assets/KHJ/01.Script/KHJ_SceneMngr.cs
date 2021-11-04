@@ -26,6 +26,8 @@ public class KHJ_SceneMngr : MonoBehaviour
     public GameObject pet_bear;
     public GameObject pet_dove;
 
+    public GameObject[] petButtons;
+
     public GameObject Panel;
 
     //¿Á»≠
