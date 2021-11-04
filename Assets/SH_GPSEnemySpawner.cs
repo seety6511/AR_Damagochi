@@ -14,10 +14,11 @@ public class SH_GPSEnemySpawner : MonoBehaviour
     public SH_Button_Enemy enemyMarkerPrefab;
     public List<SH_ActionDamagochi> enemyList;
     public List<SH_Button_Enemy> enableEnemyMarkers;
+    SH_DamagochiTrainer trainer;
     private void Start()
     {
         gm = FindObjectOfType<SH_GoogleMap>();
-
+        trainer = FindObjectOfType<SH_DamagochiTrainer>();
     }
 
     private void Update()
@@ -34,21 +35,37 @@ public class SH_GPSEnemySpawner : MonoBehaviour
             return;
 
         var enemy = GetRandomEnemy();
+
+        enemy.level = Random.Range(1, trainer.damagochi.level + 6);
         marker.SetEnemy(enemy);
         enableEnemyMarkers.Add(marker);
-
+        
         marker.transform.position = GetRandomPos();
         spawnTimer = 0f;
     }
 
+    public void ResetEnemy()
+    {
+        for (int i = 0; i < enableEnemyMarkers.Count; ++i)
+        {
+            var e = enableEnemyMarkers[i];
+            if (e.enemy != null)
+                Destroy(e.enemy.gameObject);
+            if (enableEnemyMarkers[0] != null)
+                Destroy(enableEnemyMarkers[0].gameObject);
+        }
+
+        enableEnemyMarkers.Clear();
+    }
+
     SH_ActionDamagochi GetRandomEnemy()
     {
-        return enemyList[Random.Range(0, enemyList.Count)];
+        return Instantiate(enemyList[Random.Range(0, enemyList.Count)]);
     }
 
     SH_Button_Enemy GetMarker()
     {
-        return  Instantiate(enemyMarkerPrefab, FindObjectOfType<Canvas>().transform);
+        return  Instantiate(enemyMarkerPrefab, transform);
     }
     Vector3 GetRandomPos()
     {

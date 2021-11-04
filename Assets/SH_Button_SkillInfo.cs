@@ -9,6 +9,7 @@ public class SH_Button_SkillInfo : MonoBehaviour
     Image skillImage;
     Text skillName;
     public SH_Skill skill;
+    public SH_Panel_SkillInfo ps;
 
     private void Start()
     {
@@ -22,10 +23,10 @@ public class SH_Button_SkillInfo : MonoBehaviour
     {
         this.skill = skill;
         skillImage.sprite = skill.skillSprite;
-        skillName.text = skill.name;
+        //skillName.text = skill.name;
     }
     void OpenSkillInfo()
     {
-
+        ps.SetSkill(skill);
     }
 }

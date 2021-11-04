@@ -45,7 +45,7 @@ public class SH_AnimeDamagochi : SH_SoundDamagochi
 
     }
 
-    public void SpeedCgange(float value)
+    public void SpeedChange(float value)
     {
         animator.speed = value;
         animSpeed = value;
@@ -65,6 +65,7 @@ public class SH_AnimeDamagochi : SH_SoundDamagochi
     protected override void Awake()
     {
         base.Awake();
+        Debug.Log("A");
         animator = GetComponent<Animator>();
         animParam = animator.parameters;
     }
@@ -74,6 +75,12 @@ public class SH_AnimeDamagochi : SH_SoundDamagochi
     }
     public void AnimatorParamClear()
     {
+        if (animator == null)
+            animator = GetComponent<Animator>();
+
+        if (animParam == null)
+            animParam = animator.parameters;
+
         foreach (var p in animParam)
         {
             animator.SetBool(p.name, false);

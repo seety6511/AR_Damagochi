@@ -5,7 +5,7 @@ using UnityEngine;
 public class SH_BattleManager : MonoBehaviour
 {
     public GameObject ambushedEffect;
-    public SH_Panel_Battle battlePanel;
+    public SH_UI_PlayerSkill battlePanel;
     public SH_Panel_BattleResult battleResultPanel;
 
     public SH_ActionDamagochi challenger;
@@ -70,7 +70,7 @@ public class SH_BattleManager : MonoBehaviour
         if (!playBattle)
             return;
 
-        battlePanel.SkillButtonUpdate();
+        //battlePanel.SkillButtonUpdate();
         challenger.BattleStateAction();
         target.BattleStateAction();
 

@@ -12,8 +12,6 @@ public class SH_Panel_MyStatus : MonoBehaviour
     public Text exp;
     public Text hp;
     public Text atk;
-    public Text critical;
-    public Text criticalDamage;
     public Text atkSpeed;
 
     public Image portrait;
@@ -29,8 +27,6 @@ public class SH_Panel_MyStatus : MonoBehaviour
         exp.text = target.exp+ " / " + target.maxExp;
         hp.text = target.hp + " / " + target.maxHp;
         atk.text = target.atk.ToString();
-        critical.text = target.critical.ToString();
-        criticalDamage.text = target.criticalDamage.ToString();
         atkSpeed.text = target.atkSpeed.ToString();
         portrait.sprite = target.portrait;
 
