@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.EventSystems;
 
 public enum Pet
 {
@@ -25,7 +25,6 @@ public class KHJ_SceneMngr : MonoBehaviour
     public GameObject pet_cat;
     public GameObject pet_bear;
     public GameObject pet_dove;
-
 
     public GameObject Panel;
 
@@ -48,7 +47,7 @@ public class KHJ_SceneMngr : MonoBehaviour
 
     //공 던지기
     public bool isBall;
-    public GameObject Ball;
+    public GameObject[] Ball;
     public GameObject shootPosition;
     public GameObject PlayUI;
 
@@ -64,6 +63,9 @@ public class KHJ_SceneMngr : MonoBehaviour
     public GameObject ARCam;
     public GameObject AR_Text;
 
+    //대화
+    public DialogueTrigger[] triggers;
+    public TextAsset[] dialogue_data;
     private void Awake()
     {
         if (instance == null)
@@ -74,6 +76,7 @@ public class KHJ_SceneMngr : MonoBehaviour
         pet = pet_cat.GetComponent<CatManager>();
         currH = pet.currH;
         currImacy = pet.currImacy;
+        SetDialogue();
     }
     void Update()
     {
@@ -86,19 +89,28 @@ public class KHJ_SceneMngr : MonoBehaviour
 
         Hungry();
         ConditionSet();
+        FoodSet();
 
         if (Input.GetMouseButtonDown(0))
         {
+            //UI Blocking
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+            //터치 상호작용
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100f))
             {
                 if(hit.transform.gameObject.name == "FoodPlate" && !isFoodSet[(int)nowPet])
                 {
+                    //밥주기
                     FoodUI.SetActive(!FoodUI.activeSelf);
                 }
                 if (hit.transform.gameObject.name == "cat-ball" && !isBall)
                 {
+                    //공놀이
                     PlayUI.SetActive(!PlayUI.activeSelf);
                 }
                 if (hit.transform.gameObject.name == "Cat" || hit.transform.gameObject.name == "Bear" || hit.transform.gameObject.name == "Dove")
@@ -106,26 +118,58 @@ public class KHJ_SceneMngr : MonoBehaviour
                     if (isBall)
                         return;
                     pet.actionState = CatManager.ActionState.isTouching;
+                    //대사 출력
+                    PetTalk();
                 }
                 if(hit.transform.gameObject.tag == "floor")
                 {
-                    print("터치 이동");
-                    
+                    //터치이동
                     pet.Target = hit.point;
                     pet.actionState = CatManager.ActionState.isMoving;
                 }
             }
         }
-
-        FoodSet();
-
     }
+
+    void PetTalk()
+    {
+        if(pet.hungryState == Damagochi.HungryState.Little)
+        {
+            triggers[(int)nowPet].TriggerDialogue(6);
+            return;
+        }
+        else if(pet.hungryState== Damagochi.HungryState.Very)
+        {
+            triggers[(int)nowPet].TriggerDialogue(7);
+            return;
+        }
+        switch (pet.condition)
+        {
+            case Damagochi.Condition.Happy:
+                triggers[(int)nowPet].TriggerDialogue(1);
+                break;
+            case Damagochi.Condition.Good:
+                triggers[(int)nowPet].TriggerDialogue(2);
+                break;
+            case Damagochi.Condition.Normal:
+                triggers[(int)nowPet].TriggerDialogue(3);
+                break;
+            case Damagochi.Condition.Bad:
+                triggers[(int)nowPet].TriggerDialogue(4);
+                break;
+            case Damagochi.Condition.Angry:
+                triggers[(int)nowPet].TriggerDialogue(5);
+                break;
+        }
+    }
+
     void FoodSet()
     {
-
+        //밥그릇 터치시 밥 채워주기
         if (isFoodSet[(int)nowPet])
         {
             Food[(int)nowPet].SetActive(true);
+            //펫이 배고프면 밥먹으러 가기
             if (pet.hungryState == Damagochi.HungryState.Little || pet.hungryState == Damagochi.HungryState.Very)
             {
                 if (isBall)
@@ -140,6 +184,7 @@ public class KHJ_SceneMngr : MonoBehaviour
     }
     public void SetPet(int a)
     {
+        //펫 목록에서 선택시 셋팅
         nowPet = (Pet)a;
         switch (nowPet)
         {
@@ -267,7 +312,7 @@ public class KHJ_SceneMngr : MonoBehaviour
     public void ShootBall()
     {
         //클릭한 곳으로 물체 쏘기
-        GameObject tObj = Instantiate(Ball);
+        GameObject tObj = Instantiate(Ball[0]);
         tObj.transform.position = shootPosition.transform.position;
         Vector3 force = (shootPosition.transform.position - Camera.main.transform.position).normalized;
 
@@ -340,5 +385,17 @@ public class KHJ_SceneMngr : MonoBehaviour
         }
         else
             return;
+    }
+
+    void SetDialogue()
+    {
+        for(int i = 0; i < dialogue_data.Length; i++)
+        {
+            DialogueTrigger trigger = triggers[i];
+            trigger.dialogue = new Dialogue();
+            trigger.dialogue.SetDialogue(dialogue_data[i]);
+
+            trigger.dialogue.name = trigger.dialogue.sentences[0][0];
+        }
     }
 }

@@ -6,16 +6,9 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
-    public bool isFirst;
-    public bool isFriend;
-    public bool isLose;
-
-
     public void TriggerDialogue(int n)
     {
-
-        //FindObjectOfType<DialogueManager>().StartDialogue(dialogue, n);
-    }
-    
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, n);
+    }    
 
 }

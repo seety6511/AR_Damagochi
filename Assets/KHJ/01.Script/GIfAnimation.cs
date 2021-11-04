@@ -11,6 +11,7 @@ public class GIfAnimation : MonoBehaviour
     public bool isEnd;
     public float colorA;
     public GameObject ExitBtn;
+    public GameObject Info;
     void Start()
     {
         colorA = image.color.a;
@@ -22,6 +23,10 @@ public class GIfAnimation : MonoBehaviour
         {
             if (colorA < 0)
             {
+                Info.GetComponent<KHJ_InfoMngr>().SetInfo();
+                //결과 표시 한번만
+                if (ExitBtn.activeSelf)
+                    return;
                 //결과 표시
                 ShowResult();
                 ExitBtn.SetActive(true);
@@ -33,13 +38,6 @@ public class GIfAnimation : MonoBehaviour
             image.color = tmp;
         }
 
-
-        //if(image.sprite == sprites[sprites.Length - 1])
-        //{
-        //    isEnd = true;
-        //    return;
-        //}
-        //image.sprite = sprites[(int)(Time.time * 30)%sprites.Length];
     }
 
     public int now;

@@ -12,11 +12,10 @@ public class DragAndThrow : MonoBehaviour
 
     public bool thrown, holding;
 
-    private Rigidbody _rigidbody;
+    public Rigidbody _rigidbody;
     private Vector3 newPosition;
     public GameObject initialPos;
-    public Transform catballpos;
-    public Transform bearballpos;
+
 
     void Start()
     {
@@ -26,15 +25,6 @@ public class DragAndThrow : MonoBehaviour
 
     void Update()
     {
-        if(KHJ_SceneMngr.instance.nowPet == Pet.cat)
-        {
-            initialPos = catballpos.gameObject;
-        }
-        else if(KHJ_SceneMngr.instance.nowPet == Pet.bear)
-        {
-            initialPos = bearballpos.gameObject;
-        }
-
         if (holding)
             OnTouch();
 
@@ -100,6 +90,7 @@ public class DragAndThrow : MonoBehaviour
         newPosition = transform.position;
         thrown = holding = false;
 
+        _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.useGravity = false;
         _rigidbody.velocity = Vector3.zero;
         _rigidbody.angularVelocity = Vector3.zero;
@@ -109,6 +100,10 @@ public class DragAndThrow : MonoBehaviour
 
     void OnTouch()
     {
+        if(Input.mousePosition == null)
+        {
+            transform.localPosition = initialPos.transform.position;
+        }
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = Camera.main.nearClipPlane * 27.5f;
 

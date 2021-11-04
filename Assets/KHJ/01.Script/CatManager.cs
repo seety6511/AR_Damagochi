@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.UI;
 public class CatManager : SH_AnimeDamagochi
 {
     KHJ_SceneMngr mngr;
     NavMeshPath path;
-    Animator anim;
     public NavMeshAgent agent;
     public GameObject spwanPoint;
     public GameObject Panel;
@@ -20,6 +19,9 @@ public class CatManager : SH_AnimeDamagochi
     public float currImacy;
 
     public int Level;
+    public float[] stat; //공격력, Hp, 치명타, 공격속도
+    public Text[] stats;
+    public Text leveltxt;
     public enum ActionState
     {
         Idle,        
@@ -40,14 +42,13 @@ public class CatManager : SH_AnimeDamagochi
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         path = new NavMeshPath();
-        anim = GetComponent<Animator>();
 
         currH = 100;
         currImacy = 100;
-
     }
     protected override void Update()
     {
+        SetStat();
         SetState();
         ActionStateMachine();
         ConditionSet();
@@ -174,7 +175,7 @@ public class CatManager : SH_AnimeDamagochi
     private void Playing()
     {
         //공이 던져지면 쫓아가기
-        MoveTo(KHJ_SceneMngr.instance.Ball.transform.position);
+        MoveTo(KHJ_SceneMngr.instance.Ball[(int)KHJ_SceneMngr.instance.nowPet].transform.position);
         //if (HasDestinationReached())
         //{
         //    print("Catched Ball!");
@@ -308,6 +309,23 @@ public class CatManager : SH_AnimeDamagochi
             case Condition.Angry:
                 mngr.IntimacyImg.sprite = mngr.ImmoSprites[4];
                 return;
+        }
+    }
+
+    public void LevelUp()
+    {
+        for (int i = 0; i < stats.Length; i++)
+        {
+            //stat[i] += (Level+1);
+        }
+    }
+    void SetStat()
+    {
+        leveltxt.text = "Lv." + (Level+1).ToString();
+
+        for (int i = 0; i < stats.Length; i++)
+        {
+            stats[i].text = (stat[i] + Level*2 ).ToString();
         }
     }
 }

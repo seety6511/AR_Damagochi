@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragAndSwipe : MonoBehaviour
+public class KHJ_DataManager : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

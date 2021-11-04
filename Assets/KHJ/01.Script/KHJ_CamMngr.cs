@@ -12,16 +12,17 @@ public class KHJ_CamMngr : MonoBehaviour
     Vector3 Normal;
     Vector3 Eat;
     Vector3 Play;
-   
 
-    void Update()
+    public Transform[] BallPos;
+
+    void LateUpdate()
     {
         pet = pets[(int)KHJ_SceneMngr.instance.nowPet];
         Normal = NormalPresets[(int)KHJ_SceneMngr.instance.nowPet];
         Eat = EatPresets[(int)KHJ_SceneMngr.instance.nowPet];
         Play = PlayPresets[(int)KHJ_SceneMngr.instance.nowPet];
 
-        
+        int nowpet = (int)KHJ_SceneMngr.instance.nowPet;
 
         if (KHJ_SceneMngr.instance.useAR)
             return;
@@ -35,7 +36,7 @@ public class KHJ_CamMngr : MonoBehaviour
         else if (KHJ_SceneMngr.instance.isBall)
         {
             //공놀이할때
-            KHJ_SceneMngr.instance.Ball.GetComponent<DragAndThrow>().enabled = true;
+            KHJ_SceneMngr.instance.Ball[nowpet].GetComponent<DragAndThrow>().enabled = true;
             
             Camera.main.fieldOfView = 70;
             transform.position = Vector3.Lerp(transform.position, pet.transform.position + Play, 5f * Time.deltaTime);
@@ -43,18 +44,12 @@ public class KHJ_CamMngr : MonoBehaviour
         else
         {
             //평소
-            KHJ_SceneMngr.instance.Ball.GetComponent<DragAndThrow>().enabled = false;
-            KHJ_SceneMngr.instance.Ball.transform.SetParent(null);
-            KHJ_SceneMngr.instance.Ball.transform.position = new Vector3(82.3f, 0, 0.47f);
-            KHJ_SceneMngr.instance.Ball.transform.eulerAngles = new Vector3(0, -25, 0);
-            
+            SetBallPos();
+
             Camera.main.fieldOfView = 30;
             transform.position = Vector3.Lerp(transform.position, pet.transform.position + Normal, 5f*Time.deltaTime);
 
         }
-
-
-
 
         //카메라 배경색 설정
         if (KHJ_SceneMngr.instance.nowPet == Pet.cat)
@@ -66,4 +61,26 @@ public class KHJ_CamMngr : MonoBehaviour
 
     }
 
+    public void BallReset()
+    {
+        int nowpet = (int)KHJ_SceneMngr.instance.nowPet;
+
+        KHJ_SceneMngr.instance.Ball[nowpet].GetComponent<DragAndThrow>().Reset();
+    }
+    public void BallCancel()
+    {
+        int nowpet = (int)KHJ_SceneMngr.instance.nowPet;
+        KHJ_SceneMngr.instance.Ball[nowpet].GetComponent<DragAndThrow>().enabled = true;
+        KHJ_SceneMngr.instance.Ball[nowpet].GetComponent<DragAndThrow>().Cancel();
+    }
+    void SetBallPos()
+    {
+        for(int i = 0; i < BallPos.Length; i++)
+        {
+            KHJ_SceneMngr.instance.Ball[i].GetComponent<DragAndThrow>().enabled = false;
+            KHJ_SceneMngr.instance.Ball[i].transform.SetParent(null);
+            KHJ_SceneMngr.instance.Ball[i].transform.position = BallPos[i].position;
+            KHJ_SceneMngr.instance.Ball[i].transform.eulerAngles = new Vector3(0, -25, 0);
+        }
+    }
 }
