@@ -42,6 +42,54 @@ public class KHJ_DataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void ResetData()
+    {
+        sceneInfo = new SceneInfo();
+        sceneInfo.gold = 200;
+        sceneInfo.dia = 200;
+        sceneInfo.ticket = 10;
+        sceneInfo.nowPet = Pet.cat;
+        //JSON
+        string jsonData = JsonUtility.ToJson(sceneInfo, true);
+        PlayerPrefs.SetString("scene_data", jsonData);
+        //SaveSceneData();
+
+        info = new PetInfo[3];
+        info[0].isGet = true;
+        info[1].isGet = false;
+        info[2].isGet = false;
+        for (int i = 0; i < info.Length; i++)
+        {
+            info[i].stat = new float[4];
+            info[i].level = 0;
+            info[i].currH = 100;
+            info[i].currImacy = 100;
+        }
+        
+        info[0].stat[0] = 5;
+        info[0].stat[1] = 5;
+        info[0].stat[2] = 5;
+        info[0].stat[3] = 5;
+        info[1].stat[0] = 3;
+        info[1].stat[1] = 7;
+        info[1].stat[2] = 5;
+        info[1].stat[3] = 4;
+        info[2].stat[0] = 7;
+        info[2].stat[1] = 3;
+        info[2].stat[2] = 5;
+        info[2].stat[3] = 6;
+
+        //JSON
+        PetArrayData data = new PetArrayData();
+        data.pets = info;
+        jsonData = JsonUtility.ToJson(data, true);
+        PlayerPrefs.SetString("pet_data", jsonData);
+
+
+
+        SavePetData();
+    }
+
     public void SaveSceneData()
     {
         //씬 데이터 불러오기

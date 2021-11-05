@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "R5CR21C5QBR",
+    "m_SelectedDeviceId": "22e0a51b2d017ece",
     "m_SelectedPackage": {
-        "deviceId": "R5CR21C5QBR",
+        "deviceId": "22e0a51b2d017ece",
         "name": "com.DamagochiMaster.ARDamagochi",
-        "processId": 12259,
+        "processId": 4888,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -60,6 +60,12 @@
             "deviceId": "R5CR21C5QBR",
             "name": "com.DamagochiMaster.ARDamagochi",
             "processId": 12259,
+            "exited": false
+        },
+        {
+            "deviceId": "22e0a51b2d017ece",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 4888,
             "exited": false
         }
     ],

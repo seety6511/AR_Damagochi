@@ -11111,8 +11111,8 @@ MonoBehaviour:
   eatPoint: {fileID: 585208353}
   wanderingRadius: 4
   Target: {x: 89.9, y: 0, z: 3.5}
-  currH: 0
-  currImacy: 0
+  currH: 100
+  currImacy: 100
   Level: 0
   stat:
   - 3
@@ -13493,7 +13493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -136, y: -829}
+  m_AnchoredPosition: {x: -360, y: -624}
   m_SizeDelta: {x: 160, y: 138.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &750764675
@@ -13542,7 +13542,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1498569461}
         m_TargetAssemblyTypeName: KHJ_DataManager, Assembly-CSharp
-        m_MethodName: Save
+        m_MethodName: ResetData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13559,7 +13559,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750764673}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -15429,7 +15429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &907267200
 Transform:
   m_ObjectHideFlags: 0
@@ -34313,17 +34313,29 @@ MonoBehaviour:
   info:
   - isGet: 0
     level: 0
-    stat: []
+    stat:
+    - 0
+    - 0
+    - 0
+    - 0
     currH: 0
     currImacy: 0
   - isGet: 0
     level: 0
-    stat: []
+    stat:
+    - 0
+    - 0
+    - 0
+    - 0
     currH: 0
     currImacy: 0
   - isGet: 0
     level: 0
-    stat: []
+    stat:
+    - 0
+    - 0
+    - 0
+    - 0
     currH: 0
     currImacy: 0
   sceneInfo:
@@ -42805,8 +42817,8 @@ MonoBehaviour:
   eatPoint: {fileID: 1710259792}
   wanderingRadius: 4
   Target: {x: 89.9, y: 0, z: 3.5}
-  currH: 0
-  currImacy: 0
+  currH: 100
+  currImacy: 100
   Level: 0
   stat:
   - 5
