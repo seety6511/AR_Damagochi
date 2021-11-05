@@ -7,13 +7,12 @@ public class SH_Skill_Peck : SH_Skill
     public int maxHit;
     protected override IEnumerator SpecialEffect()
     {
-        owner.SpeedCgange(3f);
+        owner.SpeedChange(3f);
         int totalCount = 0;
         for (int i = 0; i < 3; ++i)
         {
             hitEffect.SetActive(false);
-            yield return new WaitForSeconds(0.1f);
-            owner.attackTarget.Damaged(owner.atk * damage);
+            owner.attackTarget?.Damaged(owner.atk * damage);
             owner.AnimationChange(name);
             hitEffect.SetActive(true);
             totalCount++;
@@ -21,7 +20,9 @@ public class SH_Skill_Peck : SH_Skill
                 i--;
             if (totalCount == maxHit)
                 break;
+            yield return new WaitForSeconds(0.1f);
+
         }
-        owner.SpeedCgange(1f);
+        owner.SpeedChange(1f);
     }
 }

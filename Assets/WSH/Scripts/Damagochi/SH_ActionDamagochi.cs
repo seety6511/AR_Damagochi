@@ -38,8 +38,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     public float atk;
     public float hp;
     public float maxHp;
-    public float critical;
-    public float criticalDamage;
     public float atkSpeed;
     public float currentTurnGage;
     public float maxTurnGage;
@@ -56,6 +54,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
             if (e >= maxExp)
             {
                 e -= maxExp;
+                hp = maxHp;
                 level++;
             }
         }
@@ -71,7 +70,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
 
     public NavMeshAgent agent;
     NavMeshPath path;
-    public SH_DamgochiBattleUI battleUI;
+    public SH_UI_DamagochiBattle battleUI;
 
     public float wanderingRadius;//������ġ���� ����� �ʴ¼��� ����
     public float attackRange;  //������ ������ ����
@@ -80,8 +79,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     public SH_ActionDamagochi attackTarget;
 
     public BattleState battleState;
-
-    public GameObject homePlate;
 
     public SH_HitPoint[] hitPoints;
 
@@ -93,7 +90,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         path = new NavMeshPath();
-        battleUI.gameObject.SetActive(false);
+        //battleUI.gameObject.SetActive(false);
         skillList = GetComponentsInChildren<SH_Skill>();
         hitPoints = GetComponentsInChildren<SH_HitPoint>();
         foreach (var s in skillList)
@@ -107,39 +104,14 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     protected override void OnEnable()
     {
         base.OnEnable();
-        if (!playerble)
-        {
-            //SettingHomePlate();
-        }
+        Init();
         hp = maxHp;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
-        if (!playerble)
-        {
-            //DestroyHomePlate();
-        }
-
     }
-
-    GameObject tempHome;
-    void SettingHomePlate()
-    {
-        tempHome = Instantiate(homePlate);
-        var pos = gameObject.transform.position;
-        pos.y -= 2f;
-        tempHome.transform.position = pos;
-        tempHome.transform.DOMove(gameObject.transform.position, 3f);
-    }
-
-    void DestroyHomePlate()
-    {
-        tempHome.transform.DOMoveY(-3f, 3f);
-        Destroy(tempHome, 3f);
-    }
-
     protected override void Update()
     {
         base.Update();
@@ -161,7 +133,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     {
         hp += value;
         hp = Mathf.Min(maxHp, hp);
-        battleUI.UpdateHpBar();
+        battleUI.HpUpdate();
     }
 
     public void Damaged(float value)
@@ -170,16 +142,18 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
             return;
 
         Debug.Log("Damaged : " + value);
-        SH_BattleLogger.Instance.LogText("Damaged To : " + attackTarget + "_" + value,Color.black);
+        //SH_BattleLogger.Instance.LogText("Damaged To : " + attackTarget + "_" + value, Color.black);
         hp -= value;
 
         hp = Mathf.Max(0, hp);
-        battleUI.UpdateHpBar();
+
+        battleUI.HpUpdate();
         if(hp==0)
         {
             AnimationChange(ActionState.Dead.ToString());
-            SH_BattleLogger.Instance.LogText("Dead : " + name, Color.red);
+            //SH_BattleLogger.Instance.LogText("Dead : " + name, Color.red);
             ActionStateChange(ActionState.Dead);
+            FindObjectOfType<SH_BattleManager2>().BattleEnd();
         }
     }
 
@@ -218,7 +192,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         switch (actionState)
         {
             case ActionState.Idle:
-                Wandering();
+                //Wandering();
                 break;
 
             case ActionState.Walk:
@@ -268,6 +242,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         battleOn = false;
         attackTarget = null;
         agent.enabled = true;
+
     }
 
     void RunningAction()
@@ -297,14 +272,16 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     void BattleInit()
     {
         if (owner != null)
-            owner.pinPointEffect.Off();
+        {
+            if (owner.pinPointEffect != null)
+                owner.pinPointEffect.Off();
+        }
 
         hp = maxHp;
-        agent.ResetPath();
-        battleUI.gameObject.SetActive(true);
         battleState = BattleState.TurnWaiting;
-        transform.DOLookAt(attackTarget.transform.position, 1f);
-
+        //agent.ResetPath();
+        //battleUI.gameObject.SetActive(true);
+        //transform.DOLookAt(attackTarget.transform.position, 1f);
     }
     public void BattleStateAction()
     {
@@ -386,7 +363,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         else
         {
             currentTurnGage += atkSpeed * Time.deltaTime;
-            battleUI.UpdateTurnGage();
+            battleUI.SpeedUpdate();
         }
     }
 

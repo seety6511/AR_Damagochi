@@ -1208,7 +1208,7 @@ Transform:
   m_GameObject: {fileID: 4311995978208798160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4306363936962144704}
   - {fileID: 3562755410708847569}
@@ -1372,14 +1372,12 @@ MonoBehaviour:
   moveSpeed: 0.5
   spawnPoint: {x: 0, y: 0, z: 0}
   playerble: 0
-  animSpeed: 0
+  animSpeed: 1
   portrait: {fileID: 21300000, guid: 2ff13894f44bfce418ea310e20778053, type: 3}
   owner: {fileID: 0}
-  atk: 0
+  atk: 10
   hp: 100
   maxHp: 100
-  critical: 20
-  criticalDamage: 2
   atkSpeed: 1
   currentTurnGage: 0
   maxTurnGage: 10
@@ -1388,12 +1386,12 @@ MonoBehaviour:
   skillList:
   - {fileID: 2392039704802568688}
   - {fileID: 7871835294886018039}
-  - {fileID: 0}
   - {fileID: 3858370609553782909}
+  - {fileID: 8805328424499562514}
   currentActiveSkill: {fileID: 0}
   actionState: 0
   agent: {fileID: 0}
-  battleUI: {fileID: 7721741897825207886}
+  battleUI: {fileID: 0}
   wanderingRadius: 1
   attackRange: 0.5
   scanRadius: 1
@@ -1783,6 +1781,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850de781d52bb0e4a836144d104fa6dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8805328424499562514 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8769942614692339520, guid: 6f1655a34f22f78498c64a54eab6e837, type: 3}
+  m_PrefabInstance: {fileID: 254409241207396178}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e665d5fb31c26d04bb51ed2280dd4a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5400075279850929180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1955,14 +1964,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6510041716368291568, guid: b419ddc6bf4859e42bb1f71d34214305, type: 3}
   m_PrefabInstance: {fileID: 7721741899081313569}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7721741897825207886 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1323477871, guid: b419ddc6bf4859e42bb1f71d34214305, type: 3}
-  m_PrefabInstance: {fileID: 7721741899081313569}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9e5469119d472841b668ffd7d632b9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

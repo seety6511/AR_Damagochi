@@ -5,7 +5,7 @@ using UnityEngine;
 public class SH_BattleManager : MonoBehaviour
 {
     public GameObject ambushedEffect;
-    public SH_Panel_Battle battlePanel;
+    public SH_UI_PlayerSkill battlePanel;
     public SH_Panel_BattleResult battleResultPanel;
 
     public SH_ActionDamagochi challenger;
@@ -70,7 +70,7 @@ public class SH_BattleManager : MonoBehaviour
         if (!playBattle)
             return;
 
-        battlePanel.SkillButtonUpdate();
+        //battlePanel.SkillButtonUpdate();
         challenger.BattleStateAction();
         target.BattleStateAction();
 
@@ -90,8 +90,19 @@ public class SH_BattleManager : MonoBehaviour
         winer.battleState = SH_ActionDamagochi.BattleState.End;
         loser.battleState = SH_ActionDamagochi.BattleState.End;
         playBattle = false;
+        //GetBattleResult();
         battleResultPanel.On(this);
         StartCoroutine("BGMDown");
+    }
+
+    public int winCoin;
+    public int winDia;
+    void GetBattleResult()
+    {
+        winCoin = loser.level * 4;
+        winDia = loser.level;
+        winer.owner.coin += winCoin;
+        winer.owner.dia += winDia;
     }
 
     IEnumerator BGMDown()

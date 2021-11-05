@@ -58735,13 +58735,6 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: SpeedChange
-    data: 3
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 0.29166666
     functionName: Do
     data: Scratch
@@ -58749,7 +58742,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.4166666
+  - time: 1.4583334
     functionName: End
     data: Scratch
     objectReferenceParameter: {fileID: 0}

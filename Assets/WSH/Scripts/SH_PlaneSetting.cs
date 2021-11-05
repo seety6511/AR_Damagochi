@@ -19,11 +19,6 @@ public class SH_PlaneSetting : MonoBehaviour
     public GameObject settingEffect;
     public bool firstSetting;
 
-    private void Start()
-    {
-        
-    }
-
     public void Init()
     {
         arInputManager = FindObjectOfType<SH_ARInputManager>();
@@ -63,8 +58,6 @@ public class SH_PlaneSetting : MonoBehaviour
             pos.y += 0.5f;
             anchor.transform.position = pos; 
         }
-        else
-            anchor.gameObject.SetActive(false);
     }
 
     void ResetPlane()

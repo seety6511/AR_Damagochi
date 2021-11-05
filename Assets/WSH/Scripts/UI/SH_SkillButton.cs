@@ -21,11 +21,12 @@ public class SH_SkillButton : MonoBehaviour
         skillSprite.sprite = s.skillSprite;
         skillName.text = s.name;
         activeButton.onClick.RemoveAllListeners();
-        activeButton.onClick.AddListener(delegate { ButtonActive();  skill.Active(); });
+        activeButton.onClick.AddListener(delegate { ButtonActive(); });
     }
     
     void ButtonActive()
     {
+        skill.Active();
         skillSprite.fillAmount = 0f;
     }
 }
