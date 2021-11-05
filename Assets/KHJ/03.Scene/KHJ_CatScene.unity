@@ -23581,7 +23581,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uCE58\uBA85\uD0C0 \uD655\uB960"
+  m_Text: 
 --- !u!222 &1144039441
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23713,7 +23713,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Main
+          m_StringArgument: Battle
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1151286955

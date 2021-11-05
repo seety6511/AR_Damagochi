@@ -73,9 +73,13 @@ public class KHJ_SceneMngr : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+
     }
     private void Start()
     {
+        KHJ_DataManager.instance.LoadSceneData();
+        KHJ_DataManager.instance.LoadPetData();
+
         print("nowpet :" + nowPet);
         switch (nowPet)
         {

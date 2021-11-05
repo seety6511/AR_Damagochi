@@ -130,5 +130,6 @@ public class DragAndThrow : MonoBehaviour
         thrown = true;
 
         Invoke("Reset", 5.0f);
+        KHJ_DataManager.instance.SavePetData();
     }
 }

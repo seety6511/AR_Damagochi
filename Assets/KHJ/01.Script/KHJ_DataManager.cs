@@ -26,7 +26,6 @@ public struct SceneInfo
     public List<Prize> prize;
     public Pet nowPet;
 }
-
 public class KHJ_DataManager : MonoBehaviour
 {
     KHJ_SceneMngr Mngr;
@@ -39,9 +38,10 @@ public class KHJ_DataManager : MonoBehaviour
         if (instance == null)
             instance = this;
         Mngr = KHJ_SceneMngr.instance;
-        LoadSceneData();
-        LoadPetData();
+
+        DontDestroyOnLoad(gameObject);
     }
+
     public void SaveSceneData()
     {
         //씬 데이터 불러오기
@@ -61,6 +61,11 @@ public class KHJ_DataManager : MonoBehaviour
 
     public void LoadSceneData()
     {
+        if (!PlayerPrefs.HasKey("scene_data"))
+        {
+            SaveSceneData();
+        }
+
         //JSON
         string scene_data = PlayerPrefs.GetString("scene_data");
         SceneInfo data1 = JsonUtility.FromJson<SceneInfo>(scene_data);
@@ -78,7 +83,7 @@ public class KHJ_DataManager : MonoBehaviour
             LootBoxMngr.instance.lootBoxesOrigin[i].prize = sceneInfo.prize[i];
         }
     }
-    void SavePetData()
+    public void SavePetData()
     {
         //펫 데이터 불러오기
         CatManager[] pet = new CatManager[3];
@@ -102,8 +107,13 @@ public class KHJ_DataManager : MonoBehaviour
         PlayerPrefs.SetString("pet_data", jsonData);
     }
 
-    void LoadPetData()
+    public void LoadPetData()
     {
+        if (!PlayerPrefs.HasKey("pet_data"))
+        {
+            SavePetData();
+        }
+
         //JSON
         string pet_data = PlayerPrefs.GetString("pet_data");
         PetArrayData data = JsonUtility.FromJson<PetArrayData>(pet_data);
@@ -123,13 +133,5 @@ public class KHJ_DataManager : MonoBehaviour
             pet[i].currH = info[i].currH;
             pet[i].currImacy = info[i].currImacy;
         }
-    }
-    public void Save()
-    {
-        SavePetData();
-    }
-    public void Load()
-    {
-        LoadPetData();
     }
 }

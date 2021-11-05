@@ -153,7 +153,7 @@ public class CatManager : SH_AnimeDamagochi
         KHJ_SceneMngr.instance.isFoodSet[(int)KHJ_SceneMngr.instance.nowPet] = false;
         currH += 50;
         actionState = ActionState.Idle;
-        KHJ_DataManager.instance.Save();
+        KHJ_DataManager.instance.SavePetData();
         KHJ_DataManager.instance.SaveSceneData();
     }
     public void ResetDestination()

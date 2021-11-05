@@ -126,6 +126,6 @@ public class GIfAnimation : MonoBehaviour
                 }
                 break;
         }
-        KHJ_DataManager.instance.Save();
+        KHJ_DataManager.instance.SavePetData();
     }
 }
