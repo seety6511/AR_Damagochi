@@ -52,9 +52,8 @@ public class DragAndThrow : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             if (lastMouseY < Input.mousePosition.y)
-            {
-                KHJ_SceneMngr.instance.pet.condition = Damagochi.Condition.Happy;
-                KHJ_SceneMngr.instance.currImacy += 12;
+            {                
+                KHJ_SceneMngr.instance.pet.currImacy += 35;
                 ThrowBall(Input.mousePosition);
             }
         }

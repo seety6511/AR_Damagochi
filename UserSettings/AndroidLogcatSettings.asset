@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "22e0a51b2d017ece",
         "name": "com.DamagochiMaster.ARDamagochi",
-        "processId": 3333,
+        "processId": 4119,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -66,6 +66,42 @@
             "deviceId": "22e0a51b2d017ece",
             "name": "com.DamagochiMaster.ARDamagochi",
             "processId": 3333,
+            "exited": false
+        },
+        {
+            "deviceId": "22e0a51b2d017ece",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 17808,
+            "exited": false
+        },
+        {
+            "deviceId": "22e0a51b2d017ece",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 21785,
+            "exited": false
+        },
+        {
+            "deviceId": "22e0a51b2d017ece",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 26838,
+            "exited": false
+        },
+        {
+            "deviceId": "22e0a51b2d017ece",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 32164,
+            "exited": false
+        },
+        {
+            "deviceId": "22e0a51b2d017ece",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 2233,
+            "exited": false
+        },
+        {
+            "deviceId": "22e0a51b2d017ece",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 4119,
             "exited": false
         }
     ],

@@ -16,6 +16,7 @@ public class KHJ_SceneMngr : MonoBehaviour
 {
     public static KHJ_SceneMngr instance;
     public CatManager pet;
+    public KHJ_InfoMngr _InfoMngr;
 
     //Æê Á¾·ù
     public Pet nowPet;
@@ -51,7 +52,7 @@ public class KHJ_SceneMngr : MonoBehaviour
     public bool isBall;
     public GameObject[] Ball;
     public GameObject shootPosition;
-    public GameObject PlayUI;
+    public GameObject StopPlayUI;
 
     //¹ä¸Ô±â
     public bool isEat;
@@ -75,19 +76,43 @@ public class KHJ_SceneMngr : MonoBehaviour
     }
     private void Start()
     {
-        pet = pet_cat.GetComponent<CatManager>();
+        print("nowpet :" + nowPet);
+        switch (nowPet)
+        {
+            case Pet.cat:
+                pet = pet_cat.GetComponent<CatManager>();
+                break;
+            case Pet.bear:
+                print("bear");
+                pet = pet_bear.GetComponent<CatManager>();
+                break;
+            case Pet.dove:
+                pet = pet_dove.GetComponent<CatManager>();
+                break;
+        }
+        SetPet((int)nowPet);
         currH = pet.currH;
         currImacy = pet.currImacy;
         SetDialogue();
+        _InfoMngr.SetInfo();
+    }
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
     void Update()
-    {
+    {        
         currH = pet.currH;
         currImacy = pet.currImacy;
         goldUI.text = gold.ToString();
         diaUI.text = dia.ToString();
         ticketNum.text = Ticket.ToString();
         HungryBar.fillAmount = currH / maxH;
+        IntimacyBar.fillAmount = currImacy / maxH;
 
         Hungry();
         ConditionSet();
@@ -100,6 +125,10 @@ public class KHJ_SceneMngr : MonoBehaviour
             {
                 return;
             }
+
+            if (IsPointerOverUIObject())
+                return;
+
             //ÅÍÄ¡ »óÈ£ÀÛ¿ë
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -113,7 +142,9 @@ public class KHJ_SceneMngr : MonoBehaviour
                 if (hit.transform.gameObject.name == "cat-ball" && !isBall)
                 {
                     //°ø³îÀÌ
-                    PlayUI.SetActive(!PlayUI.activeSelf);
+                    isBallChange();
+                    Camera.main.GetComponent<KHJ_CamMngr>().BallReset();
+                    StopPlayUI.SetActive(true);
                 }
                 if (hit.transform.gameObject.name == "Cat" || hit.transform.gameObject.name == "Bear" || hit.transform.gameObject.name == "Dove")
                 {
@@ -225,7 +256,7 @@ public class KHJ_SceneMngr : MonoBehaviour
         if (currImacy >= 80)
         {
             pet.condition = Damagochi.Condition.Happy;
-            IntimacyBar.color = Color.green;
+            IntimacyBar.color = Color.blue;
         }
         else if (currImacy < 80 && currImacy >= 60)
         {
@@ -235,12 +266,12 @@ public class KHJ_SceneMngr : MonoBehaviour
         else if (currImacy < 60 && currImacy >= 40)
         {
             pet.condition = Damagochi.Condition.Normal;
-            IntimacyBar.color = Color.green;
+            IntimacyBar.color = Color.yellow;
         }
         else if (currImacy < 40 && currImacy >= 20)
         {
             pet.condition = Damagochi.Condition.Bad;
-            IntimacyBar.color = Color.yellow;
+            IntimacyBar.color = new Color(1,0.46f,0.008f);
         }
         else
         {
@@ -256,7 +287,7 @@ public class KHJ_SceneMngr : MonoBehaviour
         if (currH >= 80)
         {
             pet.hungryState = Damagochi.HungryState.Full;
-            HungryBar.color = Color.green;
+            HungryBar.color = Color.blue;
         }
         else if(currH<80 && currH >= 60)
         {
@@ -266,12 +297,12 @@ public class KHJ_SceneMngr : MonoBehaviour
         else if(currH<60 && currH>=40)
         {
             pet.hungryState = Damagochi.HungryState.Normal;
-            HungryBar.color = Color.green;
+            HungryBar.color = Color.yellow;
         }
         else if(currH<40 && currH >= 20)
         {
             pet.hungryState = Damagochi.HungryState.Little;
-            HungryBar.color = Color.yellow;
+            IntimacyBar.color = new Color(1,0.46f,0.008f);
         }
         else
         {

@@ -43,8 +43,6 @@ public class CatManager : SH_AnimeDamagochi
         agent.speed = moveSpeed;
         path = new NavMeshPath();
 
-        currH = 100;
-        currImacy = 100;
     }
     protected override void Update()
     {
@@ -155,6 +153,8 @@ public class CatManager : SH_AnimeDamagochi
         KHJ_SceneMngr.instance.isFoodSet[(int)KHJ_SceneMngr.instance.nowPet] = false;
         currH += 50;
         actionState = ActionState.Idle;
+        KHJ_DataManager.instance.Save();
+        KHJ_DataManager.instance.SaveSceneData();
     }
     public void ResetDestination()
     {

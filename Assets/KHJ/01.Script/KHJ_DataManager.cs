@@ -16,7 +16,7 @@ public struct PetArrayData
 {
     public PetInfo[] pets;
 }
-
+[System.Serializable]
 public struct SceneInfo
 {
     public int gold;
@@ -38,12 +38,47 @@ public class KHJ_DataManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-    }
-    private void Start()
-    {
         Mngr = KHJ_SceneMngr.instance;
+        LoadSceneData();
+        LoadPetData();
     }
-    void SaveData()
+    public void SaveSceneData()
+    {
+        //¾À µ¥ÀÌÅÍ ºÒ·¯¿À±â
+        sceneInfo.gold = Mngr.gold;
+        sceneInfo.dia = Mngr.dia;
+        sceneInfo.ticket = Mngr.Ticket;
+        sceneInfo.nowPet = Mngr.nowPet;
+        for(int i = 0; i < LootBoxMngr.instance.lootBoxesOrigin.Count; i++)
+        {
+            sceneInfo.lootbox[i] = LootBoxMngr.instance.lootBoxesOrigin[i].Finish;
+            sceneInfo.prize[i] = LootBoxMngr.instance.lootBoxesOrigin[i].prize;
+        }
+        //JSON
+        string jsonData = JsonUtility.ToJson(sceneInfo, true);
+        PlayerPrefs.SetString("scene_data", jsonData);
+    }
+
+    public void LoadSceneData()
+    {
+        //JSON
+        string scene_data = PlayerPrefs.GetString("scene_data");
+        SceneInfo data1 = JsonUtility.FromJson<SceneInfo>(scene_data);
+        sceneInfo = data1;
+
+        //¾Àµ¥ÀÌÅÍ
+        Mngr.gold = sceneInfo.gold;
+        Mngr.dia = sceneInfo.dia;
+        Mngr.Ticket = sceneInfo.ticket;
+        Mngr.nowPet = sceneInfo.nowPet;
+        for (int i = 0; i < LootBoxMngr.instance.lootBoxesOrigin.Count; i++)
+        {
+            LootBoxMngr.instance.lootBoxesOrigin[i].Finish = sceneInfo.lootbox[i];
+            LootBoxMngr.instance.lootBoxesOrigin[i].OnDisappear = sceneInfo.lootbox[i];
+            LootBoxMngr.instance.lootBoxesOrigin[i].prize = sceneInfo.prize[i];
+        }
+    }
+    void SavePetData()
     {
         //Æê µ¥ÀÌÅÍ ºÒ·¯¿À±â
         CatManager[] pet = new CatManager[3];
@@ -65,24 +100,9 @@ public class KHJ_DataManager : MonoBehaviour
         data.pets = info;
         string jsonData = JsonUtility.ToJson(data, true);
         PlayerPrefs.SetString("pet_data", jsonData);
-
-
-        //¾À µ¥ÀÌÅÍ ºÒ·¯¿À±â
-        sceneInfo.gold = Mngr.gold;
-        sceneInfo.dia = Mngr.dia;
-        sceneInfo.ticket = Mngr.Ticket;
-        sceneInfo.nowPet = Mngr.nowPet;
-        for(int i = 0; i < LootBoxMngr.instance.lootBoxesOrigin.Count; i++)
-        {
-            sceneInfo.lootbox[i] = LootBoxMngr.instance.lootBoxesOrigin[i].Finish;
-            sceneInfo.prize[i] = LootBoxMngr.instance.lootBoxesOrigin[i].prize;
-        }
-        //JSON
-        jsonData = JsonUtility.ToJson(sceneInfo, true);
-        PlayerPrefs.SetString("scene_data", jsonData);
     }
 
-    void LoadData()
+    void LoadPetData()
     {
         //JSON
         string pet_data = PlayerPrefs.GetString("pet_data");
@@ -103,31 +123,13 @@ public class KHJ_DataManager : MonoBehaviour
             pet[i].currH = info[i].currH;
             pet[i].currImacy = info[i].currImacy;
         }
-
-        //JSON
-        string scene_data = PlayerPrefs.GetString("scene_data");
-        SceneInfo data1 = JsonUtility.FromJson<SceneInfo>(scene_data);
-        sceneInfo = data1;
-
-        //¾Àµ¥ÀÌÅÍ
-        Mngr.gold = sceneInfo.gold;
-        Mngr.dia = sceneInfo.dia;
-        Mngr.Ticket = sceneInfo.ticket;
-        Mngr.nowPet = sceneInfo.nowPet;
-        for (int i = 0; i < LootBoxMngr.instance.lootBoxesOrigin.Count; i++)
-        {
-            LootBoxMngr.instance.lootBoxesOrigin[i].Finish = sceneInfo.lootbox[i];
-            LootBoxMngr.instance.lootBoxesOrigin[i].OnDisappear = sceneInfo.lootbox[i];
-            LootBoxMngr.instance.lootBoxesOrigin[i].prize = sceneInfo.prize[i];
-        }
     }
-
     public void Save()
     {
-        SaveData();
+        SavePetData();
     }
     public void Load()
     {
-        LoadData();
+        LoadPetData();
     }
 }

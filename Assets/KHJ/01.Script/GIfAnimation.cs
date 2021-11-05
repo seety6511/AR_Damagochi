@@ -114,7 +114,7 @@ public class GIfAnimation : MonoBehaviour
                 }
                 break;
             case 2:
-                if (petButtons[0].activeSelf)
+                if (petButtons[2].activeSelf)
                 {
                     KHJ_SceneMngr.instance.pet_dove.GetComponent<CatManager>().Level++;
                     resultTxt.text = "구구 레벨업";
@@ -126,5 +126,6 @@ public class GIfAnimation : MonoBehaviour
                 }
                 break;
         }
+        KHJ_DataManager.instance.Save();
     }
 }
