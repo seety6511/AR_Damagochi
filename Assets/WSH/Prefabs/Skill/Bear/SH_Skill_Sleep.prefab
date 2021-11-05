@@ -50,9 +50,12 @@ MonoBehaviour:
   timer: 0
   canActive: 0
   damage: 2
+  info: "\uD55C\uC228 \uC790\uACE0 \uC77C\uC5B4\uB0A9\uB2C8\uB2E4."
   skillSprite: {fileID: 21300000, guid: f4e91210802c742e6acff3a55e4f0d53, type: 3}
   activeEffect: {fileID: 5482201762220656232}
   hitEffect: {fileID: 0}
+  activeSound: {fileID: 0}
+  hitSound: {fileID: 0}
 --- !u!1001 &5481376402415718068
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -85,7 +85,7 @@ public class SH_BattleManager : MonoBehaviour
     public SH_ActionDamagochi loser;
     void BattleEnd()
     {
-        winer.exp = loser.deadExp;
+        //winer.exp = loser.deadExp;
         Debug.Log(winer.name + " Get " + loser.deadExp +" Exp");
         winer.battleState = SH_ActionDamagochi.BattleState.End;
         loser.battleState = SH_ActionDamagochi.BattleState.End;

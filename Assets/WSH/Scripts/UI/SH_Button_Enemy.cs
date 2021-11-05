@@ -31,6 +31,8 @@ public class SH_Button_Enemy : MonoBehaviour
 
     void BattleStart()
     {
+        if (FindObjectOfType<SH_DamagochiTrainer>().damagochi.hp == 0)
+            return;
         FindObjectOfType<SH_BattleManager2>().BattleStart(enemy);
     }
 }
