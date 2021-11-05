@@ -7,6 +7,8 @@ public class SH_BattleMap : MonoBehaviour
     public GameObject playerPlat;
     public GameObject enemyPlat;
 
+    public GameObject[] maps;
+
     public void On(SH_ActionDamagochi player, SH_ActionDamagochi enemy)
     {
         gameObject.SetActive(true);
@@ -17,6 +19,14 @@ public class SH_BattleMap : MonoBehaviour
         enemy.gameObject.transform.position = enemyPlat.transform.position;
         player.gameObject.transform.LookAt(enemy.transform);
         enemy.gameObject.transform.LookAt(player.transform);
-        
+
+        foreach (var m in maps)
+            m.SetActive(false);
+        GetRandomMap().SetActive(true);
+    }
+
+    GameObject GetRandomMap()
+    {
+        return maps[Random.Range(0, maps.Length)];
     }
 }

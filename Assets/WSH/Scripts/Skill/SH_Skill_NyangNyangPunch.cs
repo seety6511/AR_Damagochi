@@ -13,7 +13,7 @@ public class SH_Skill_NyangNyangPunch : SH_Skill
             yield return new WaitForSeconds(0.1f);
             owner.attackTarget.Damaged(owner.atk * damage);
             owner.AnimationChange(name);
-            owner.attackTarget.TurnGageChange (turnGageDamage);
+            owner.attackTarget.TurnGageChange(turnGageDamage);
         }
         owner.SpeedChange(1f);
     }

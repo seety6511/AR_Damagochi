@@ -51,6 +51,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         set
         {
             e += value;
+
             if (e >= maxExp)
             {
                 e -= maxExp;
@@ -91,6 +92,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         agent.speed = moveSpeed;
         path = new NavMeshPath();
         //battleUI.gameObject.SetActive(false);
+        exp = 0;
         skillList = GetComponentsInChildren<SH_Skill>();
         hitPoints = GetComponentsInChildren<SH_HitPoint>();
         foreach (var s in skillList)
@@ -164,6 +166,8 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
             currentTurnGage = maxTurnGage;
         if (currentTurnGage < 0f)
             currentTurnGage = 0f;
+
+        battleUI.SpeedUpdate();
     }
 
     public override void End(string key)
@@ -185,8 +189,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         MoveTo(pos);
     }
 
-    float deadTimer;
-    public float deadSinkTime = 3f;
     void ActionStateMachine()
     {
         switch (actionState)
@@ -218,15 +220,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
                 break;
 
             case ActionState.Dead:
-                deadTimer += Time.deltaTime;
-                battleUI.gameObject.SetActive(false);
-                if (deadTimer >= deadSinkTime)
-                {
-                    transform.DOMoveY(-10f, 3f).OnComplete(delegate { gameObject.SetActive(false); });
-                    deadTimer = 0f;
-                    ActionStateChange(ActionState.Idle);
-                    attackTarget = null;
-                }
                 break;
         }
     }
@@ -234,7 +227,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     void Init()
     {
         agent.enabled = false;
-        deadTimer = 0f;
         hp = maxHp;
         currentTurnGage = 0f;
         ActionStateChange(ActionState.Idle);
@@ -242,7 +234,6 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
         battleOn = false;
         attackTarget = null;
         agent.enabled = true;
-
     }
 
     void RunningAction()

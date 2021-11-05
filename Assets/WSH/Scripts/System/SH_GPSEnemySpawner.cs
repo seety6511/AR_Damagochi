@@ -23,6 +23,14 @@ public class SH_GPSEnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        Spawn();
+    }
+
+    void Spawn()
+    {
+        if (!gm.mapOn)
+            return;
+
         if (enableEnemyMarkers.Count == maxEnemy)
             return;
 
@@ -39,20 +47,21 @@ public class SH_GPSEnemySpawner : MonoBehaviour
         enemy.level = Random.Range(1, trainer.damagochi.level + 6);
         marker.SetEnemy(enemy);
         enableEnemyMarkers.Add(marker);
-        
+
         marker.transform.position = GetRandomPos();
         spawnTimer = 0f;
     }
 
     public void ResetEnemy()
     {
-        for (int i = 0; i < enableEnemyMarkers.Count; ++i)
+        var count = enableEnemyMarkers.Count;
+        for (int i = 0; i < count; ++i)
         {
-            var e = enableEnemyMarkers[i];
+            var e = enableEnemyMarkers[0];
+            enableEnemyMarkers.RemoveAt(0);
             if (e.enemy != null)
                 Destroy(e.enemy.gameObject);
-            if (enableEnemyMarkers[0] != null)
-                Destroy(enableEnemyMarkers[0].gameObject);
+            Destroy(e.gameObject);
         }
 
         enableEnemyMarkers.Clear();

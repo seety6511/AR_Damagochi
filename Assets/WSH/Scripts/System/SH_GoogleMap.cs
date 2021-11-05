@@ -42,11 +42,14 @@ public class SH_GoogleMap : MonoBehaviour
         StartCoroutine(LocationUpdate());
         playerMarker.transform.position = rawImage.transform.position;
     }
+
+    public bool mapOn;
     IEnumerator LocationUpdate()
     {
         //if (!Input.location.isEnabledByUser)
         //    yield break;
 
+        mapOn = false;
         Input.location.Start();
 
         if (Input.location.status == LocationServiceStatus.Failed)
@@ -59,11 +62,12 @@ public class SH_GoogleMap : MonoBehaviour
             longitude = Input.location.lastData.longitude;
             currPlayerPos = new Vector3(latitude, longitude);
             playerMoveDir = prevPlayerPos - currPlayerPos;
-            EnemyMarkerUpdate();
+            //EnemyMarkerUpdate();
 
             Maps(rawImage, latitude, longitude, curZoom, 2, MapType.Terrain);
-            gd.DebugUpdate(this);
+            //gd.DebugUpdate(this);
             yield return new WaitForSeconds(3f);
+            mapOn = true;
         }
 
         Input.location.Stop();
@@ -72,16 +76,17 @@ public class SH_GoogleMap : MonoBehaviour
     List<RaycastResult> results = new List<RaycastResult>();
     void EnemyMarkerUpdate()
     {
-        foreach(var i in es.enableEnemyMarkers)
+        for(int i = 0; i < es.enableEnemyMarkers.Count; ++i)
         {
-            i.transform.position += playerMoveDir;
+            var temp = es.enableEnemyMarkers[0];
+            temp.transform.position += playerMoveDir;
             PointerEventData ped = new PointerEventData(null);
-            ped.position = i.transform.position;
+            ped.position = temp.transform.position;
             results.Clear();
             gr.Raycast(ped, results);
 
             bool hasOn = false;
-            foreach(var r in results)
+            foreach (var r in results)
             {
                 if (r.gameObject.CompareTag("Map"))
                 {
@@ -91,9 +96,40 @@ public class SH_GoogleMap : MonoBehaviour
             }
 
             if (!hasOn)
-                i.gameObject.SetActive(false);
-            
+            {
+                if (temp.enemy.actionState != SH_ActionDamagochi.ActionState.Battle)
+                {
+                    Destroy(temp.enemy.gameObject);
+                    Destroy(temp.gameObject);
+                    es.enableEnemyMarkers.RemoveAt(0);
+                }
+            }
         }
+        //foreach(var i in es.enableEnemyMarkers)
+        //{
+        //    i.transform.position += playerMoveDir;
+        //    PointerEventData ped = new PointerEventData(null);
+        //    ped.position = i.transform.position;
+        //    results.Clear();
+        //    gr.Raycast(ped, results);
+
+        //    bool hasOn = false;
+        //    foreach(var r in results)
+        //    {
+        //        if (r.gameObject.CompareTag("Map"))
+        //        {
+        //            hasOn = true;
+        //            break;
+        //        }
+        //    }
+
+        //    if (!hasOn)
+        //    {
+        //        Destroy(i.enemy.gameObject);
+        //        Destroy(i);
+        //    }
+            
+        //}
     }
 
     public void Zoom(bool pm)

@@ -80,8 +80,13 @@ public class SH_BattleManager2 : MonoBehaviour
 
     IEnumerator BattleResult()
     {
-        battleResult.On(this);
+        trainer.statUI.StatUpdate(trainer.damagochi);
+
+        if (loser != trainer.damagochi)
+            battleResult.On(this);
+
         yield return new WaitForSeconds(5f);
+        trainer.damagochi.ActionStateChange(SH_ActionDamagochi.ActionState.Idle);
         nonBattleUI.transform.DOLocalMoveY(0f, 3f);
         battleUI.SetActive(false);
         sm.StopBGM();
