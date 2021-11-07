@@ -74,6 +74,7 @@ public class KHJ_SceneMngr : MonoBehaviour
         if (instance == null)
             instance = this;
 
+        //DontDestroyOnLoad(gameObject);
     }
     private void Start()
     {

@@ -16,10 +16,9 @@ public class KHJ_InfoMngr : MonoBehaviour
     {
         portrait.sprite = sprites[(int)KHJ_SceneMngr.instance.nowPet];
         petname.text = names[(int)KHJ_SceneMngr.instance.nowPet];
-        for (int i = 0; i < stats.Length; i++)
-        {
-            stats[i].text = (KHJ_SceneMngr.instance.pet.stat[i] + KHJ_SceneMngr.instance.pet.Level * 2).ToString();
-        }
+        stats[0].text = (KHJ_SceneMngr.instance.pet.hp + KHJ_SceneMngr.instance.pet.Level * 2).ToString();
+        stats[1].text = (KHJ_SceneMngr.instance.pet.atk + KHJ_SceneMngr.instance.pet.Level * 2).ToString();
+        stats[2].text = (KHJ_SceneMngr.instance.pet.speed + KHJ_SceneMngr.instance.pet.Level * 2).ToString();
         level.text = "Lv." + (KHJ_SceneMngr.instance.pet.Level + 1).ToString();
     }
 }

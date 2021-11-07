@@ -33,6 +33,7 @@ public class SH_ActionDamagochi : SH_AnimeDamagochi
     #endregion
 
     public SH_Player owner;
+    public bool unlock;
 
     //���� ��Ʋ�� ����
     public float atk;
