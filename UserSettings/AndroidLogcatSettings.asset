@@ -1,49 +1,13 @@
 {
     "m_SelectedDeviceId": "R5CR21C5QBR",
     "m_SelectedPackage": {
-        "deviceId": "R5CR21C5QBR",
-        "name": "com.DamagochiMaster.ARDamagochi",
-        "processId": 12259,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 28426,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 31249,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 23393,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.android.chrome",
-            "processId": 31237,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.microsoft.launcher",
-            "processId": 24990,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR21C5QBR",
-            "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 31518,
-            "exited": true
-        },
         {
             "deviceId": "R5CR21C5QBR",
             "name": "com.DamagochiMaster.ARDamagochi",
@@ -54,12 +18,30 @@
             "deviceId": "R5CR21C5QBR",
             "name": "com.DamagochiMaster.ARDamagochi",
             "processId": 7149,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "R5CR21C5QBR",
             "name": "com.DamagochiMaster.ARDamagochi",
             "processId": 12259,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.android.settings",
+            "processId": 31936,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 27263,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.microsoft.launcher",
+            "processId": 14801,
             "exited": false
         }
     ],

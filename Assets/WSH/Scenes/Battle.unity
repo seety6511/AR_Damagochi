@@ -6706,8 +6706,8 @@ MonoBehaviour:
   damagochi: {fileID: 0}
   damagoList:
   - {fileID: 221371240}
-  - {fileID: 769885725}
   - {fileID: 1523252779}
+  - {fileID: 769885725}
   statUI: {fileID: 1516130866}
   gold: 0
   dia: 0
