@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/FREE Food Pack.meta
+guid: 016d51f7d0317324d8a65962aa4c376f
+folderAsset: yes
+DefaultImporter:
+=======
 guid: ae6423509f5c2714e994b7e184c2101b
 PrefabImporter:
+>>>>>>> main:Assets/WSH/Prefabs/UI/Info.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

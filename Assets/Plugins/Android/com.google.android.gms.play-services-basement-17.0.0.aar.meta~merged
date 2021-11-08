@@ -1,0 +1,42 @@
+fileFormatVersion: 2
+<<<<<<< HEAD
+guid: eda8a6c482a7f3d4abf758322c3f7d52
+=======
+<<<<<<< HEAD:Assets/Plugins/Android/androidx.versionedparcelable.versionedparcelable-1.0.0.aar.meta
+guid: 712682eefefeab74cbdbbcbdb5c399a7
+=======
+guid: d56eb42e67b15204b865c4a82a0cbb33
+>>>>>>> main:Assets/Plugins/Android/com.google.android.gms.play-services-basement-17.0.0.aar.meta
+>>>>>>> main
+labels:
+- gpsr
+PluginImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  iconMap: {}
+  executionOrder: {}
+  defineConstraints: []
+  isPreloaded: 0
+  isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 1
+  platformData:
+  - first:
+      Android: Android
+    second:
+      enabled: 1
+      settings: {}
+  - first:
+      Any: 
+    second:
+      enabled: 0
+      settings: {}
+  - first:
+      Editor: Editor
+    second:
+      enabled: 0
+      settings:
+        DefaultValueInitialized: true
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

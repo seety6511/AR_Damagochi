@@ -42,6 +42,10 @@ public class KHJ_DataManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        else
+        {
+            Destroy(this.gameObject);
+        }
         Mngr = KHJ_SceneMngr.instance;
 
     }
@@ -55,6 +59,49 @@ public class KHJ_DataManager : MonoBehaviour
         data.pets = info;
         string jsonData2 = JsonUtility.ToJson(data, true);
         PlayerPrefs.SetString("pet_data", jsonData2);
+    }
+
+    public void ResetData()
+    {
+        sceneInfo = new SceneInfo();
+        sceneInfo.gold = 200;
+        sceneInfo.dia = 200;
+        sceneInfo.ticket = 10;
+        sceneInfo.nowPet = Pet.cat;
+        //JSON
+        string jsonData = JsonUtility.ToJson(sceneInfo, true);
+        PlayerPrefs.SetString("scene_data", jsonData);
+        //SaveSceneData();
+
+        info = new PetInfo[3];
+        info[0].isGet = true;
+        info[1].isGet = false;
+        info[2].isGet = false;
+        for (int i = 0; i < info.Length; i++)
+        {
+            info[i].level = 0;
+            info[i].currH = 100;
+            info[i].currImacy = 100;
+        }
+
+        info[0].atk = 5;
+        info[0].hp = 5;
+        info[0].speed = 5;
+
+        info[1].atk = 3;
+        info[1].hp = 7;
+        info[1].speed = 5;
+
+        info[2].atk = 7;
+        info[2].hp = 3;
+        info[2].speed = 5;
+
+        //JSON
+        PetArrayData data = new PetArrayData();
+        data.pets = info;
+        jsonData = JsonUtility.ToJson(data, true);
+        PlayerPrefs.SetString("pet_data", jsonData);
+        SavePetData();
     }
 
     public void SaveSceneData()
