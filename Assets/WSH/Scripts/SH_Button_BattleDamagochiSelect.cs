@@ -9,7 +9,7 @@ public class SH_Button_BattleDamagochiSelect : MonoBehaviour
     public Button select;
     public Image portrait;
     public Text level;
-    public Text name;
+    public new Text name;
     public Slider hp;
     public Slider exp;
 

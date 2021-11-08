@@ -24,8 +24,8 @@ public class SH_Panel_MyStatus : MonoBehaviour
 
         damagoName.text = target.name;
         level.text = target.level.ToString();
-        exp.text = target.exp+ " / " + target.maxExp;
-        hp.text = target.hp + " / " + target.maxHp;
+        exp.text = Mathf.Round(target.exp)+ " / " + target.maxExp;
+        hp.text = Mathf.Round(target.hp) + " / " + target.maxHp;
         atk.text = target.atk.ToString();
         atkSpeed.text = target.atkSpeed.ToString();
         portrait.sprite = target.portrait;

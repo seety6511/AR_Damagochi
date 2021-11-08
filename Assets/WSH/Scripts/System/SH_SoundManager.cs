@@ -11,6 +11,7 @@ public class SH_SoundManager : MonoBehaviour
 
     public void PlayBattleBGM()
     {
+        bgmPlayer.volume = 1f;
         var bgm = bgmList[Random.Range(0, bgmList.Length)];
         bgmPlayer.clip = bgm;
         bgmPlayer.loop = true;

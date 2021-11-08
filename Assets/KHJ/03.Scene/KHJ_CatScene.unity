@@ -10954,9 +10954,9 @@ MonoBehaviour:
   currH: 0
   currImacy: 0
   Level: 0
-  hp: 0
-  atk: 0
-  speed: 0
+  hp: 7
+  atk: 7
+  speed: 3
   stats:
   - {fileID: 125523530}
   - {fileID: 1370278184}
@@ -42249,9 +42249,9 @@ MonoBehaviour:
   currH: 0
   currImacy: 0
   Level: 0
-  hp: 0
-  atk: 0
-  speed: 0
+  hp: 6
+  atk: 6
+  speed: 6
   stats:
   - {fileID: 1096377878}
   - {fileID: 2003588907}
@@ -47183,9 +47183,9 @@ MonoBehaviour:
   currH: 100
   currImacy: 100
   Level: 0
-  hp: 0
-  atk: 0
-  speed: 0
+  hp: 3
+  atk: 7
+  speed: 7
   stats:
   - {fileID: 1349506001}
   - {fileID: 1614919772}

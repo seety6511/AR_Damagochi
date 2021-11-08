@@ -38,10 +38,12 @@ public class KHJ_DataManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         Mngr = KHJ_SceneMngr.instance;
 
-        DontDestroyOnLoad(gameObject);
     }
 
     public void SaveBattleSceneData()

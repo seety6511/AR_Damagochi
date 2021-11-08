@@ -45,6 +45,27 @@ public class SH_GPSEnemySpawner : MonoBehaviour
         var enemy = GetRandomEnemy();
 
         enemy.level = Random.Range(1, trainer.damagochi.level + 6);
+        var statData=  FindObjectOfType<SH_DataLoader>().dm.info;
+
+        int i = 0;
+        switch (enemy.name)
+        {
+            case "Cat":
+                i = 0;
+                break;
+            case "Bear":
+                i = 1;
+                break;
+            case "Dove":
+                i = 2;
+                break;
+        }
+        enemy.maxHp = statData[i].hp * enemy.level * 5;
+        enemy.hp = statData[i].hp * enemy.level * 5;
+        enemy.atk = statData[i].atk * enemy.level;
+        enemy.atkSpeed = statData[i].speed * enemy.level;
+        enemy.maxTurnGage = enemy.level * 20;
+    
         marker.SetEnemy(enemy);
         enableEnemyMarkers.Add(marker);
 
