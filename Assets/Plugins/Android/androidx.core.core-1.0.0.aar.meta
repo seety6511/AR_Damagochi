@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 4684741df7a5f8a45be057633c5c816f
+<<<<<<< HEAD:Assets/Plugins/Android/com.google.android.gms.play-services-basement-17.0.0.aar.meta
+guid: eda8a6c482a7f3d4abf758322c3f7d52
+=======
+guid: 3269a088e0023c34b920c017873bc8af
+>>>>>>> main:Assets/Plugins/Android/androidx.core.core-1.0.0.aar.meta
 labels:
 - gpsr
 PluginImporter:

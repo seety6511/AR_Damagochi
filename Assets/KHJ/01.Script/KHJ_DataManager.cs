@@ -7,7 +7,9 @@ public struct PetInfo
 {
     public bool isGet;  //획득한 펫인지
     public int level;
-    public float[] stat; //공격력, Hp, 치명타, 공격속도
+    public float hp;
+    public float atk;
+    public float speed;
     public float currH;
     public float currImacy;
 }
@@ -36,10 +38,23 @@ public class KHJ_DataManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         Mngr = KHJ_SceneMngr.instance;
 
-        DontDestroyOnLoad(gameObject);
+    }
+
+    public void SaveBattleSceneData()
+    {
+        string jsonData = JsonUtility.ToJson(sceneInfo, true);
+        PlayerPrefs.SetString("scene_data", jsonData);
+
+        PetArrayData data = new PetArrayData();
+        data.pets = info;
+        string jsonData2 = JsonUtility.ToJson(data, true);
+        PlayerPrefs.SetString("pet_data", jsonData2);
     }
 
     public void ResetData()
@@ -111,7 +126,7 @@ public class KHJ_DataManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("scene_data"))
         {
-            SaveSceneData();
+            SaveBattleSceneData();
         }
 
         //JSON
@@ -133,6 +148,8 @@ public class KHJ_DataManager : MonoBehaviour
     }
     public void SavePetData()
     {
+        info = new PetInfo[3];
+
         //펫 데이터 불러오기
         CatManager[] pet = new CatManager[3];
         pet[0] = Mngr.pet_cat.GetComponent<CatManager>();
@@ -143,7 +160,9 @@ public class KHJ_DataManager : MonoBehaviour
         {
             info[i].isGet = Mngr.petButtons[i].activeSelf;
             info[i].level = pet[i].Level;
-            info[i].stat = pet[i].stat;
+            info[i].hp = pet[i].hp;
+            info[i].atk = pet[i].atk;
+            info[i].speed = pet[i].speed;
             info[i].currH = pet[i].currH;
             info[i].currImacy = pet[i].currImacy;
         }
@@ -159,8 +178,10 @@ public class KHJ_DataManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("pet_data"))
         {
-            SavePetData();
+            SaveBattleSceneData();
         }
+
+        Mngr = FindObjectOfType<KHJ_SceneMngr>();
 
         //JSON
         string pet_data = PlayerPrefs.GetString("pet_data");
@@ -177,7 +198,9 @@ public class KHJ_DataManager : MonoBehaviour
         {
             Mngr.petButtons[i].SetActive(info[i].isGet);
             pet[i].Level = info[i].level;
-            pet[i].stat = info[i].stat;
+            pet[i].hp = info[i].hp;
+            pet[i].atk = info[i].atk;
+            pet[i].speed = info[i].speed;
             pet[i].currH = info[i].currH;
             pet[i].currImacy = info[i].currImacy;
         }

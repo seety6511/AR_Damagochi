@@ -19,7 +19,9 @@ public class CatManager : SH_AnimeDamagochi
     public float currImacy;
 
     public int Level;
-    public float[] stat; //공격력, Hp, 치명타, 공격속도
+    public float hp;
+    public float atk;
+    public float speed;
     public Text[] stats;
     public Text leveltxt;
 
@@ -342,9 +344,8 @@ public class CatManager : SH_AnimeDamagochi
     {
         leveltxt.text = "Lv." + (Level+1).ToString();
 
-        for (int i = 0; i < stats.Length; i++)
-        {
-            stats[i].text = (stat[i] + Level*2 ).ToString();
-        }
+        stats[0].text = (hp + Level * 2).ToString();
+        stats[1].text = (atk + Level * 2).ToString();
+        stats[2].text = (speed + Level * 2).ToString();
     }
 }

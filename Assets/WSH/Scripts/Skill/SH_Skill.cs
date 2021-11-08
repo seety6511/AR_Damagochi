@@ -32,7 +32,11 @@ public class SH_Skill : MonoBehaviour
         if (hitEffect != null)
         {
             if (owner.attackTarget.hitPoints.Length != 0)
+            {
+                if (owner == null || owner.attackTarget == null || owner.attackTarget.hitPoints == null)
+                    return;
                 hitEffect.transform.position = owner.attackTarget.GetRandomHitPoint().transform.position;
+            }
             else
                 hitEffect.transform.position = owner.attackTarget.transform.position;
 
