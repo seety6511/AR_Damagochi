@@ -22,6 +22,9 @@ public class CatManager : SH_AnimeDamagochi
     public float[] stat; //공격력, Hp, 치명타, 공격속도
     public Text[] stats;
     public Text leveltxt;
+
+    public GameObject healEft;
+    public GameObject heartEft;
     public enum ActionState
     {
         Idle,        
@@ -106,6 +109,10 @@ public class CatManager : SH_AnimeDamagochi
                 currImacy = 0;
                 return;
             }
+            if (currImacy >= 100)
+            {
+                currImacy = 100;
+            }
             currTime1 = 0;
         }
     }
@@ -148,10 +155,22 @@ public class CatManager : SH_AnimeDamagochi
 
     public void FinishEat()
     {
+        healEft.GetComponent<ParticleSystem>().Play();
         KHJ_SceneMngr.instance.isEat = false;
         Panel.SetActive(true);
         KHJ_SceneMngr.instance.isFoodSet[(int)KHJ_SceneMngr.instance.nowPet] = false;
-        currH += 50;
+        switch (KHJ_SceneMngr.instance.FoodSelect[(int)KHJ_SceneMngr.instance.nowPet])
+        {
+            case 0:
+                currH += 10;
+                break;
+            case 1:
+                currH += 30;
+                break;
+            case 2:
+                currH += 50;
+                break;
+        }
         actionState = ActionState.Idle;
         KHJ_DataManager.instance.SavePetData();
         KHJ_DataManager.instance.SaveSceneData();

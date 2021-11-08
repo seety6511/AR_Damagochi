@@ -31,6 +31,9 @@ public class KHJ_SceneMngr : MonoBehaviour
 
     public GameObject Panel;
 
+    //¿Ã∆Â∆Æ
+    public GameObject touchEft;
+
     //¿Á»≠
     public TMP_Text goldUI;
     public TMP_Text diaUI;
@@ -58,6 +61,10 @@ public class KHJ_SceneMngr : MonoBehaviour
     public bool isEat;
     public bool[] isFoodSet;
     public GameObject[] Food;
+    public int[] FoodSelect = new int[3];
+    public GameObject[] Food_cat;
+    public GameObject[] Food_bear;
+    public GameObject[] Food_dove;
     public GameObject FoodUI;
 
     //AR
@@ -149,6 +156,7 @@ public class KHJ_SceneMngr : MonoBehaviour
                     isBallChange();
                     Camera.main.GetComponent<KHJ_CamMngr>().BallReset();
                     StopPlayUI.SetActive(true);
+                    Panel.SetActive(false);
                 }
                 if (hit.transform.gameObject.name == "Cat" || hit.transform.gameObject.name == "Bear" || hit.transform.gameObject.name == "Dove")
                 {
@@ -161,6 +169,7 @@ public class KHJ_SceneMngr : MonoBehaviour
                 if(hit.transform.gameObject.tag == "floor")
                 {
                     //≈Õƒ°¿Ãµø
+                    StartCoroutine(Touch(hit.point));
                     pet.Target = hit.point;
                     pet.actionState = CatManager.ActionState.isMoving;
                 }
@@ -168,6 +177,13 @@ public class KHJ_SceneMngr : MonoBehaviour
         }
     }
 
+    IEnumerator Touch(Vector3 hit)
+    {
+        GameObject obj = Instantiate(touchEft);
+        obj.transform.position = hit;
+        yield return new WaitForSeconds(2.5f);
+        Destroy(obj);
+    }
     void PetTalk()
     {
         if(pet.hungryState == Damagochi.HungryState.Little)
@@ -205,6 +221,18 @@ public class KHJ_SceneMngr : MonoBehaviour
         //π‰±◊∏© ≈Õƒ°Ω√ π‰ √§øˆ¡÷±‚
         if (isFoodSet[(int)nowPet])
         {
+            switch (nowPet)
+            {
+                case Pet.cat:
+                    Food[(int)nowPet] = Food_cat[FoodSelect[(int)nowPet]];
+                    break;
+                case Pet.bear:
+                    Food[(int)nowPet] = Food_bear[FoodSelect[(int)nowPet]];
+                    break;
+                case Pet.dove:
+                    Food[(int)nowPet] = Food_dove[FoodSelect[(int)nowPet]];
+                    break;
+            }
             Food[(int)nowPet].SetActive(true);
             //∆Í¿Ã πË∞Ì«¡∏È π‰∏‘¿∏∑Ø ∞°±‚
             if (pet.hungryState == Damagochi.HungryState.Little || pet.hungryState == Damagochi.HungryState.Very)
@@ -363,11 +391,14 @@ public class KHJ_SceneMngr : MonoBehaviour
         switch (i)
         {
             case 0:
+                FoodSelect[(int)nowPet] = 0;
                 break;
             case 1:
                 DecreaseGold(10);
+                FoodSelect[(int)nowPet] = 1;
                 break;
             case 2:
+                FoodSelect[(int)nowPet] = 2;
                 DecreaseDia(10);
                 break;
         }

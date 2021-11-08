@@ -52,8 +52,9 @@ public class DragAndThrow : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             if (lastMouseY < Input.mousePosition.y)
-            {                
-                KHJ_SceneMngr.instance.pet.currImacy += 35;
+            {
+                KHJ_SceneMngr.instance.pet.heartEft.GetComponent<ParticleSystem>().Play();
+                KHJ_SceneMngr.instance.pet.currImacy += 5;
                 ThrowBall(Input.mousePosition);
             }
         }
