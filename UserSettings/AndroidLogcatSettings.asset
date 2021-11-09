@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "22e0a51b2d017ece",
+    "m_SelectedDeviceId": "R5CR21C5QBR",
     "m_SelectedPackage": {
-        "deviceId": "22e0a51b2d017ece",
+        "deviceId": "R5CR21C5QBR",
         "name": "com.DamagochiMaster.ARDamagochi",
-        "processId": 4888,
+        "processId": 9533,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -45,9 +45,57 @@
             "exited": false
         },
         {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 10900,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 31175,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 3754,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 19367,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 7582,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR21C5QBR",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 9533,
+            "exited": false
+        },
+        {
             "deviceId": "22e0a51b2d017ece",
             "name": "com.DamagochiMaster.ARDamagochi",
-            "processId": 4888,
+            "processId": 4076,
+            "exited": false
+        },
+        {
+            "deviceId": "22e0a51b2d017ece",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 5785,
+            "exited": false
+        },
+        {
+            "deviceId": "22e0a51b2d017ece",
+            "name": "com.DamagochiMaster.ARDamagochi",
+            "processId": 9076,
             "exited": false
         }
     ],

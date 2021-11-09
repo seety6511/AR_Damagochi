@@ -32459,11 +32459,9 @@ MonoBehaviour:
   currH: 100
   currImacy: 100
   Level: 0
-  stat:
-  - 3
-  - 7
-  - 5
-  - 4
+  hp: 7
+  atk: 7
+  speed: 4
   stats:
   - {fileID: 125523530}
   - {fileID: 1370278184}
@@ -51520,7 +51518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &907267200
 Transform:
   m_ObjectHideFlags: 0
@@ -94723,29 +94721,23 @@ MonoBehaviour:
   info:
   - isGet: 0
     level: 0
-    stat:
-    - 0
-    - 0
-    - 0
-    - 0
+    hp: 0
+    atk: 0
+    speed: 0
     currH: 0
     currImacy: 0
   - isGet: 0
     level: 0
-    stat:
-    - 0
-    - 0
-    - 0
-    - 0
+    hp: 0
+    atk: 0
+    speed: 0
     currH: 0
     currImacy: 0
   - isGet: 0
     level: 0
-    stat:
-    - 0
-    - 0
-    - 0
-    - 0
+    hp: 0
+    atk: 0
+    speed: 0
     currH: 0
     currImacy: 0
   sceneInfo:
@@ -118032,11 +118024,9 @@ MonoBehaviour:
   currH: 100
   currImacy: 100
   Level: 0
-  stat:
-  - 5
-  - 5
-  - 5
-  - 5
+  hp: 6
+  atk: 6
+  speed: 6
   stats:
   - {fileID: 1096377878}
   - {fileID: 2003588907}
@@ -138028,11 +138018,9 @@ MonoBehaviour:
   currH: 100
   currImacy: 100
   Level: 0
-  stat:
-  - 7
-  - 3
-  - 5
-  - 6
+  hp: 4
+  atk: 7
+  speed: 7
   stats:
   - {fileID: 1349506001}
   - {fileID: 1614919772}
