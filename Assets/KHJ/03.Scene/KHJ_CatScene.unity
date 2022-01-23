@@ -18610,7 +18610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c68c709cc754454d9eec276ae2ce369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pet: {fileID: 0}
+  pet: {fileID: 1966769101}
   _InfoMngr: {fileID: 1360050335}
   nowPet: 0
   catEnvironmet: {fileID: 414155522}
@@ -94720,30 +94720,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info:
   - isGet: 0
-    level: 0
-    hp: 0
-    atk: 0
-    speed: 0
+    level: 1
+    hp: 5
+    atk: 5
+    speed: 5
     currH: 0
     currImacy: 0
   - isGet: 0
-    level: 0
-    hp: 0
-    atk: 0
-    speed: 0
+    level: 1
+    hp: 7
+    atk: 2
+    speed: 5
     currH: 0
     currImacy: 0
   - isGet: 0
-    level: 0
-    hp: 0
-    atk: 0
-    speed: 0
+    level: 1
+    hp: 2
+    atk: 7
+    speed: 7
     currH: 0
     currImacy: 0
   sceneInfo:
-    gold: 0
-    dia: 0
-    ticket: 0
+    gold: 200
+    dia: 200
+    ticket: 10
     lootbox: 0000000000000000000000000000000000000000
     prize: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     nowPet: 0
@@ -122048,6 +122048,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1498569461}
         m_TargetAssemblyTypeName: KHJ_DataManager, Assembly-CSharp
         m_MethodName: SaveSceneData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1498569461}
+        m_TargetAssemblyTypeName: KHJ_DataManager, Assembly-CSharp
+        m_MethodName: SavePetData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

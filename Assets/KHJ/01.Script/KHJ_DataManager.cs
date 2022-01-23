@@ -47,7 +47,10 @@ public class KHJ_DataManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         Mngr = KHJ_SceneMngr.instance;
-
+        if (sceneInfo.lootbox.Count == 0)
+            sceneInfo.lootbox = new List<bool>(20);
+        if (sceneInfo.prize.Count == 0)
+            sceneInfo.prize = new List<Prize>(20);
     }
 
     public void SaveBattleSceneData()
